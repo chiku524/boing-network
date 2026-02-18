@@ -4,9 +4,16 @@ import '../styles/boing-theme.css';
 interface Props {
   title?: string;
   description?: string;
+  canonical?: string;
 }
 
-const { title = 'Boing Network', description = 'Authentic, decentralized L1 blockchain — built from first principles.' } = Astro.props;
+const { title = 'Boing Network', description = 'Boing Network — The DeFi that always bounces back. Authentic L1 blockchain built from first principles.', canonical } = Astro.props;
+
+const siteUrl = 'https://boing.network';
+const fullTitle = title === 'Boing Network' ? 'Boing Network | The DeFi that always bounces back' : `${title} | Boing Network`;
+const path = (Astro.url.pathname || '/').replace(/\/$/, '') || '';
+const canonicalUrl = canonical ? `${siteUrl}${canonical.startsWith('/') ? canonical : '/' + canonical}` : `${siteUrl}${path || '/'}`;
+const ogImage = `${siteUrl}/og.png`;
 ---
 
 <!doctype html>
@@ -15,14 +22,48 @@ const { title = 'Boing Network', description = 'Authentic, decentralized L1 bloc
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title === 'Boing Network' ? title : `${title} | Boing Network`}</title>
+
+    <title>{fullTitle}</title>
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:site_name" content="Boing Network" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Additional SEO -->
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="keywords" content="Boing, Boing Network, blockchain, DeFi, L1, cryptocurrency, boing.finance, decentralized finance" />
+
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Boing Network",
+      "url": siteUrl,
+      "description": "The DeFi that always bounces back. Authentic L1 blockchain built from first principles.",
+      "slogan": "The DeFi that always bounces back"
+    })} />
   </head>
   <body>
     <header class="site-header">
       <a href="/" class="logo gradient-text">boing.network</a>
       <nav>
         <a href="/about">About</a>
+        <a href="/tokenomics">Tokenomics</a>
+        <a href="/roadmap">Roadmap</a>
+        <a href="/applications">Ecosystem</a>
         <a href="/docs/getting-started">Docs</a>
         <a href="/developers/quickstart">Developers</a>
         <a href="/network/status">Network</a>
@@ -33,7 +74,7 @@ const { title = 'Boing Network', description = 'Authentic, decentralized L1 bloc
       <slot />
     </main>
     <footer class="site-footer">
-      <p>Boing Network — Authentic. Decentralized. Optimal. Sustainable.</p>
+      <p>Boing Network — The DeFi that always bounces back. Authentic. Decentralized. Optimal. Sustainable.</p>
       <div class="footer-links">
         <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">GitHub</a>
         <a href="https://boing.finance" target="_blank" rel="noopener">boing.finance</a>
@@ -84,6 +125,8 @@ const { title = 'Boing Network', description = 'Authentic, decentralized L1 bloc
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
     padding: 1rem 2rem;
     border-bottom: 1px solid var(--border-color);
     background: var(--bg-secondary);
@@ -99,7 +142,7 @@ const { title = 'Boing Network', description = 'Authentic, decentralized L1 bloc
     filter: drop-shadow(0 0 12px var(--glow-cyan));
   }
 
-  .site-header nav { display: flex; gap: 1.5rem; }
+  .site-header nav { display: flex; gap: 1rem; flex-wrap: wrap; }
 
   .site-header nav a {
     color: var(--text-secondary);

@@ -4,11 +4,12 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="Boing Network"
-  description="Authentic, decentralized L1 blockchain — built from first principles. Security, Scalability, Decentralization, Authenticity."
+  description="The DeFi that always bounces back. Boing Network is the authentic L1 blockchain — built from first principles. Swap, stake, and build on the Boing ecosystem."
+  canonical="/"
 >
   <section class="hero">
     <h1 class="hero-title gradient-text-hero">boing.network</h1>
-    <p class="tagline gradient-text-hero">Authentic L1 blockchain — built from first principles</p>
+    <p class="tagline gradient-text-hero">The DeFi that always bounces back</p>
     <p class="pillars">Security → Scalability → Decentralization → Authenticity</p>
     <div class="cta">
       <a href="/docs/getting-started" class="btn btn-primary">Get Started</a>
@@ -35,6 +36,27 @@ import Layout from '../layouts/Layout.astro';
         <h3>Transparent Slashing</h3>
         <p>Auditable slashing conditions and appeal mechanisms for delegators.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="preview-cards">
+    <h2>The Foundation</h2>
+    <div class="preview-grid">
+      <a href="/tokenomics" class="preview-card">
+        <h3>Tokenomics</h3>
+        <p>1B max supply, declining emissions, fee burn. Sustainable value design.</p>
+        <span class="preview-link">View tokenomics →</span>
+      </a>
+      <a href="/roadmap" class="preview-card">
+        <h3>Roadmap</h3>
+        <p>From foundation to mainnet. Phased build with clear milestones.</p>
+        <span class="preview-link">View roadmap →</span>
+      </a>
+      <a href="/applications" class="preview-card">
+        <h3>Ecosystem</h3>
+        <p>Applications building on Boing. DeFi, infra, and more.</p>
+        <span class="preview-link">Explore ecosystem →</span>
+      </a>
     </div>
   </section>
 
@@ -155,6 +177,61 @@ import Layout from '../layouts/Layout.astro';
     margin: 0;
     font-size: 0.9rem;
     color: var(--text-secondary);
+  }
+
+  .preview-cards {
+    padding: 4rem 2rem;
+    background: var(--bg-secondary);
+  }
+
+  .preview-cards h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-primary);
+  }
+
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .preview-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s;
+  }
+
+  .preview-card:hover {
+    border-color: var(--accent-neon);
+    box-shadow: 0 0 24px var(--glow-cyan-subtle);
+  }
+
+  .preview-card h3 {
+    font-size: 1.125rem;
+    margin: 0 0 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .preview-card p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0 0 1rem;
+    flex: 1;
+  }
+
+  .preview-link {
+    font-size: 0.9rem;
+    color: var(--accent-neon);
+    font-weight: 500;
   }
 
   .links {

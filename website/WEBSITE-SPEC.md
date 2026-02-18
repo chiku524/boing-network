@@ -10,8 +10,11 @@
 
 ```
 boing.network/
-├── /                    → Landing (hero, value prop, quick links)
+├── /                    → Landing (hero, value prop, tokenomics/roadmap/ecosystem preview)
 ├── /about               → Design philosophy, pillars, innovation overview
+├── /tokenomics          → Tokenomics charts (fee allocation, emission curve), value accrual
+├── /roadmap             → Visual timeline (phases, status)
+├── /applications        → Ecosystem: dApps building on Boing (boing.finance, etc.)
 ├── /docs/               → Documentation hub
 │   ├── /getting-started → Install, run node, first transaction
 │   ├── /architecture    → Consensus, state, VM, networking
@@ -110,10 +113,13 @@ boing.network/
 
 ## 6. SEO & Meta
 
-- Title: `Boing Network — Authentic L1 Blockchain`
-- Description: `An authentic, decentralized L1 blockchain built from first principles. Native account abstraction, adaptive gas, and cross-chain DeFi coordination.`
-- OG image: `/og.png` (1200×630)
-- Favicon: `/favicon.ico`
+- **Slogan:** The DeFi that always bounces back
+- Title: `Boing Network | The DeFi that always bounces back`
+- Description: `The DeFi that always bounces back. Authentic L1 blockchain built from first principles.`
+- Canonical URLs, Open Graph, Twitter cards, JSON-LD structured data
+- OG image: `/og.png` (1200×630) — add for social sharing
+- Favicon: `/favicon.svg`
+- robots.txt, sitemap.xml
 
 ---
 
