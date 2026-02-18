@@ -42,10 +42,10 @@
 /* Smooth scroll for anchor links */
 html { scroll-behavior: smooth; }
 
-/* Animations */
+/* Animations — transform-only so content is always visible even if animation fails */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { transform: translateY(24px); }
+  to { transform: translateY(0); }
 }
 
 @keyframes fadeIn {
@@ -69,19 +69,20 @@ html { scroll-behavior: smooth; }
   100% { background-position: 0% 50%; }
 }
 
+/* Load-time slide-up (transform only; content stays visible) */
 .fade-in-up {
-  opacity: 0;
+  animation: fadeInUp 0.6s ease-out both;
 }
 
-.fade-in-up.visible {
-  animation: fadeInUp 0.7s ease-out forwards;
-}
+.section.fade-in-up#tokenomics { animation-delay: 0.1s; }
+.section.fade-in-up#roadmap { animation-delay: 0.2s; }
+.section.fade-in-up#ecosystem { animation-delay: 0.3s; }
+.section.fade-in-up#innovations { animation-delay: 0.4s; }
+.section.fade-in-up.links-section { animation-delay: 0.5s; }
 
-.fade-in-up.delay-1 { animation-delay: 0.1s; }
-.fade-in-up.delay-2 { animation-delay: 0.2s; opacity: 0; }
-.fade-in-up.delay-3 { animation-delay: 0.3s; opacity: 0; }
-.fade-in-up.delay-4 { animation-delay: 0.4s; opacity: 0; }
-.fade-in-up.delay-5 { animation-delay: 0.5s; opacity: 0; }
+.fade-in-up.delay-1 { animation-delay: 0.25s; }
+.fade-in-up.delay-2 { animation-delay: 0.35s; }
+.fade-in-up.delay-3 { animation-delay: 0.45s; }
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
