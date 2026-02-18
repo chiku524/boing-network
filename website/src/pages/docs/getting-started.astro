@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Getting Started" description="Build and run a Boing node in minutes.">
+  <article class="page">
+    <h1>Getting Started</h1>
+    <h2>Prerequisites</h2>
+    <ul>
+      <li>Rust (latest stable)</li>
+    </ul>
+
+    <h2>Build</h2>
+    <pre><code>cargo build</code></pre>
+
+    <h2>Run a Node</h2>
+    <pre><code>cargo run -p boing-node</code></pre>
+
+    <h2>Options</h2>
+    <ul>
+      <li><code>--validator</code> — Run as a validator</li>
+      <li><code>--rpc-port &lt;port&gt;</code> — RPC port (default: 8545)</li>
+      <li><code>--data-dir &lt;path&gt;</code> — Data directory for chain and state</li>
+    </ul>
+
+    <h2>First Transaction</h2>
+    <p>Use the JSON-RPC API at <code>http://&lt;host&gt;:8545/</code>. See the <a href="/docs/rpc-api">RPC API reference</a> for methods like <code>boing_submitTransaction</code> and <code>boing_chainHeight</code>.</p>
+  </article>
+</Layout>
+
+<style>
+  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
+  pre { background: var(--surface); padding: 1rem; border-radius: 8px; overflow-x: auto; }
+</style>

@@ -1,0 +1,163 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Boing Network"
+  description="Authentic, decentralized L1 blockchain — built from first principles. Security, Scalability, Decentralization, Authenticity."
+>
+  <section class="hero">
+    <h1>boing.network</h1>
+    <p class="tagline">Authentic L1 blockchain — built from first principles</p>
+    <p class="pillars">Security → Scalability → Decentralization → Authenticity</p>
+    <div class="cta">
+      <a href="/docs/getting-started" class="btn btn-primary">Get Started</a>
+      <a href="/about" class="btn btn-secondary">Learn More</a>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2>Unique Innovations</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Native Account Abstraction</h3>
+        <p>Gasless txs, social recovery, session keys — built into the protocol, not bolted on.</p>
+      </div>
+      <div class="card">
+        <h3>Adaptive Gas Model</h3>
+        <p>Dynamic gas that responds to network conditions with predictable upper bounds.</p>
+      </div>
+      <div class="card">
+        <h3>Cross-Chain DeFi Hub</h3>
+        <p>Protocol-level primitives for liquidity routing and coordination across chains.</p>
+      </div>
+      <div class="card">
+        <h3>Transparent Slashing</h3>
+        <p>Auditable slashing conditions and appeal mechanisms for delegators.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="links">
+    <h2>Resources</h2>
+    <div class="link-grid">
+      <a href="/docs/getting-started">Getting Started</a>
+      <a href="/docs/rpc-api">RPC API</a>
+      <a href="/developers/quickstart">Developer Quickstart</a>
+      <a href="/network/status">Network Status</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: var(--accent);
+  }
+
+  .tagline {
+    font-size: 1.25rem;
+    color: var(--text);
+  }
+
+  .pillars {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 1rem 0 2rem;
+  }
+
+  .cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-dim);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--accent);
+  }
+
+  .features {
+    padding: 4rem 2rem;
+    background: var(--surface);
+  }
+
+  .features h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .card {
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+    margin: 0 0 0.5rem;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .links {
+    padding: 4rem 2rem;
+  }
+
+  .links h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .link-grid {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .link-grid a {
+    padding: 0.5rem 1rem;
+  }
+</style>

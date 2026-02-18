@@ -1,0 +1,94 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = 'Boing Network', description = 'Authentic, decentralized L1 blockchain — built from first principles.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title === 'Boing Network' ? title : `${title} | Boing Network`}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="logo">boing.network</a>
+      <nav>
+        <a href="/about">About</a>
+        <a href="/docs/getting-started">Docs</a>
+        <a href="/developers/quickstart">Developers</a>
+        <a href="/network/status">Network</a>
+        <a href="/community">Community</a>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>Boing Network — Authentic. Decentralized. Optimal. Sustainable.</p>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+        <a href="/docs">Documentation</a>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #0a0b0f;
+    --surface: #12141c;
+    --border: #1e2230;
+    --text: #e8eaef;
+    --text-muted: #8b92a6;
+    --accent: #22d3ee;
+    --accent-dim: #0891b2;
+  }
+  * { box-sizing: border-box; }
+  html {
+    font-family: 'Outfit', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+  main { flex: 1; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--surface);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .logo { font-weight: 700; font-size: 1.25rem; color: var(--accent); }
+  .site-header nav { display: flex; gap: 1.5rem; }
+  .site-header nav a { color: var(--text-muted); font-weight: 500; }
+  .site-header nav a:hover { color: var(--text); }
+  .site-footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+  }
+  .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.5rem; }
+</style>

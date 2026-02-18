@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Network Status" description="Boing Network status and block explorer.">
+  <article class="page">
+    <h1>Network Status</h1>
+    <p>Network status and block explorer will be available once the testnet is live and an indexer/API is connected to D1.</p>
+    <p>Until then, query a node directly via <code>boing_chainHeight</code> and <code>boing_getBlockByHeight</code>.</p>
+  </article>
+</Layout>
+
+<style>
+  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
+</style>

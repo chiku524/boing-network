@@ -1,0 +1,42 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="Developer Quickstart" description="Build on Boing Network with the CLI and RPC.">
+  <article class="page">
+    <h1>Developer Quickstart</h1>
+
+    <h2>Crates</h2>
+    <table>
+      <thead>
+        <tr><th>Crate</th><th>Description</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>boing-primitives</code></td><td>Types, hashing (BLAKE3), cryptography</td></tr>
+        <tr><td><code>boing-consensus</code></td><td>PoS + HotStuff BFT</td></tr>
+        <tr><td><code>boing-state</code></td><td>State store (Verkle tree)</td></tr>
+        <tr><td><code>boing-execution</code></td><td>VM + parallel scheduler</td></tr>
+        <tr><td><code>boing-automation</code></td><td>Scheduler, triggers, executor incentives</td></tr>
+        <tr><td><code>boing-cli</code></td><td><code>boing init</code>, <code>boing dev</code>, <code>boing deploy</code></td></tr>
+        <tr><td><code>boing-p2p</code></td><td>libp2p networking</td></tr>
+        <tr><td><code>boing-node</code></td><td>Node binary</td></tr>
+      </tbody>
+    </table>
+
+    <h2>CLI</h2>
+    <ul>
+      <li><code>boing init</code> — Initialize a project</li>
+      <li><code>boing dev</code> — Local development</li>
+      <li><code>boing deploy</code> — Deploy</li>
+    </ul>
+
+    <h2>RPC</h2>
+    <p>Default port: <code>8545</code>. See <a href="/docs/rpc-api">RPC API reference</a>.</p>
+  </article>
+</Layout>
+
+<style>
+  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { padding: 0.5rem; text-align: left; border-bottom: 1px solid var(--border); }
+</style>

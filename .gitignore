@@ -1,0 +1,10 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+target/
+
+# Local dev / Wrangler
+.wrangler/
+.astro/

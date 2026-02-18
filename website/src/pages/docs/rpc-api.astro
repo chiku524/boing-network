@@ -1,0 +1,45 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout title="RPC API" description="JSON-RPC API reference for Boing Network nodes.">
+  <article class="page">
+    <h1>RPC API</h1>
+    <p>Boing nodes expose a JSON-RPC HTTP interface. Base URL: <code>http://&lt;host&gt;:8545/</code></p>
+
+    <h2>Methods</h2>
+    <dl>
+      <dt><code>boing_submitTransaction</code></dt>
+      <dd>Submit a signed transaction. Params: <code>[hex_signed_tx]</code></dd>
+
+      <dt><code>boing_chainHeight</code></dt>
+      <dd>Return current chain height. Params: <code>[]</code></dd>
+
+      <dt><code>boing_getBlockByHeight</code></dt>
+      <dd>Get block by height. Params: <code>[height]</code></dd>
+
+      <dt><code>boing_getBlockByHash</code></dt>
+      <dd>Get block by hash. Params: <code>[hex_block_hash]</code></dd>
+
+      <dt><code>boing_getAccountProof</code></dt>
+      <dd>Get Merkle proof for an account. Params: <code>[hex_account_id]</code></dd>
+
+      <dt><code>boing_verifyAccountProof</code></dt>
+      <dd>Verify an account Merkle proof. Params: <code>[hex_proof, hex_state_root]</code></dd>
+
+      <dt><code>boing_simulateTransaction</code></dt>
+      <dd>Simulate a transaction. Params: <code>[hex_signed_tx]</code></dd>
+
+      <dt><code>boing_submitIntent</code></dt>
+      <dd>Submit a signed intent. Params: <code>[hex_signed_intent]</code></dd>
+    </dl>
+
+    <p>Full spec: <a href="https://github.com" target="_blank" rel="noopener">docs/RPC-API-SPEC.md</a></p>
+  </article>
+</Layout>
+
+<style>
+  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
+  dt { margin-top: 1rem; }
+  dd { margin-left: 1rem; color: var(--text-muted); }
+</style>

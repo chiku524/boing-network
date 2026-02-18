@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About" description="Design philosophy and innovations of Boing Network — an authentic L1 blockchain.">
+  <article class="page">
+    <h1>About Boing Network</h1>
+    <p class="lead">An authentic L1 blockchain built from first principles — optimized for efficiency, free from dependencies on other chains, and designed for absolute decentralization.</p>
+
+    <h2>Design Philosophy</h2>
+    <ul>
+      <li><strong>Authentic</strong> — Your own architecture, not a fork or framework</li>
+      <li><strong>Independent</strong> — Zero reliance on Solana, Cosmos, Ethereum, or other chains</li>
+      <li><strong>Optimal</strong> — Adopt the best ideas from the ecosystem when they are demonstrably superior</li>
+      <li><strong>Unique</strong> — A distinct identity and technical story</li>
+      <li><strong>Decentralized</strong> — Absolute decentralization as a foundational requirement</li>
+    </ul>
+
+    <h2>Priority Pillars</h2>
+    <p>In order: <strong>Security</strong> → <strong>Scalability</strong> → <strong>Decentralization</strong> → <strong>Authenticity</strong></p>
+
+    <h2>Unique Innovations</h2>
+    <ul>
+      <li>Native Account Abstraction (protocol-level, not contract-based)</li>
+      <li>Adaptive Gas Model (dynamic pricing with predictable caps)</li>
+      <li>Native Cross-Chain Primitives (light client verification)</li>
+      <li>Transparent Slashing with appeal mechanisms</li>
+      <li>Phased Governance with time locks</li>
+      <li>State Rent with grace periods</li>
+    </ul>
+
+    <p><a href="/docs/getting-started">Get started</a> or explore the <a href="/developers/quickstart">developer docs</a>.</p>
+  </article>
+</Layout>
+
+<style>
+  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
+  .lead { font-size: 1.125rem; color: var(--text-muted); }
+  .page h2 { margin-top: 2rem; }
+</style>
