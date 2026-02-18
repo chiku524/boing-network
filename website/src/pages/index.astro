@@ -52,6 +52,29 @@ import Layout from '../layouts/Layout.astro';
       <div class="stat-card fade-in-up delay-2"><span class="stat-value">~2s</span><span class="stat-label">Block Time</span></div>
       <div class="stat-card fade-in-up delay-3"><span class="stat-value">1%</span><span class="stat-label">Long-term Floor</span></div>
     </div>
+    <div class="chart-card chart-fullwidth">
+      <h3>Token Supply Allocation (1B BOING)</h3>
+      <div class="chart-wrapper chart-supply">
+        <svg viewBox="0 0 400 80" class="supply-svg">
+          <defs>
+            <linearGradient id="stakeGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4" /><stop offset="100%" stop-color="#3b82f6" /></linearGradient>
+            <linearGradient id="treasuryGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8b5cf6" /><stop offset="100%" stop-color="#7b61ff" /></linearGradient>
+            <linearGradient id="communityGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22c55e" /><stop offset="100%" stop-color="#10b981" /></linearGradient>
+            <linearGradient id="burnGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ef4444" /><stop offset="100%" stop-color="#f97316" /></linearGradient>
+          </defs>
+          <rect x="0" y="15" width="320" height="50" rx="6" fill="url(#stakeGrad)" />
+          <rect x="320" y="15" width="48" height="50" fill="url(#treasuryGrad)" />
+          <rect x="368" y="15" width="20" height="50" fill="url(#communityGrad)" />
+          <rect x="388" y="15" width="12" height="50" rx="6" fill="url(#burnGrad)" />
+        </svg>
+      </div>
+      <ul class="legend legend-inline">
+        <li><span class="dot" style="background:linear-gradient(90deg,#06b6d4,#3b82f6)"></span> Staking Rewards 80%</li>
+        <li><span class="dot" style="background:#8b5cf6"></span> Treasury 12%</li>
+        <li><span class="dot" style="background:#22c55e"></span> Community & Grants 5%</li>
+        <li><span class="dot" style="background:#ef4444"></span> Burn 3%</li>
+      </ul>
+    </div>
     <div class="charts-row">
       <div class="chart-card">
         <h3>Fee Allocation</h3>
@@ -244,6 +267,10 @@ import Layout from '../layouts/Layout.astro';
   .stat-card:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 24px rgba(6,182,212,0.25); border-color: rgba(34,211,238,0.4); }
   .stat-value { display: block; font-size: 1.5rem; font-weight: 700; color: var(--accent-neon); }
   .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+  .chart-fullwidth { margin-bottom: 1.5rem; }
+  .chart-wrapper.chart-supply { height: 100px; min-height: 100px; }
+  .chart-supply .supply-svg { width: 100%; height: 100%; display: block; }
+  .legend-inline { justify-content: flex-start; margin-top: 0.75rem; }
   .charts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
   .chart-card { background: rgba(30,41,59,0.35); border: 1px solid rgba(34,211,238,0.2); border-radius: 1rem; padding: 1.25rem; backdrop-filter: blur(12px); transition: border-color 0.3s, box-shadow 0.3s; }
   .chart-card:hover { border-color: rgba(34,211,238,0.35); box-shadow: 0 8px 24px rgba(6,182,212,0.15); }
