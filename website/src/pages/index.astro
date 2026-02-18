@@ -181,15 +181,15 @@ import Layout from '../layouts/Layout.astro';
     border-radius: 1px;
     transform-origin: left center;
   }
-  /* Line angle = movement direction. Left-anchored: bright end goes in +X; Right-anchored: bright end goes in -X */
-  .line-1 { background: linear-gradient(to right, transparent, rgba(34,211,238,0.5), rgba(6,182,212,0.9)); box-shadow: 0 0 8px rgba(6,182,212,0.4); transform: rotate(-16deg); } /* move →↗ */
-  .line-2 { background: linear-gradient(to left, transparent, rgba(59,130,246,0.5), rgba(59,130,246,0.9)); box-shadow: 0 0 8px rgba(59,130,246,0.4); transform-origin: right center; transform: rotate(15deg); } /* move ←↙ */
-  .line-3 { background: linear-gradient(to right, transparent, rgba(139,92,246,0.5), rgba(167,139,250,0.9)); box-shadow: 0 0 8px rgba(139,92,246,0.4); transform: rotate(45deg); } /* move →↘ */
-  .line-4 { background: linear-gradient(to left, transparent, rgba(34,211,238,0.5), rgba(34,211,238,0.9)); box-shadow: 0 0 6px rgba(34,211,238,0.3); transform-origin: right center; transform: rotate(45deg); } /* move ←↖ */
-  .line-5 { background: linear-gradient(to right, transparent, rgba(20,184,166,0.5), rgba(6,182,212,0.9)); box-shadow: 0 0 6px rgba(6,182,212,0.35); transform: rotate(-10deg); } /* move →↗ */
-  .line-6 { background: linear-gradient(to left, transparent, rgba(99,102,241,0.5), rgba(99,102,241,0.9)); box-shadow: 0 0 6px rgba(99,102,241,0.35); transform-origin: right center; transform: rotate(15deg); } /* move ←↙ */
-  .line-7 { background: linear-gradient(to right, transparent, rgba(167,139,250,0.5), rgba(139,92,246,0.9)); box-shadow: 0 0 6px rgba(139,92,246,0.3); transform: rotate(35deg); } /* move →↘ (70vw ≈ 35°) */
-  .line-8 { background: linear-gradient(to left, transparent, rgba(34,211,238,0.5), rgba(34,211,238,0.9)); box-shadow: 0 0 6px rgba(34,211,238,0.3); transform-origin: right center; transform: rotate(-45deg); } /* move ←↖ */
+  /* Rotation = atan2(dy,dx) for left-origin; atan2(dy,dx)-180 for right-origin. Bright end leads. */
+  .line-1 { background: linear-gradient(to right, transparent, rgba(34,211,238,0.5), rgba(6,182,212,0.9)); box-shadow: 0 0 8px rgba(6,182,212,0.4); transform: rotate(-16deg); } /* (100,-28) → -16° */
+  .line-2 { background: linear-gradient(to left, transparent, rgba(59,130,246,0.5), rgba(59,130,246,0.9)); box-shadow: 0 0 8px rgba(59,130,246,0.4); transform-origin: right center; transform: rotate(-55deg); } /* (-100,140) → 125°-180=-55° */
+  .line-3 { background: linear-gradient(to right, transparent, rgba(139,92,246,0.5), rgba(167,139,250,0.9)); box-shadow: 0 0 8px rgba(139,92,246,0.4); transform: rotate(45deg); } /* (100,100) → 45° */
+  .line-4 { background: linear-gradient(to left, transparent, rgba(34,211,238,0.5), rgba(34,211,238,0.9)); box-shadow: 0 0 6px rgba(34,211,238,0.3); transform-origin: right center; transform: rotate(45deg); } /* (-50,-50) → 225°-180=45° */
+  .line-5 { background: linear-gradient(to right, transparent, rgba(20,184,166,0.5), rgba(6,182,212,0.9)); box-shadow: 0 0 6px rgba(6,182,212,0.35); transform: rotate(-10deg); } /* (100,-18) → -10° */
+  .line-6 { background: linear-gradient(to left, transparent, rgba(99,102,241,0.5), rgba(99,102,241,0.9)); box-shadow: 0 0 6px rgba(99,102,241,0.35); transform-origin: right center; transform: rotate(-16deg); } /* (-60,18) → 164°-180=-16° */
+  .line-7 { background: linear-gradient(to right, transparent, rgba(167,139,250,0.5), rgba(139,92,246,0.9)); box-shadow: 0 0 6px rgba(139,92,246,0.3); transform: rotate(35deg); } /* (100,70) → 35° */
+  .line-8 { background: linear-gradient(to left, transparent, rgba(34,211,238,0.5), rgba(34,211,238,0.9)); box-shadow: 0 0 6px rgba(34,211,238,0.3); transform-origin: right center; transform: rotate(45deg); } /* (-25,-25) → 225°-180=45° */
   .shooting-star-1 { top: 25%; left: 0; animation: shoot1 8s linear infinite; opacity: 0.6; }
   .shooting-star-2 { top: 33%; right: 0; animation: shoot2 12s linear infinite; animation-delay: -2s; opacity: 0.5; }
   .shooting-star-3 { bottom: 25%; left: 25%; animation: shoot3 10s linear infinite; animation-delay: -4s; opacity: 0.4; }
