@@ -7,5 +7,6 @@
       <stop offset="1" stop-color="#3b82f6"/>
     </linearGradient>
   </defs>
-  <text x="16" y="22" font-family="Comfortaa,system-ui,sans-serif" font-size="14" font-weight="700" fill="url(#boing)" text-anchor="middle">B</text>
+  <circle cx="16" cy="16" r="12" fill="none" stroke="url(#boing)" stroke-width="1.5" opacity="0.5"/>
+  <text x="16" y="21" font-family="Comfortaa,system-ui,sans-serif" font-size="12" font-weight="700" fill="url(#boing)" text-anchor="middle">B</text>
 </svg>

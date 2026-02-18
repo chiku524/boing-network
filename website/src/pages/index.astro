@@ -13,9 +13,12 @@ import Layout from '../layouts/Layout.astro';
       <div class="hero-orb hero-orb-1"></div>
       <div class="hero-orb hero-orb-2"></div>
       <div class="hero-orb hero-orb-3"></div>
+      <div class="shooting-star star-1"></div>
+      <div class="shooting-star star-2"></div>
+      <div class="shooting-star star-3"></div>
     </div>
     <div class="hero-content">
-      <h1 class="hero-title gradient-text-hero">boing.network</h1>
+      <h1 class="hero-title gradient-text-hero animate-pulse-glow">boing.network</h1>
       <p class="tagline gradient-text-hero">The DeFi that always bounces back</p>
       <p class="pillars">Security → Scalability → Decentralization → Authenticity</p>
       <div class="cta">
@@ -26,13 +29,13 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Tokenomics -->
-  <section class="section section-alt" id="tokenomics">
+  <section class="section section-alt fade-in-up" id="tokenomics">
     <h2>Tokenomics</h2>
     <p class="section-lead">Sustainable value design — 1B max supply, declining emissions, fee burn.</p>
     <div class="stats-grid">
-      <div class="stat-card"><span class="stat-value">1B</span><span class="stat-label">Max Supply</span></div>
-      <div class="stat-card"><span class="stat-value">~2s</span><span class="stat-label">Block Time</span></div>
-      <div class="stat-card"><span class="stat-value">1%</span><span class="stat-label">Long-term Floor</span></div>
+      <div class="stat-card fade-in-up delay-1"><span class="stat-value">1B</span><span class="stat-label">Max Supply</span></div>
+      <div class="stat-card fade-in-up delay-2"><span class="stat-value">~2s</span><span class="stat-label">Block Time</span></div>
+      <div class="stat-card fade-in-up delay-3"><span class="stat-value">1%</span><span class="stat-label">Long-term Floor</span></div>
     </div>
     <div class="charts-row">
       <div class="chart-card">
@@ -53,7 +56,7 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Roadmap -->
-  <section class="section" id="roadmap">
+  <section class="section fade-in-up" id="roadmap">
     <h2>Roadmap</h2>
     <p class="section-lead">Phased build from first principles.</p>
     <div class="timeline-compact">
@@ -68,7 +71,7 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Ecosystem -->
-  <section class="section section-alt" id="ecosystem">
+  <section class="section section-alt fade-in-up" id="ecosystem">
     <h2>Ecosystem</h2>
     <p class="section-lead">Applications building on Boing Network.</p>
     <div class="apps-row">
@@ -91,7 +94,7 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Innovations -->
-  <section class="section" id="innovations">
+  <section class="section fade-in-up" id="innovations">
     <h2>Unique Innovations</h2>
     <div class="grid">
       <div class="card"><h3>Native Account Abstraction</h3><p>Gasless txs, social recovery, session keys — built into the protocol.</p></div>
@@ -102,7 +105,7 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Resources -->
-  <section class="section section-alt links-section">
+  <section class="section section-alt links-section fade-in-up">
     <h2>Resources</h2>
     <div class="link-grid">
       <a href="/docs/getting-started">Getting Started</a>
@@ -127,6 +130,16 @@ import Layout from '../layouts/Layout.astro';
     if (emissionCtx) new Chart(emissionCtx, { type: 'line', data: { labels: ['Y1', 'Y2', 'Y3', 'Y4', 'Y5', 'Y10+'], datasets: [{ data: [8, 6, 4.5, 3.4, 2.5, 1], borderColor: c.accent, backgroundColor: 'rgba(6,182,212,0.1)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 10, grid: { color: c.grid }, ticks: { color: c.text } }, x: { grid: { color: c.grid }, ticks: { color: c.text } } } } });
   }
   document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', initCharts) : initCharts();
+
+  // Scroll-triggered fade-in for sections
+  function initScrollAnimations() {
+    const sections = document.querySelectorAll('.section.fade-in-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    sections.forEach((s) => observer.observe(s));
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', initScrollAnimations) : initScrollAnimations();
 </script>
 
 <style>
@@ -138,6 +151,13 @@ import Layout from '../layouts/Layout.astro';
   .hero-orb-2 { width: 300px; height: 300px; background: radial-gradient(circle, #3b82f6 0%, transparent 70%); bottom: -10%; right: 15%; animation-delay: -7s; }
   .hero-orb-3 { width: 250px; height: 250px; background: radial-gradient(circle, #8b5cf6 0%, transparent 70%); top: 30%; right: 5%; animation-delay: -14s; }
   @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 15px) scale(0.95); } }
+  .shooting-star { position: absolute; width: 2px; height: 2px; background: rgba(0, 224, 255, 0.8); border-radius: 50%; box-shadow: 0 0 6px rgba(0, 224, 255, 0.6); }
+  .star-1 { animation: shoot1 12s linear infinite; top: 10%; left: -20px; }
+  .star-2 { animation: shoot2 15s linear infinite; top: 40%; right: -20px; animation-delay: -5s; }
+  .star-3 { animation: shoot3 10s linear infinite; bottom: 20%; left: 30%; animation-delay: -3s; }
+  @keyframes shoot1 { 0% { transform: translate(0, 0); opacity: 0; } 5% { opacity: 0.8; } 95% { opacity: 0.8; } 100% { transform: translate(150vw, 80vh); opacity: 0; } }
+  @keyframes shoot2 { 0% { transform: translate(0, 0); opacity: 0; } 5% { opacity: 0.6; } 95% { opacity: 0.6; } 100% { transform: translate(-120vw, -60vh); opacity: 0; } }
+  @keyframes shoot3 { 0% { transform: translate(0, 0); opacity: 0; } 8% { opacity: 0.5; } 92% { opacity: 0.5; } 100% { transform: translate(80vw, -100vh); opacity: 0; } }
   .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
   .hero-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin: 0 0 0.5rem; filter: drop-shadow(0 0 20px var(--glow-cyan-subtle)); }
   .tagline { font-size: 1.25rem; margin: 0 0 0.5rem; filter: drop-shadow(0 0 12px var(--glow-cyan-subtle)); }
@@ -157,7 +177,8 @@ import Layout from '../layouts/Layout.astro';
 
   /* Tokenomics */
   .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
-  .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem; text-align: center; }
+  .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem; text-align: center; transition: transform 0.25s ease, box-shadow 0.2s; }
+  .stat-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--glow-cyan-subtle); }
   .stat-value { display: block; font-size: 1.5rem; font-weight: 700; color: var(--accent-neon); }
   .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
   .charts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
@@ -177,8 +198,8 @@ import Layout from '../layouts/Layout.astro';
 
   /* Ecosystem */
   .apps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
-  .app-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem; text-decoration: none; color: inherit; transition: all 0.2s; }
-  .app-card:hover { border-color: var(--accent-neon); box-shadow: 0 0 20px var(--glow-cyan-subtle); }
+  .app-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem; text-decoration: none; color: inherit; transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.2s; }
+  .app-card:hover { transform: translateY(-3px); border-color: var(--accent-neon); box-shadow: 0 8px 28px var(--glow-cyan-subtle); }
   .app-card.featured { border-color: var(--primary-color); }
   .app-card h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--text-primary); }
   .app-card p { font-size: 0.875rem; color: var(--text-secondary); margin: 0 0 0.75rem; line-height: 1.4; }
@@ -188,8 +209,8 @@ import Layout from '../layouts/Layout.astro';
 
   /* Innovations grid */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
-  .card { padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; transition: all 0.2s; }
-  .card:hover { border-color: var(--border-hover); box-shadow: 0 2px 16px var(--glow-cyan-subtle); }
+  .card { padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-2px); border-color: var(--border-hover); box-shadow: 0 8px 24px var(--glow-cyan-subtle); }
   .card h3 { font-size: 0.95rem; margin: 0 0 0.5rem; color: var(--text-primary); }
   .card p { margin: 0; font-size: 0.85rem; color: var(--text-secondary); }
 
@@ -198,7 +219,12 @@ import Layout from '../layouts/Layout.astro';
   .link-grid a { padding: 0.5rem 1rem; }
 
   @media (max-width: 640px) { .stats-grid { grid-template-columns: 1fr; } }
+  .t-item { transition: transform 0.2s ease; }
+  .t-item:hover { transform: scale(1.02); }
   @media (prefers-reduced-motion: reduce) {
-    .hero-orb { animation: none; opacity: 0.25; }
+    .hero-orb, .shooting-star { animation: none; }
+    .hero-orb { opacity: 0.25; }
+    .shooting-star { display: none; }
+    .card:hover, .app-card:hover, .stat-card:hover, .t-item:hover { transform: none; }
   }
 </style>

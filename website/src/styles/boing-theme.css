@@ -39,6 +39,58 @@
   --border: var(--border-color);
 }
 
+/* Smooth scroll for anchor links */
+html { scroll-behavior: smooth; }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 8px var(--glow-cyan-subtle)); }
+  50% { opacity: 1; filter: drop-shadow(0 0 16px var(--glow-cyan)); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.fade-in-up {
+  opacity: 0;
+}
+
+.fade-in-up.visible {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+.fade-in-up.delay-1 { animation-delay: 0.1s; }
+.fade-in-up.delay-2 { animation-delay: 0.2s; opacity: 0; }
+.fade-in-up.delay-3 { animation-delay: 0.3s; opacity: 0; }
+.fade-in-up.delay-4 { animation-delay: 0.4s; opacity: 0; }
+.fade-in-up.delay-5 { animation-delay: 0.5s; opacity: 0; }
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
 /* Gradient utilities */
 .gradient-text {
   background: linear-gradient(135deg, #22d3ee, #06b6d4, #3b82f6);
@@ -47,12 +99,16 @@
   background-clip: text;
 }
 
-/* Smooth scroll for anchor links */
-html { scroll-behavior: smooth; }
-
 .gradient-text-hero {
-  background: linear-gradient(to right, #22d3ee, #06b6d4, #3b82f6);
+  background: linear-gradient(135deg, #22d3ee, #06b6d4, #3b82f6);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-up, .animate-float, .animate-pulse-glow { animation: none; }
+  .fade-in-up { opacity: 1; transform: none; }
 }
