@@ -1,5 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const jsonRpcExample = '{"jsonrpc":"2.0","id":1,"method":"boing_chainHeight","params":[]}';
+const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: application/json" \\
+  -d '${jsonRpcExample}'`;
 ---
 
 <Layout title="Documentation" description="Complete Boing Network documentation — getting started, tokenomics, RPC API, operations, and more. All in one place." canonical="/docs">
@@ -93,7 +96,7 @@ import Layout from '../../layouts/Layout.astro';
         <h2>RPC API</h2>
         <p>Boing nodes expose a JSON-RPC 2.0 HTTP interface. <strong>Base URL:</strong> <code>http://&lt;host&gt;:8545/</code> (default port 8545).</p>
         <h3>Request format</h3>
-        <pre><code>{"jsonrpc":"2.0","id":1,"method":"boing_chainHeight","params":[]}</code></pre>
+        <pre><code>{jsonRpcExample}</code></pre>
         <h3>Methods</h3>
         <dl class="rpc-methods">
           <dt><code>boing_submitTransaction</code></dt>
@@ -143,8 +146,7 @@ import Layout from '../../layouts/Layout.astro';
         </table>
         <h3>Monitoring</h3>
         <p>Chain height via RPC:</p>
-        <pre><code>curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: application/json" \
-  -d '{"jsonrpc":"2.0","id":1,"method":"boing_chainHeight","params":[]}'</code></pre>
+        <pre><code>{curlExample}</code></pre>
         <p>Set <code>RUST_LOG=info</code> (or <code>debug</code> / <code>trace</code>) before running the node for logs.</p>
         <h3>Troubleshooting</h3>
         <ul>
