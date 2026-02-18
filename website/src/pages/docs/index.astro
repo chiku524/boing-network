@@ -11,24 +11,24 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
       <nav>
         <h2 class="toc-title">On this page</h2>
         <ol class="toc-list">
-          <li><a href="#overview">Overview</a></li>
-          <li><a href="#getting-started">Getting Started</a></li>
-          <li><a href="#network-overview">Network Overview</a></li>
-          <li><a href="#tokenomics">Tokenomics</a></li>
-          <li><a href="#architecture">Architecture & Features</a></li>
-          <li><a href="#rpc-api">RPC API</a></li>
-          <li><a href="#operations">Operations</a></li>
-          <li><a href="#security">Security</a></li>
-          <li><a href="#governance">Governance & Transparency</a></li>
-          <li><a href="#resources">Resources</a></li>
+          <li><a href="#overview" class="toc-link active">Overview</a></li>
+          <li><a href="#getting-started" class="toc-link">Getting Started</a></li>
+          <li><a href="#network-overview" class="toc-link">Network Overview</a></li>
+          <li><a href="#tokenomics" class="toc-link">Tokenomics</a></li>
+          <li><a href="#architecture" class="toc-link">Architecture & Features</a></li>
+          <li><a href="#rpc-api" class="toc-link">RPC API</a></li>
+          <li><a href="#operations" class="toc-link">Operations</a></li>
+          <li><a href="#security" class="toc-link">Security</a></li>
+          <li><a href="#governance" class="toc-link">Governance & Transparency</a></li>
+          <li><a href="#resources" class="toc-link">Resources</a></li>
         </ol>
       </nav>
     </aside>
     <div class="docs-content">
       <h1 class="docs-main-title">Boing Network Documentation</h1>
-      <p class="docs-lead">Everything you need to know about Boing Network in one place. Use the table of contents to jump to any section — no endless scrolling.</p>
+      <p class="docs-lead">Select a section from the table of contents to view it. Only the selected section is shown.</p>
 
-      <section id="overview" class="doc-section">
+      <section id="overview" class="doc-section active">
         <h2>Overview</h2>
         <p>Boing Network is an authentic L1 blockchain built from first principles: <strong>Security</strong> → <strong>Scalability</strong> → <strong>Decentralization</strong> → <strong>Authenticity</strong> → <strong>Transparency</strong>. It is independent of other chains and designed for sustainable value, uncapped supply with floor-triggered rebalancing, and 100% transparent governance and tokenomics.</p>
       </section>
@@ -197,6 +197,32 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
   </article>
 </Layout>
 
+<script>
+  (function () {
+    const sectionIds = ['overview', 'getting-started', 'network-overview', 'tokenomics', 'architecture', 'rpc-api', 'operations', 'security', 'governance', 'resources'];
+    function showSection(id) {
+      const sections = document.querySelectorAll('.doc-section');
+      const links = document.querySelectorAll('.toc-link');
+      sections.forEach((el) => el.classList.toggle('active', el.id === id));
+      links.forEach((a) => a.classList.toggle('active', (a.getAttribute('href') || '').slice(1) === id));
+      if (id) window.history.replaceState(null, '', window.location.pathname + '#' + id);
+    }
+    function getSectionFromHash() {
+      const hash = window.location.hash.slice(1);
+      return sectionIds.includes(hash) ? hash : 'overview';
+    }
+    document.querySelectorAll('.toc-link').forEach((a) => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = (a.getAttribute('href') || '').slice(1);
+        if (sectionIds.includes(id)) showSection(id);
+      });
+    });
+    window.addEventListener('hashchange', () => showSection(getSectionFromHash()));
+    showSection(getSectionFromHash());
+  })();
+</script>
+
 <style>
   .docs-page {
     display: grid;
@@ -223,7 +249,7 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
     padding: 0;
     margin: 0;
   }
-  .toc-list a {
+  .toc-list a.toc-link {
     display: block;
     padding: 0.35rem 0;
     font-size: 0.9rem;
@@ -233,12 +259,18 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
     padding-left: 0.5rem;
     margin-left: -0.5rem;
   }
-  .toc-list a:hover {
+  .toc-list a.toc-link:hover {
     color: var(--accent-neon);
   }
-  .toc-list a[href]:target,
-  .docs-content :target {
-    scroll-margin-top: 5rem;
+  .toc-list a.toc-link.active {
+    color: var(--accent-neon);
+    border-left-color: var(--accent-neon);
+  }
+  .doc-section {
+    display: none;
+  }
+  .doc-section.active {
+    display: block;
   }
   .docs-content {
     min-width: 0;
@@ -253,8 +285,7 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
     margin: 0 0 2rem;
     font-size: 1rem;
   }
-  .doc-section {
-    scroll-margin-top: 5rem;
+  .doc-section.active {
     margin-bottom: 2.5rem;
   }
   .doc-section h2 {
