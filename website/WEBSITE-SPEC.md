@@ -12,12 +12,10 @@
 boing.network/
 ├── /                    → Landing: hero (animated), tokenomics (charts), roadmap, ecosystem, innovations, resources
 ├── /about               → Design philosophy, pillars, innovation overview
-├── /docs/               → Documentation hub
-│   ├── /getting-started → Install, run node, first transaction
-│   ├── /architecture    → Consensus, state, VM, networking
-│   ├── /rpc-api         → JSON-RPC methods (from docs/RPC-API-SPEC.md)
-│   ├── /runbook         → Operator runbook
-│   └── /security        → Security standards
+├── /docs/               → Single-page documentation (table of contents, anchor navigation)
+│   │                    → Sections: Overview, Getting Started, Network, Tokenomics, Architecture, RPC API, Operations, Security, Governance, Resources
+│   ├── /getting-started → Redirects to /docs#getting-started
+│   └── /rpc-api         → Redirects to /docs#rpc-api
 ├── /developers/         → Developer resources
 │   ├── /quickstart      → CLI, SDK, local dev
 │   ├── /sdk             → boing init, dev, deploy

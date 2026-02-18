@@ -1,35 +1,11 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-
-<Layout title="Getting Started" description="Build and run a Boing node in minutes.">
-  <article class="page">
-    <h1>Getting Started</h1>
-    <h2>Prerequisites</h2>
-    <ul>
-      <li>Rust (latest stable)</li>
-    </ul>
-
-    <h2>Build</h2>
-    <pre><code>cargo build</code></pre>
-
-    <h2>Run a Node</h2>
-    <pre><code>cargo run -p boing-node</code></pre>
-
-    <h2>Options</h2>
-    <ul>
-      <li><code>--validator</code> — Run as a validator</li>
-      <li><code>--rpc-port &lt;port&gt;</code> — RPC port (default: 8545)</li>
-      <li><code>--data-dir &lt;path&gt;</code> — Data directory for chain and state</li>
-    </ul>
-
-    <h2>First Transaction</h2>
-    <p>Use the JSON-RPC API at <code>http://&lt;host&gt;:8545/</code>. See the <a href="/docs/rpc-api">RPC API reference</a> for methods like <code>boing_submitTransaction</code> and <code>boing_chainHeight</code>.</p>
-  </article>
+<Layout title="Getting Started" description="Build and run a Boing node.">
+  <p class="redirect-msg">Redirecting to <a href="/docs#getting-started">Documentation → Getting Started</a>…</p>
+  <script>window.location.replace('/docs#getting-started');</script>
 </Layout>
-
 <style>
-  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
-  .page h1, .page h2 { color: var(--text-primary); }
-  pre { background: var(--bg-tertiary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; border: 1px solid var(--border-color); }
+  .redirect-msg { max-width: 720px; margin: 4rem auto; padding: 2rem; text-align: center; color: var(--text-secondary); }
+  .redirect-msg a { color: var(--accent-neon); }
 </style>

@@ -2,18 +2,356 @@
 import Layout from '../../layouts/Layout.astro';
 ---
 
-<Layout title="Documentation" description="Boing Network documentation.">
-  <article class="page">
-    <h1>Documentation</h1>
-    <ul>
-      <li><a href="/docs/getting-started">Getting Started</a></li>
-      <li><a href="/docs/rpc-api">RPC API</a></li>
-    </ul>
+<Layout title="Documentation" description="Complete Boing Network documentation — getting started, tokenomics, RPC API, operations, and more. All in one place." canonical="/docs">
+  <article class="docs-page">
+    <aside class="docs-toc" aria-label="Table of contents">
+      <nav>
+        <h2 class="toc-title">On this page</h2>
+        <ol class="toc-list">
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#getting-started">Getting Started</a></li>
+          <li><a href="#network-overview">Network Overview</a></li>
+          <li><a href="#tokenomics">Tokenomics</a></li>
+          <li><a href="#architecture">Architecture & Features</a></li>
+          <li><a href="#rpc-api">RPC API</a></li>
+          <li><a href="#operations">Operations</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#governance">Governance & Transparency</a></li>
+          <li><a href="#resources">Resources</a></li>
+        </ol>
+      </nav>
+    </aside>
+    <div class="docs-content">
+      <h1 class="docs-main-title">Boing Network Documentation</h1>
+      <p class="docs-lead">Everything you need to know about Boing Network in one place. Use the table of contents to jump to any section — no endless scrolling.</p>
+
+      <section id="overview" class="doc-section">
+        <h2>Overview</h2>
+        <p>Boing Network is an authentic L1 blockchain built from first principles: <strong>Security</strong> → <strong>Scalability</strong> → <strong>Decentralization</strong> → <strong>Authenticity</strong> → <strong>Transparency</strong>. It is independent of other chains and designed for sustainable value, uncapped supply with floor-triggered rebalancing, and 100% transparent governance and tokenomics.</p>
+      </section>
+
+      <section id="getting-started" class="doc-section">
+        <h2>Getting Started</h2>
+        <h3>Prerequisites</h3>
+        <ul>
+          <li><strong>Rust</strong> — Latest stable (1.70+). Use <code>rustup</code>.</li>
+          <li><strong>OS</strong> — Linux, macOS, or Windows (WSL recommended on Windows).</li>
+        </ul>
+        <h3>Build</h3>
+        <pre><code>cargo build --release</code></pre>
+        <h3>Run a Node</h3>
+        <p><strong>Full node (non-validator):</strong></p>
+        <pre><code>cargo run -p boing-node</code></pre>
+        <p>RPC is available at <code>http://127.0.0.1:8545</code> by default.</p>
+        <p><strong>Validator node:</strong></p>
+        <pre><code>cargo run -p boing-node -- --validator --rpc-port 8545</code></pre>
+        <h3>Options</h3>
+        <ul>
+          <li><code>--validator</code> — Run as a block producer.</li>
+          <li><code>--rpc-port &lt;port&gt;</code> — RPC port (default: 8545).</li>
+          <li><code>--data-dir &lt;path&gt;</code> — Data directory for chain and state.</li>
+        </ul>
+        <h3>First Transaction</h3>
+        <p>Use the JSON-RPC API at <code>http://&lt;host&gt;:8545/</code>. See the <a href="#rpc-api">RPC API</a> section for methods such as <code>boing_submitTransaction</code> and <code>boing_chainHeight</code>.</p>
+      </section>
+
+      <section id="network-overview" class="doc-section">
+        <h2>Network Overview</h2>
+        <p>Boing is a greenfield L1 with:</p>
+        <ul>
+          <li><strong>Authentic</strong> — Original architecture, not a fork.</li>
+          <li><strong>Independent</strong> — No reliance on other chains.</li>
+          <li><strong>Decentralized</strong> — Permissionless validators and nodes.</li>
+          <li><strong>Transparent</strong> — 100% openness in design, tokenomics, and governance.</li>
+        </ul>
+        <p><strong>Block time:</strong> ~2 seconds (target).</p>
+      </section>
+
+      <section id="tokenomics" class="doc-section">
+        <h2>Tokenomics</h2>
+        <ul>
+          <li><strong>Total supply:</strong> Uncapped. New waves are minted when circulating supply reaches a defined floor to rebalance.</li>
+          <li><strong>Initial supply:</strong> Set at mainnet launch (fixed amount).</li>
+          <li><strong>Fee allocation:</strong> 80% validators, 20% treasury. No required burn.</li>
+          <li><strong>Initial supply allocation:</strong> Staking rewards 55%, Treasury 30%, Community & grants 15%. Staking is topped up by waves when the floor is reached.</li>
+        </ul>
+        <p>All parameters (floor, wave size, fee split) are on-chain and transparent. See the <a href="/#tokenomics">landing page tokenomics</a> for charts.</p>
+      </section>
+
+      <section id="architecture" class="doc-section">
+        <h2>Architecture & Features</h2>
+        <ul>
+          <li><strong>Native Account Abstraction</strong> — Gasless txs, social recovery, session keys as protocol primitives.</li>
+          <li><strong>Adaptive Gas Model</strong> — Gas adapts to congestion with predictable caps.</li>
+          <li><strong>Native Cross-Chain Primitives</strong> — Protocol-level bridges and messaging.</li>
+          <li><strong>Transparent Slashing</strong> — Auditable slashing conditions and appeal mechanisms.</li>
+          <li><strong>On-Chain Governance</strong> — Time-locked parameter changes (proposal → cooling → execution).</li>
+        </ul>
+      </section>
+
+      <section id="rpc-api" class="doc-section">
+        <h2>RPC API</h2>
+        <p>Boing nodes expose a JSON-RPC 2.0 HTTP interface. <strong>Base URL:</strong> <code>http://&lt;host&gt;:8545/</code> (default port 8545).</p>
+        <h3>Request format</h3>
+        <pre><code>{"jsonrpc":"2.0","id":1,"method":"boing_chainHeight","params":[]}</code></pre>
+        <h3>Methods</h3>
+        <dl class="rpc-methods">
+          <dt><code>boing_submitTransaction</code></dt>
+          <dd>Params: <code>[hex_signed_tx]</code>. Submit a signed transaction.</dd>
+          <dt><code>boing_chainHeight</code></dt>
+          <dd>Params: <code>[]</code>. Current chain height (u64).</dd>
+          <dt><code>boing_getBlockByHeight</code></dt>
+          <dd>Params: <code>[height]</code>. Block by height (u64).</dd>
+          <dt><code>boing_getBlockByHash</code></dt>
+          <dd>Params: <code>[hex_block_hash]</code>. Block by 32-byte hash (hex).</dd>
+          <dt><code>boing_getAccountProof</code></dt>
+          <dd>Params: <code>[hex_account_id]</code>. Merkle proof for account.</dd>
+          <dt><code>boing_verifyAccountProof</code></dt>
+          <dd>Params: <code>[hex_proof, hex_state_root]</code>. Verify Merkle proof.</dd>
+          <dt><code>boing_simulateTransaction</code></dt>
+          <dd>Params: <code>[hex_signed_tx]</code>. Simulate tx (gas, success).</dd>
+          <dt><code>boing_registerDappMetrics</code></dt>
+          <dd>Params: <code>[hex_contract, hex_owner]</code>. Register dApp for incentives.</dd>
+          <dt><code>boing_submitIntent</code></dt>
+          <dd>Params: <code>[hex_signed_intent]</code>. Submit signed intent for solver.</dd>
+        </dl>
+        <h3>Error codes</h3>
+        <table class="doc-table">
+          <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
+          <tbody>
+            <tr><td>-32600</td><td>Invalid Request</td></tr>
+            <tr><td>-32601</td><td>Method not found</td></tr>
+            <tr><td>-32602</td><td>Invalid params</td></tr>
+            <tr><td>-32000</td><td>Server error</td></tr>
+            <tr><td>-32016</td><td>Rate limit exceeded</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="operations" class="doc-section">
+        <h2>Operations</h2>
+        <h3>CLI</h3>
+        <table class="doc-table">
+          <thead><tr><th>Command</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>boing init [name]</code></td><td>Scaffold a new dApp project</td></tr>
+            <tr><td><code>boing dev [--port 8545]</code></td><td>Start local dev chain</td></tr>
+            <tr><td><code>boing deploy [path]</code></td><td>Deploy contract or config</td></tr>
+            <tr><td><code>boing metrics register --contract &lt;hex&gt; --owner &lt;hex&gt;</code></td><td>Register contract for dApp incentives</td></tr>
+            <tr><td><code>boing completions &lt;shell&gt;</code></td><td>Shell completions (bash, zsh, fish, etc.)</td></tr>
+          </tbody>
+        </table>
+        <h3>Monitoring</h3>
+        <p>Chain height via RPC:</p>
+        <pre><code>curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"boing_chainHeight","params":[]}'</code></pre>
+        <p>Set <code>RUST_LOG=info</code> (or <code>debug</code> / <code>trace</code>) before running the node for logs.</p>
+        <h3>Troubleshooting</h3>
+        <ul>
+          <li><strong>Node won't start</strong> — Ensure RPC port is free; check <code>RUST_LOG=debug</code>; on Windows try WSL if needed.</li>
+          <li><strong>Transaction not included</strong> — Enable validator mode for block production; use <code>boing_simulateTransaction</code> first.</li>
+          <li><strong>Method not found</strong> — Use exact method name (case-sensitive); params must be a JSON array.</li>
+        </ul>
+      </section>
+
+      <section id="security" class="doc-section">
+        <h2>Security</h2>
+        <p>RPC endpoints are rate-limited per configuration. For security incidents:</p>
+        <ol>
+          <li><strong>Detect</strong> — Monitor logs and community reports.</li>
+          <li><strong>Assess</strong> — Classify severity (Low / Medium / High / Critical).</li>
+          <li><strong>Contain</strong> — Isolate affected systems.</li>
+          <li><strong>Communicate</strong> — Notify validators and users as appropriate.</li>
+          <li><strong>Remediate</strong> — Apply fixes; coordinate upgrades via governance if needed.</li>
+        </ol>
+        <p>Audit reports and bug bounty details are published transparently. See the repository for current security standards.</p>
+      </section>
+
+      <section id="governance" class="doc-section">
+        <h2>Governance & Transparency</h2>
+        <p>Boing commits to <strong>100% transparency</strong>:</p>
+        <ul>
+          <li><strong>Protocol design</strong> — Open specs and auditable code.</li>
+          <li><strong>Tokenomics</strong> — Emission, fee split, and wave parameters on-chain and documented.</li>
+          <li><strong>Governance</strong> — On-chain proposals, votes, and outcomes.</li>
+          <li><strong>Validator & staking</strong> — Clear slashing conditions and reward distribution.</li>
+          <li><strong>Treasury</strong> — Public accounts and governance-approved disbursements.</li>
+        </ul>
+        <p>Trust is earned through verification, not promises. All parameters are verifiable on-chain.</p>
+      </section>
+
+      <section id="resources" class="doc-section">
+        <h2>Resources</h2>
+        <ul>
+          <li><a href="/">Landing page</a> — Tokenomics, roadmap, ecosystem.</li>
+          <li><a href="/developers/quickstart">Developer quickstart</a> — CLI, SDK, local dev.</li>
+          <li><a href="/network/status">Network status</a> — When available.</li>
+          <li><a href="/about">About</a> — Design philosophy and pillars.</li>
+          <li><a href="/community">Community</a> — GitHub, governance, grants.</li>
+        </ul>
+        <p>Full design plan, RPC spec, runbook, and security standards are in the <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">boing-network</a> repository.</p>
+      </section>
+    </div>
   </article>
 </Layout>
 
 <style>
-  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
-  .page h1 { color: var(--text-primary); }
-  .page a { color: var(--accent-neon); }
+  .docs-page {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    align-items: start;
+  }
+  .docs-toc {
+    position: sticky;
+    top: 5rem;
+  }
+  .toc-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-tertiary);
+    margin: 0 0 0.75rem;
+  }
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc-list a {
+    display: block;
+    padding: 0.35rem 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    padding-left: 0.5rem;
+    margin-left: -0.5rem;
+  }
+  .toc-list a:hover {
+    color: var(--accent-neon);
+  }
+  .toc-list a[href]:target,
+  .docs-content :target {
+    scroll-margin-top: 5rem;
+  }
+  .docs-content {
+    min-width: 0;
+  }
+  .docs-main-title {
+    font-size: 1.75rem;
+    margin: 0 0 0.5rem;
+    color: var(--text-primary);
+  }
+  .docs-lead {
+    color: var(--text-secondary);
+    margin: 0 0 2rem;
+    font-size: 1rem;
+  }
+  .doc-section {
+    scroll-margin-top: 5rem;
+    margin-bottom: 2.5rem;
+  }
+  .doc-section h2 {
+    font-size: 1.35rem;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+    padding-bottom: 0.35rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .doc-section h3 {
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin: 1.25rem 0 0.5rem;
+  }
+  .doc-section p, .doc-section li {
+    color: var(--text-secondary);
+    margin: 0.5rem 0;
+    line-height: 1.6;
+  }
+  .doc-section ul, .doc-section ol {
+    margin: 0.5rem 0 1rem;
+    padding-left: 1.5rem;
+  }
+  .doc-section code {
+    font-family: var(--font-mono);
+    background: var(--bg-tertiary);
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  .doc-section pre {
+    background: var(--bg-tertiary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    margin: 0.75rem 0;
+  }
+  .doc-section pre code {
+    background: none;
+    padding: 0;
+  }
+  .rpc-methods dt {
+    margin-top: 1rem;
+    color: var(--accent-neon);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+  .rpc-methods dt:first-of-type { margin-top: 0; }
+  .rpc-methods dd {
+    margin-left: 0;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+  .doc-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.9rem;
+  }
+  .doc-table th, .doc-table td {
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .doc-table th {
+    color: var(--text-tertiary);
+    font-weight: 600;
+  }
+  .doc-table td {
+    color: var(--text-secondary);
+  }
+  .doc-table code {
+    font-size: 0.85em;
+  }
+  @media (max-width: 768px) {
+    .docs-page {
+      grid-template-columns: 1fr;
+      padding: 1.5rem;
+    }
+    .docs-toc {
+      position: static;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: rgba(30,41,59,0.4);
+      border-radius: 0.5rem;
+      border: 1px solid var(--border-color);
+    }
+    .toc-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+    }
+    .toc-list li { margin: 0; }
+    .toc-list a {
+      padding: 0.25rem 0;
+      margin-left: 0;
+      border-left: none;
+    }
+  }
 </style>
