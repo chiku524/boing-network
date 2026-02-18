@@ -54,26 +54,19 @@ import Layout from '../layouts/Layout.astro';
     </div>
     <div class="chart-card chart-fullwidth">
       <h3>Token Supply Allocation (1B BOING)</h3>
-      <div class="chart-wrapper chart-supply">
-        <svg viewBox="0 0 400 80" class="supply-svg">
-          <defs>
-            <linearGradient id="stakeGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#06b6d4" /><stop offset="100%" stop-color="#3b82f6" /></linearGradient>
-            <linearGradient id="treasuryGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#8b5cf6" /><stop offset="100%" stop-color="#7b61ff" /></linearGradient>
-            <linearGradient id="communityGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#22c55e" /><stop offset="100%" stop-color="#10b981" /></linearGradient>
-            <linearGradient id="burnGrad" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ef4444" /><stop offset="100%" stop-color="#f97316" /></linearGradient>
-          </defs>
-          <rect x="0" y="15" width="320" height="50" rx="6" fill="url(#stakeGrad)" />
-          <rect x="320" y="15" width="48" height="50" fill="url(#treasuryGrad)" />
-          <rect x="368" y="15" width="20" height="50" fill="url(#communityGrad)" />
-          <rect x="388" y="15" width="12" height="50" rx="6" fill="url(#burnGrad)" />
+      <div class="chart-wrapper chart-supply chart-pie-wrap">
+        <svg viewBox="0 0 100 100" class="supply-pie-svg">
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#06b6d4" stroke-width="40" stroke-dasharray="226.2 25.1" stroke-dashoffset="0" transform="rotate(-90 50 50)" stroke-linecap="butt" />
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="40" stroke-dasharray="12.6 238.7" stroke-dashoffset="-226.2" transform="rotate(-90 50 50)" stroke-linecap="butt" />
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="40" stroke-dasharray="12.6 238.7" stroke-dashoffset="-238.8" transform="rotate(-90 50 50)" stroke-linecap="butt" />
         </svg>
       </div>
       <ul class="legend legend-inline">
-        <li><span class="dot" style="background:linear-gradient(90deg,#06b6d4,#3b82f6)"></span> Staking Rewards 80%</li>
-        <li><span class="dot" style="background:#8b5cf6"></span> Treasury 12%</li>
+        <li><span class="dot" style="background:#06b6d4"></span> Staking Rewards 90%</li>
+        <li><span class="dot" style="background:#8b5cf6"></span> Treasury 5%</li>
         <li><span class="dot" style="background:#22c55e"></span> Community & Grants 5%</li>
-        <li><span class="dot" style="background:#ef4444"></span> Burn 3%</li>
       </ul>
+      <p class="chart-note">Fee burn (10% of fees) reduces supply over time.</p>
     </div>
     <div class="charts-row">
       <div class="chart-card">
@@ -268,8 +261,9 @@ import Layout from '../layouts/Layout.astro';
   .stat-value { display: block; font-size: 1.5rem; font-weight: 700; color: var(--accent-neon); }
   .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
   .chart-fullwidth { margin-bottom: 1.5rem; }
-  .chart-wrapper.chart-supply { height: 100px; min-height: 100px; }
-  .chart-supply .supply-svg { width: 100%; height: 100%; display: block; }
+  .chart-wrapper.chart-supply { height: 220px; min-height: 220px; display: flex; align-items: center; justify-content: center; }
+  .chart-supply .supply-pie-svg { width: 100%; height: 100%; max-width: 220px; max-height: 220px; display: block; margin: 0 auto; }
+  .chart-note { font-size: 0.8rem; color: var(--text-tertiary); margin: 0.5rem 0 0; font-style: italic; }
   .legend-inline { justify-content: flex-start; margin-top: 0.75rem; }
   .charts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
   .chart-card { background: rgba(30,41,59,0.35); border: 1px solid rgba(34,211,238,0.2); border-radius: 1rem; padding: 1.25rem; backdrop-filter: blur(12px); transition: border-color 0.3s, box-shadow 0.3s; }
