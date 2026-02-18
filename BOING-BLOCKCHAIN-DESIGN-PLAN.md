@@ -537,8 +537,8 @@ If fee revenue consistently exceeds validator costs, the network is **self-susta
 
 | Parameter | Value | Rationale |
 |-----------|-------|-----------|
-| **Max supply** | 1,000,000,000 BOING (1B) | Hard cap; no infinite inflation |
-| **Genesis supply** | 0 (fair launch) or minimal (e.g. 2% for early validators/grants) | Fair distribution; no pre-mine |
+| **Supply model** | **Uncapped, floor-triggered waves** | Start with specific initial supply; when circulating supply reaches a defined floor, a new wave of tokens is minted to restore balance (see [Chosen Model: Uncapped Supply with Floor-Triggered Waves](#chosen-model-uncapped-supply-with-floor-triggered-waves)). |
+| **Initial supply** | Specific amount at mainnet launch (TBD) | No infinite mint at genesis; predictable starting point. |
 | **Block time** | ~2 seconds (target) | Balance between throughput and finality |
 
 ### Emission Schedule (Block Rewards)
@@ -633,6 +633,34 @@ An uncapped supply is often frowned upon, but it **can work** if the system is d
 - Fee burn rate is fixed or governance-bounded (e.g. 5–20%)
 - No centralized minting; emission is algorithmic and auditable
 - All parameters visible on-chain; dashboards and explorers show real-time supply and burn
+
+### Chosen Model: Uncapped Supply with Floor-Triggered Waves
+
+Boing uses an **uncapped supply** with a **floor-triggered rebalancing** mechanism:
+
+| Phase | Description |
+|-------|--------------|
+| **Genesis** | Start with a **specific initial supply** (e.g. fixed amount at mainnet launch). No infinite mint at day one. |
+| **Ongoing** | Normal activity: fee burn and usage reduce circulating supply over time. Validators earn from fees and any active emission. |
+| **Floor** | When circulating supply reaches a **defined floor** (or a threshold near it), the protocol treats this as a rebalancing trigger. |
+| **New wave** | A **new wave of tokens** is minted (size and destination defined by protocol/governance) to restore balance — e.g. validator incentives, treasury, or staking rewards — so the network remains secure and sustainable without arbitrary permanent deflation. |
+
+**Design principles for this model:**
+
+- **Transparency:** Floor level, wave size, and trigger conditions are **on-chain and public**. No hidden minting.
+- **Predictability:** Rules are clear: “When circulating supply ≤ X, mint wave Y according to Z.” Community can verify and plan.
+- **Decentralization:** Trigger and wave parameters are either **algorithmic** (code-defined) or **governance-set within bounds**. No single key can mint at will.
+- **Balance:** The goal of each wave is to **create balance** — enough supply for staking rewards, ecosystem incentives, and security, without runaway inflation.
+
+**Parameters to define (and keep transparent):**
+
+- Initial supply at genesis
+- Floor (or threshold) that triggers a new wave
+- Wave size (fixed, formula-based, or governance-capped)
+- Destination of minted tokens (e.g. staking rewards pool, treasury, both)
+- Minimum interval between waves (if any) to avoid gaming or excessive minting
+
+This model gives long-term sustainability without a hard cap, while keeping supply growth tied to observable, verifiable rules.
 
 ---
 
