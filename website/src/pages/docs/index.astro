@@ -3,6 +3,10 @@ import Layout from '../../layouts/Layout.astro';
 const jsonRpcExample = '{"jsonrpc":"2.0","id":1,"method":"boing_chainHeight","params":[]}';
 const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: application/json" \\
   -d '${jsonRpcExample}'`;
+const responseSuccessExample = '{"jsonrpc":"2.0","id":1,"result":42}';
+const responseErrorExample = '{"jsonrpc":"2.0","id":1,"error":{"code":-32602,"message":"Invalid params"}}';
+const paramsArrayExample = '[]';
+const paramsObjectWrong = '{}';
 ---
 
 <Layout title="Documentation" description="Complete Boing Network documentation — getting started, tokenomics, RPC API, operations, and more. All in one place." canonical="/docs">
@@ -18,6 +22,8 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
           <li><a href="#architecture" class="toc-link">Architecture & Features</a></li>
           <li><a href="#rpc-api" class="toc-link">RPC API</a></li>
           <li><a href="#operations" class="toc-link">Operations</a></li>
+          <li><a href="#roadmap" class="toc-link">Roadmap</a></li>
+          <li><a href="#testnet" class="toc-link">Testnet</a></li>
           <li><a href="#security" class="toc-link">Security</a></li>
           <li><a href="#governance" class="toc-link">Governance & Transparency</a></li>
           <li><a href="#resources" class="toc-link">Resources</a></li>
@@ -30,73 +36,124 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
 
       <section id="overview" class="doc-section active">
         <h2>Overview</h2>
-        <p>Boing Network is an authentic L1 blockchain built from first principles: <strong>Security</strong> → <strong>Scalability</strong> → <strong>Decentralization</strong> → <strong>Authenticity</strong> → <strong>Transparency</strong>. It is independent of other chains and designed for sustainable value, uncapped supply with floor-triggered rebalancing, and 100% transparent governance and tokenomics.</p>
+        <p>Boing Network is an authentic L1 blockchain built from first principles. It is independent of other chains and designed for sustainable value, uncapped supply with floor-triggered rebalancing, and 100% transparent governance and tokenomics.</p>
+        <h3>Priority pillars</h3>
+        <p>In order: <strong>Security</strong> (safety over speed) → <strong>Scalability</strong> (throughput, efficiency) → <strong>Decentralization</strong> (permissionless at every layer) → <strong>Authenticity</strong> (unique architecture) → <strong>Transparency</strong> (100% openness; trust through verification).</p>
+        <h3>What this documentation covers</h3>
+        <p><strong>Getting Started</strong> — Prerequisites, build, run a node (full or validator), first transaction. <strong>Network Overview</strong> — Block time, consensus, key facts. <strong>Tokenomics</strong> — Supply model, fees, staking, waves. <strong>Architecture & Features</strong> — Native AA, adaptive gas, cross-chain, slashing, governance. <strong>RPC API</strong> — All JSON-RPC methods, params, and error codes. <strong>Operations</strong> — CLI, monitoring, troubleshooting, incident response. <strong>Roadmap</strong> — Phased build status. <strong>Testnet</strong> — How to join testnet when available. <strong>Security</strong> — Protocol, network, and operational security. <strong>Governance & Transparency</strong> — How decisions and parameters are visible and verifiable. <strong>Resources</strong> — Links to repo, landing page, and other pages.</p>
       </section>
 
       <section id="getting-started" class="doc-section">
         <h2>Getting Started</h2>
         <h3>Prerequisites</h3>
         <ul>
-          <li><strong>Rust</strong> — Latest stable (1.70+). Use <code>rustup</code>.</li>
+          <li><strong>Rust</strong> — Latest stable (1.70+). Install via <code>rustup</code>.</li>
           <li><strong>OS</strong> — Linux, macOS, or Windows (WSL recommended on Windows).</li>
         </ul>
-        <h3>Build</h3>
-        <pre><code>cargo build --release</code></pre>
-        <h3>Run a Node</h3>
+        <h3>Clone and build</h3>
+        <p>From the <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">boing-network</a> repository:</p>
+        <pre><code>git clone https://github.com/chiku524/boing-network.git
+cd boing-network
+cargo build --release</code></pre>
+        <h3>Directory layout after build</h3>
+        <ul>
+          <li><code>target/release/boing-node</code> — Node binary.</li>
+          <li><code>target/release/boing</code> — CLI binary.</li>
+          <li><code>~/.boing/</code> or <code>./data/</code> (with <code>--data-dir</code>) — Chain and state data.</li>
+        </ul>
+        <h3>Run a node</h3>
         <p><strong>Full node (non-validator):</strong></p>
         <pre><code>cargo run -p boing-node</code></pre>
         <p>RPC is available at <code>http://127.0.0.1:8545</code> by default.</p>
         <p><strong>Validator node:</strong></p>
         <pre><code>cargo run -p boing-node -- --validator --rpc-port 8545</code></pre>
+        <p>Produces blocks when there are pending transactions.</p>
+        <p><strong>With a custom data directory:</strong></p>
+        <pre><code>cargo run -p boing-node -- --data-dir ./boing-data --rpc-port 8545</code></pre>
         <h3>Options</h3>
         <ul>
           <li><code>--validator</code> — Run as a block producer.</li>
           <li><code>--rpc-port &lt;port&gt;</code> — RPC port (default: 8545).</li>
           <li><code>--data-dir &lt;path&gt;</code> — Data directory for chain and state.</li>
         </ul>
-        <h3>First Transaction</h3>
-        <p>Use the JSON-RPC API at <code>http://&lt;host&gt;:8545/</code>. See the <a href="#rpc-api">RPC API</a> section for methods such as <code>boing_submitTransaction</code> and <code>boing_chainHeight</code>.</p>
+        <h3>First transaction</h3>
+        <p>Use the JSON-RPC API at <code>http://&lt;host&gt;:8545/</code>. See the <a href="#rpc-api">RPC API</a> section for <code>boing_submitTransaction</code>, <code>boing_simulateTransaction</code>, and <code>boing_chainHeight</code>.</p>
+        <h3>Next steps</h3>
+        <p>See <a href="#operations">Operations</a> for CLI commands, monitoring, and troubleshooting; <a href="#rpc-api">RPC API</a> for all methods; and <a href="#tokenomics">Tokenomics</a> if you plan to run a validator or stake.</p>
       </section>
 
       <section id="network-overview" class="doc-section">
         <h2>Network Overview</h2>
-        <p>Boing is a greenfield L1 with:</p>
+        <p>Boing is a greenfield L1 — original architecture, not a fork — with no reliance on other chains.</p>
+        <h3>Design principles</h3>
         <ul>
-          <li><strong>Authentic</strong> — Original architecture, not a fork.</li>
-          <li><strong>Independent</strong> — No reliance on other chains.</li>
-          <li><strong>Decentralized</strong> — Permissionless validators and nodes.</li>
+          <li><strong>Authentic</strong> — Your own stack; not a framework clone.</li>
+          <li><strong>Independent</strong> — No dependency on Ethereum, Solana, Cosmos, etc.</li>
+          <li><strong>Decentralized</strong> — Permissionless validators and full nodes.</li>
           <li><strong>Transparent</strong> — 100% openness in design, tokenomics, and governance.</li>
         </ul>
-        <p><strong>Block time:</strong> ~2 seconds (target).</p>
+        <h3>Key parameters</h3>
+        <ul>
+          <li><strong>Block time</strong> — ~2 seconds (target).</li>
+          <li><strong>Consensus</strong> — Proof of Stake (PoS) with BFT-style consensus; validators stake BOING.</li>
+          <li><strong>State</strong> — Verkle trees for compact proofs and stateless-client support.</li>
+          <li><strong>RPC port</strong> — Default 8545 (HTTP JSON-RPC).</li>
+        </ul>
       </section>
 
       <section id="tokenomics" class="doc-section">
         <h2>Tokenomics</h2>
+        <h3>Supply model</h3>
         <ul>
-          <li><strong>Total supply:</strong> Uncapped. New waves are minted when circulating supply reaches a defined floor to rebalance.</li>
-          <li><strong>Initial supply:</strong> Set at mainnet launch (fixed amount).</li>
-          <li><strong>Fee allocation:</strong> 80% validators, 20% treasury. No required burn.</li>
-          <li><strong>Initial supply allocation:</strong> Staking rewards 55%, Treasury 30%, Community & grants 15%. Staking is topped up by waves when the floor is reached.</li>
+          <li><strong>Total supply</strong> — Uncapped. When circulating supply reaches a defined floor, a new wave of tokens is minted to rebalance (validator incentives, treasury, staking).</li>
+          <li><strong>Initial supply</strong> — Set at mainnet launch (fixed amount); no infinite mint at genesis.</li>
         </ul>
-        <p>All parameters (floor, wave size, fee split) are on-chain and transparent. See the <a href="/#tokenomics">landing page tokenomics</a> for charts.</p>
+        <h3>Fee allocation</h3>
+        <p>Of transaction fees: <strong>80% validators</strong>, <strong>20% treasury</strong>. Burn is optional (0% in base design).</p>
+        <h3>Initial supply allocation (at launch)</h3>
+        <p>Staking rewards 55%, Treasury 30%, Community &amp; grants 15%. Staking is topped up by new waves when the floor is reached, so the initial allocation leans toward treasury and community.</p>
+        <h3>Floor-triggered waves</h3>
+        <p><strong>Genesis</strong> — Fixed initial supply. <strong>Ongoing</strong> — Validators and treasury earn from fees; supply may decrease slowly until the floor. <strong>Floor</strong> — When circulating supply reaches the defined floor, the protocol triggers a rebalance. <strong>New wave</strong> — A new wave of tokens is minted (size and destination set by protocol/governance) to restore balance. All parameters (floor, wave size, trigger) are on-chain and transparent.</p>
+        <h3>Emission schedule (block rewards)</h3>
+        <p>Declining over time: Year 1 ~8%, Year 2 ~6%, then lower; Year 10+ targets a 1% floor or 0% if fees are sufficient. Formula: <code>emission_year_n = emission_year_1 × (decay)^(n-1)</code> with decay ~0.85.</p>
+        <h3>Staking and validator economics</h3>
+        <ul>
+          <li><strong>Min stake</strong> — Accessible (e.g. 10,000 BOING) for broad participation.</li>
+          <li><strong>Staking yield</strong> — 5–15% early, 3–8% at maturity.</li>
+          <li><strong>Commission</strong> — Validators typically 5–10%; delegators keep the rest.</li>
+          <li><strong>Unbonding</strong> — 14–21 days.</li>
+        </ul>
+        <h3>dApp incentive caps</h3>
+        <p>Per-dApp cap per epoch is governance-controlled (e.g. 50,000 BOING/month). Total dApp pool is a share of fees (e.g. 5% of treasury). Prevents one dApp capturing all incentives; overflow goes to treasury.</p>
+        <p>Charts and visuals: see the <a href="/#tokenomics">landing page tokenomics</a>.</p>
       </section>
 
       <section id="architecture" class="doc-section">
         <h2>Architecture & Features</h2>
+        <p>Boing aims to deliver distinct features as protocol primitives rather than add-on contracts.</p>
+        <h3>Core features</h3>
         <ul>
-          <li><strong>Native Account Abstraction</strong> — Gasless txs, social recovery, session keys as protocol primitives.</li>
-          <li><strong>Adaptive Gas Model</strong> — Gas adapts to congestion with predictable caps.</li>
-          <li><strong>Native Cross-Chain Primitives</strong> — Protocol-level bridges and messaging.</li>
-          <li><strong>Transparent Slashing</strong> — Auditable slashing conditions and appeal mechanisms.</li>
-          <li><strong>On-Chain Governance</strong> — Time-locked parameter changes (proposal → cooling → execution).</li>
+          <li><strong>Native Account Abstraction</strong> — Gasless txs, social recovery, session keys built into the protocol (not a contract layer).</li>
+          <li><strong>Adaptive Gas Model</strong> — Gas costs adapt to congestion in real time with predictable upper bounds.</li>
+          <li><strong>Native Cross-Chain Primitives</strong> — Protocol-level bridges and cross-chain messaging (light clients, not third-party contracts only).</li>
+          <li><strong>Transparent Slashing</strong> — Clear, auditable slashing conditions and appeal mechanisms; delegators see why validators were slashed.</li>
+          <li><strong>On-Chain Governance with Time Locks</strong> — Parameter changes go through proposal → cooling → execution so the community can react.</li>
+        </ul>
+        <h3>Additional innovations</h3>
+        <ul>
+          <li><strong>State rent with grace periods</strong> — Inactive accounts may pay state rent after long grace periods and clear notice.</li>
+          <li><strong>Verifiable delay / ordering (VDF)</strong> — Boing-native verifiable delay for fair ordering without depending on another chain.</li>
+          <li><strong>Native DeFi primitives</strong> — Protocol-level swap/AMM-style primitives for <a href="https://boing.finance" target="_blank" rel="noopener">boing.finance</a> integration.</li>
         </ul>
       </section>
 
       <section id="rpc-api" class="doc-section">
         <h2>RPC API</h2>
-        <p>Boing nodes expose a JSON-RPC 2.0 HTTP interface. <strong>Base URL:</strong> <code>http://&lt;host&gt;:8545/</code> (default port 8545).</p>
+        <p>Boing nodes expose a <strong>JSON-RPC 2.0</strong> interface over <strong>HTTP POST</strong>. <strong>Base URL:</strong> <code>http://&lt;host&gt;:8545/</code> (default port 8545). RPC is rate-limited per node configuration; see repository security standards for details.</p>
         <h3>Request format</h3>
         <pre><code>{jsonRpcExample}</code></pre>
+        <h3>Response format</h3>
+        <p><strong>Success:</strong> <code>{responseSuccessExample}</code>. <strong>Error:</strong> <code>{responseErrorExample}</code>.</p>
         <h3>Methods</h3>
         <dl class="rpc-methods">
           <dt><code>boing_submitTransaction</code></dt>
@@ -116,8 +173,9 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
           <dt><code>boing_registerDappMetrics</code></dt>
           <dd>Params: <code>[hex_contract, hex_owner]</code>. Register dApp for incentives.</dd>
           <dt><code>boing_submitIntent</code></dt>
-          <dd>Params: <code>[hex_signed_intent]</code>. Submit signed intent for solver.</dd>
+          <dd>Params: <code>[hex_signed_intent]</code>. Submit signed intent for solver. Result: <code>intent_id</code>.</dd>
         </dl>
+        <p><code>boing_getAccountProof</code> returns <code>proof</code>, <code>root</code>, <code>value_hash</code>. <code>boing_simulateTransaction</code> returns <code>gas_used</code>, <code>success</code>, and optional <code>error</code>.</p>
         <h3>Error codes</h3>
         <table class="doc-table">
           <thead><tr><th>Code</th><th>Meaning</th></tr></thead>
@@ -133,7 +191,7 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
 
       <section id="operations" class="doc-section">
         <h2>Operations</h2>
-        <h3>CLI</h3>
+        <h3>CLI commands</h3>
         <table class="doc-table">
           <thead><tr><th>Command</th><th>Description</th></tr></thead>
           <tbody>
@@ -141,57 +199,106 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
             <tr><td><code>boing dev [--port 8545]</code></td><td>Start local dev chain</td></tr>
             <tr><td><code>boing deploy [path]</code></td><td>Deploy contract or config</td></tr>
             <tr><td><code>boing metrics register --contract &lt;hex&gt; --owner &lt;hex&gt;</code></td><td>Register contract for dApp incentives</td></tr>
-            <tr><td><code>boing completions &lt;shell&gt;</code></td><td>Shell completions (bash, zsh, fish, etc.)</td></tr>
+            <tr><td><code>boing completions &lt;shell&gt;</code></td><td>Shell completions (bash, zsh, fish, powershell, elvish)</td></tr>
           </tbody>
         </table>
-        <h3>Monitoring</h3>
-        <p>Chain height via RPC:</p>
+        <h3>Shell completions</h3>
+        <p>Example (bash): <code>boing completions bash &gt; ~/.local/share/bash-completion/completions/boing</code>. Similar for zsh, fish.</p>
+        <h3>Monitoring and health</h3>
+        <p><strong>Chain height:</strong></p>
         <pre><code>{curlExample}</code></pre>
-        <p>Set <code>RUST_LOG=info</code> (or <code>debug</code> / <code>trace</code>) before running the node for logs.</p>
+        <p><strong>Block by height:</strong> Use RPC method <code>boing_getBlockByHeight</code> with params <code>[0]</code> (or desired height).</p>
+        <p><strong>Logs:</strong> Set <code>RUST_LOG=info</code> (or <code>debug</code> / <code>trace</code>) before running the node.</p>
+        <h3>Incident response</h3>
+        <p>For security incidents: (1) <strong>Detect</strong> — logs, alerts, reports. (2) <strong>Assess</strong> — severity: Low, Medium, High, Critical. (3) <strong>Contain</strong> — isolate systems; pause if needed. (4) <strong>Communicate</strong> — notify validators and users. (5) <strong>Remediate</strong> — apply fixes; coordinate upgrades via governance. (6) <strong>Post-mortem</strong> — document cause and prevention. See repository SECURITY-STANDARDS for contacts and bug bounty.</p>
         <h3>Troubleshooting</h3>
         <ul>
-          <li><strong>Node won't start</strong> — Ensure RPC port is free; check <code>RUST_LOG=debug</code>; on Windows try WSL if needed.</li>
-          <li><strong>Transaction not included</strong> — Enable validator mode for block production; use <code>boing_simulateTransaction</code> first.</li>
-          <li><strong>Method not found</strong> — Use exact method name (case-sensitive); params must be a JSON array.</li>
+          <li><strong>Node won't start</strong> — Ensure RPC port is free; run with <code>RUST_LOG=debug</code>; on Windows try WSL or check firewall.</li>
+          <li><strong>Transaction not included</strong> — Validator mode must be on for block production; simulate with <code>boing_simulateTransaction</code> first; check mempool and nonce order.</li>
+          <li><strong>Method not found</strong> — Method names are case-sensitive; <code>params</code> must be a JSON array (e.g. <code>{paramsArrayExample}</code> not <code>{paramsObjectWrong}</code>).</li>
+          <li><strong>Build fails</strong> — Try <code>cargo clean</code> then <code>cargo build</code>.</li>
         </ul>
+      </section>
+
+      <section id="roadmap" class="doc-section">
+        <h2>Roadmap</h2>
+        <p>Phased build from first principles. Current status:</p>
+        <ul>
+          <li><strong>Foundation</strong> — Complete.</li>
+          <li><strong>Networking</strong> — Complete.</li>
+          <li><strong>Verkle &amp; VM</strong> — Complete.</li>
+          <li><strong>PoS &amp; Production</strong> — In progress.</li>
+          <li><strong>UX &amp; Automation</strong> — In progress.</li>
+          <li><strong>Cross-chain</strong> — Planned.</li>
+          <li><strong>Testnet &amp; Mainnet</strong> — Planned.</li>
+        </ul>
+        <p>See the <a href="/#roadmap">landing page roadmap</a> and the repository BUILD-ROADMAP for details.</p>
+      </section>
+
+      <section id="testnet" class="doc-section">
+        <h2>Testnet</h2>
+        <p>Testnet will provide a public network for validators and developers before mainnet. When available you can expect:</p>
+        <ul>
+          <li><strong>Bootnodes</strong> — Public endpoints to join the testnet.</li>
+          <li><strong>Faucet</strong> — Test tokens for development and validation.</li>
+          <li><strong>Incentives</strong> — Testnet token or NFT programs for early validators and bug hunters (non-dilutive for mainnet).</li>
+        </ul>
+        <p>Check the repository and <a href="/network/status">network status</a> for testnet announcements and configuration.</p>
       </section>
 
       <section id="security" class="doc-section">
         <h2>Security</h2>
-        <p>RPC endpoints are rate-limited per configuration. For security incidents:</p>
-        <ol>
-          <li><strong>Detect</strong> — Monitor logs and community reports.</li>
-          <li><strong>Assess</strong> — Classify severity (Low / Medium / High / Critical).</li>
-          <li><strong>Contain</strong> — Isolate affected systems.</li>
-          <li><strong>Communicate</strong> — Notify validators and users as appropriate.</li>
-          <li><strong>Remediate</strong> — Apply fixes; coordinate upgrades via governance if needed.</li>
-        </ol>
-        <p>Audit reports and bug bounty details are published transparently. See the repository for current security standards.</p>
+        <h3>Protocol level</h3>
+        <ul>
+          <li><strong>Consensus</strong> — BFT-style consensus; network tolerates up to 1/3 malicious validators. PoS and slashing for misbehavior.</li>
+          <li><strong>Cryptography</strong> — Audited primitives (e.g. Ed25519, BLAKE3).</li>
+          <li><strong>State</strong> — Verkle trees for integrity and stateless clients.</li>
+        </ul>
+        <h3>Network level</h3>
+        <ul>
+          <li><strong>Transport</strong> — Encrypted P2P (e.g. libp2p).</li>
+          <li><strong>Rate limiting</strong> — RPC and P2P rate-limited to reduce abuse and DDoS risk.</li>
+        </ul>
+        <h3>Incident response</h3>
+        <p>Detect → Assess (Low/Medium/High/Critical) → Contain → Communicate → Remediate → Post-mortem. Audit reports and bug bounty details are published; see SECURITY-STANDARDS in the repository.</p>
       </section>
 
       <section id="governance" class="doc-section">
         <h2>Governance & Transparency</h2>
-        <p>Boing commits to <strong>100% transparency</strong>:</p>
+        <p>Boing commits to <strong>100% transparency</strong>. Trust is earned through verification, not promises.</p>
+        <h3>Transparency commitments</h3>
         <ul>
-          <li><strong>Protocol design</strong> — Open specs and auditable code.</li>
-          <li><strong>Tokenomics</strong> — Emission, fee split, and wave parameters on-chain and documented.</li>
-          <li><strong>Governance</strong> — On-chain proposals, votes, and outcomes.</li>
-          <li><strong>Validator & staking</strong> — Clear slashing conditions and reward distribution.</li>
-          <li><strong>Treasury</strong> — Public accounts and governance-approved disbursements.</li>
+          <li><strong>Protocol design</strong> — Open design docs, public specs, auditable code.</li>
+          <li><strong>Tokenomics</strong> — Emission, fee split, floor, and wave parameters on-chain and documented.</li>
+          <li><strong>Governance</strong> — On-chain proposals, votes, and outcomes; no backroom deals.</li>
+          <li><strong>Validator &amp; staking</strong> — Clear slashing conditions, reward formulas, and distribution.</li>
+          <li><strong>Treasury</strong> — Public accounts, transparent allocation, governance-approved spending.</li>
+          <li><strong>Security &amp; audits</strong> — Audit reports public; known risks disclosed.</li>
+          <li><strong>Development</strong> — Open source; roadmap and trade-offs discussed openly.</li>
         </ul>
-        <p>Trust is earned through verification, not promises. All parameters are verifiable on-chain.</p>
+        <h3>Governance process</h3>
+        <p>Parameter changes use <strong>time-locked stages</strong>: proposal → cooling period → execution. This allows the community to react and exit if needed. No single party can change critical parameters unilaterally; changes require broad consensus within protocol bounds.</p>
       </section>
 
       <section id="resources" class="doc-section">
         <h2>Resources</h2>
+        <h3>Site pages</h3>
         <ul>
-          <li><a href="/">Landing page</a> — Tokenomics, roadmap, ecosystem.</li>
+          <li><a href="/">Landing page</a> — Tokenomics charts, roadmap, ecosystem, innovations.</li>
           <li><a href="/developers/quickstart">Developer quickstart</a> — CLI, SDK, local dev.</li>
-          <li><a href="/network/status">Network status</a> — When available.</li>
+          <li><a href="/network/status">Network status</a> — Block height, validators (when available).</li>
           <li><a href="/about">About</a> — Design philosophy and pillars.</li>
           <li><a href="/community">Community</a> — GitHub, governance, grants.</li>
         </ul>
-        <p>Full design plan, RPC spec, runbook, and security standards are in the <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">boing-network</a> repository.</p>
+        <h3>Repository (boing-network)</h3>
+        <p>Source code and full specs: <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">github.com/chiku524/boing-network</a>. Key documents include:</p>
+        <ul>
+          <li><strong>BOING-BLOCKCHAIN-DESIGN-PLAN.md</strong> — Design philosophy, tokenomics, decentralization, innovations.</li>
+          <li><strong>RUNBOOK.md</strong> — Operations: node setup, RPC, CLI, monitoring, incident response, troubleshooting.</li>
+          <li><strong>docs/RPC-API-SPEC.md</strong> — Full JSON-RPC method and error specification.</li>
+          <li><strong>SECURITY-STANDARDS.md</strong> — Protocol, network, and operational security; audit and bug bounty.</li>
+          <li><strong>BUILD-ROADMAP.md</strong> — Build and release roadmap.</li>
+        </ul>
       </section>
     </div>
   </article>
@@ -199,7 +306,7 @@ const curlExample = `curl -s -X POST http://127.0.0.1:8545/ -H "Content-Type: ap
 
 <script>
   (function () {
-    const sectionIds = ['overview', 'getting-started', 'network-overview', 'tokenomics', 'architecture', 'rpc-api', 'operations', 'security', 'governance', 'resources'];
+    const sectionIds = ['overview', 'getting-started', 'network-overview', 'tokenomics', 'architecture', 'rpc-api', 'operations', 'roadmap', 'testnet', 'security', 'governance', 'resources'];
     function showSection(id) {
       const sections = document.querySelectorAll('.doc-section');
       const links = document.querySelectorAll('.toc-link');
