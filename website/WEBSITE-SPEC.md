@@ -10,11 +10,8 @@
 
 ```
 boing.network/
-├── /                    → Landing (hero, value prop, tokenomics/roadmap/ecosystem preview)
+├── /                    → Landing: hero (animated), tokenomics (charts), roadmap, ecosystem, innovations, resources
 ├── /about               → Design philosophy, pillars, innovation overview
-├── /tokenomics          → Tokenomics charts (fee allocation, emission curve), value accrual
-├── /roadmap             → Visual timeline (phases, status)
-├── /applications        → Ecosystem: dApps building on Boing (boing.finance, etc.)
 ├── /docs/               → Documentation hub
 │   ├── /getting-started → Install, run node, first transaction
 │   ├── /architecture    → Consensus, state, VM, networking

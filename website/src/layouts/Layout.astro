@@ -58,15 +58,17 @@ const ogImage = `${siteUrl}/og.png`;
   </head>
   <body>
     <header class="site-header">
-      <a href="/" class="logo gradient-text">boing.network</a>
+      <a href="/" class="logo">
+      <img src="/logo.svg" alt="Boing" width="32" height="32" class="logo-icon" />
+      <span class="gradient-text">boing.network</span>
+    </a>
       <nav>
-        <a href="/about">About</a>
-        <a href="/tokenomics">Tokenomics</a>
-        <a href="/roadmap">Roadmap</a>
-        <a href="/applications">Ecosystem</a>
+        <a href="/#tokenomics">Tokenomics</a>
+        <a href="/#roadmap">Roadmap</a>
+        <a href="/#ecosystem">Ecosystem</a>
         <a href="/docs/getting-started">Docs</a>
         <a href="/developers/quickstart">Developers</a>
-        <a href="/network/status">Network</a>
+        <a href="/about">About</a>
         <a href="/community">Community</a>
       </nav>
     </header>
@@ -133,13 +135,20 @@ const ogImage = `${siteUrl}/og.png`;
   }
 
   .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-weight: 700;
     font-size: 1.25rem;
-    filter: drop-shadow(0 0 8px var(--glow-cyan-subtle));
+    text-decoration: none;
+  }
+  .logo-icon {
+    flex-shrink: 0;
+    filter: drop-shadow(0 0 6px var(--glow-cyan-subtle));
   }
 
-  .logo:hover {
-    filter: drop-shadow(0 0 12px var(--glow-cyan));
+  .logo:hover .logo-icon {
+    filter: drop-shadow(0 0 10px var(--glow-cyan));
   }
 
   .site-header nav { display: flex; gap: 1rem; flex-wrap: wrap; }

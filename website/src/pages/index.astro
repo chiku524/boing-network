@@ -7,251 +7,198 @@ import Layout from '../layouts/Layout.astro';
   description="The DeFi that always bounces back. Boing Network is the authentic L1 blockchain — built from first principles. Swap, stake, and build on the Boing ecosystem."
   canonical="/"
 >
-  <section class="hero">
-    <h1 class="hero-title gradient-text-hero">boing.network</h1>
-    <p class="tagline gradient-text-hero">The DeFi that always bounces back</p>
-    <p class="pillars">Security → Scalability → Decentralization → Authenticity</p>
-    <div class="cta">
-      <a href="/docs/getting-started" class="btn btn-primary">Get Started</a>
-      <a href="/about" class="btn btn-secondary">Learn More</a>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-orb hero-orb-1"></div>
+      <div class="hero-orb hero-orb-2"></div>
+      <div class="hero-orb hero-orb-3"></div>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title gradient-text-hero">boing.network</h1>
+      <p class="tagline gradient-text-hero">The DeFi that always bounces back</p>
+      <p class="pillars">Security → Scalability → Decentralization → Authenticity</p>
+      <div class="cta">
+        <a href="/docs/getting-started" class="btn btn-primary">Get Started</a>
+        <a href="#tokenomics" class="btn btn-secondary">Explore</a>
+      </div>
     </div>
   </section>
 
-  <section class="features">
+  <!-- Tokenomics -->
+  <section class="section section-alt" id="tokenomics">
+    <h2>Tokenomics</h2>
+    <p class="section-lead">Sustainable value design — 1B max supply, declining emissions, fee burn.</p>
+    <div class="stats-grid">
+      <div class="stat-card"><span class="stat-value">1B</span><span class="stat-label">Max Supply</span></div>
+      <div class="stat-card"><span class="stat-value">~2s</span><span class="stat-label">Block Time</span></div>
+      <div class="stat-card"><span class="stat-value">1%</span><span class="stat-label">Long-term Floor</span></div>
+    </div>
+    <div class="charts-row">
+      <div class="chart-card">
+        <h3>Fee Allocation</h3>
+        <div class="chart-wrapper"><canvas id="feeChart"></canvas></div>
+        <ul class="legend">
+          <li><span class="dot" style="background:#3b82f6"></span> Validators 70%</li>
+          <li><span class="dot" style="background:#8b5cf6"></span> Treasury 20%</li>
+          <li><span class="dot" style="background:#ef4444"></span> Burn 10%</li>
+        </ul>
+      </div>
+      <div class="chart-card">
+        <h3>Emission Schedule</h3>
+        <div class="chart-wrapper"><canvas id="emissionChart"></canvas></div>
+      </div>
+    </div>
+    <p class="value-loop"><strong>Usage ↑</strong> → Fees ↑ → Burn ↑ → Supply ↓ → <strong>Value ↑</strong></p>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="section" id="roadmap">
+    <h2>Roadmap</h2>
+    <p class="section-lead">Phased build from first principles.</p>
+    <div class="timeline-compact">
+      <div class="t-item complete"><span class="t-marker">✓</span><span>Foundation</span></div>
+      <div class="t-item complete"><span class="t-marker">✓</span><span>Networking</span></div>
+      <div class="t-item complete"><span class="t-marker">✓</span><span>Verkle & VM</span></div>
+      <div class="t-item in-progress"><span class="t-marker">●</span><span>PoS & Production</span></div>
+      <div class="t-item in-progress"><span class="t-marker">●</span><span>UX & Automation</span></div>
+      <div class="t-item planned"><span class="t-marker">○</span><span>Cross-chain</span></div>
+      <div class="t-item planned"><span class="t-marker">○</span><span>Testnet & Mainnet</span></div>
+    </div>
+  </section>
+
+  <!-- Ecosystem -->
+  <section class="section section-alt" id="ecosystem">
+    <h2>Ecosystem</h2>
+    <p class="section-lead">Applications building on Boing Network.</p>
+    <div class="apps-row">
+      <a href="https://boing.finance" class="app-card featured" target="_blank" rel="noopener">
+        <h3>boing.finance</h3>
+        <p>Swap, bridge, deploy tokens, manage liquidity across EVM & Solana.</p>
+        <span class="app-status live">Live</span>
+      </a>
+      <a href="/docs/getting-started" class="app-card">
+        <h3>Boing Network</h3>
+        <p>Run a node, stake, participate in governance. The foundation layer.</p>
+        <span class="app-status live">Live</span>
+      </a>
+      <a href="/developers/quickstart" class="app-card">
+        <h3>Build on Boing</h3>
+        <p>Native AA, adaptive gas, success-based incentives for developers.</p>
+        <span class="app-status build">Build</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Innovations -->
+  <section class="section" id="innovations">
     <h2>Unique Innovations</h2>
     <div class="grid">
-      <div class="card">
-        <h3>Native Account Abstraction</h3>
-        <p>Gasless txs, social recovery, session keys — built into the protocol, not bolted on.</p>
-      </div>
-      <div class="card">
-        <h3>Adaptive Gas Model</h3>
-        <p>Dynamic gas that responds to network conditions with predictable upper bounds.</p>
-      </div>
-      <div class="card">
-        <h3>Cross-Chain DeFi Hub</h3>
-        <p>Protocol-level primitives for liquidity routing and coordination across chains.</p>
-      </div>
-      <div class="card">
-        <h3>Transparent Slashing</h3>
-        <p>Auditable slashing conditions and appeal mechanisms for delegators.</p>
-      </div>
+      <div class="card"><h3>Native Account Abstraction</h3><p>Gasless txs, social recovery, session keys — built into the protocol.</p></div>
+      <div class="card"><h3>Adaptive Gas Model</h3><p>Dynamic gas that responds to network conditions with predictable caps.</p></div>
+      <div class="card"><h3>Cross-Chain DeFi Hub</h3><p>Protocol-level primitives for liquidity routing across chains.</p></div>
+      <div class="card"><h3>Transparent Slashing</h3><p>Auditable slashing conditions and appeal mechanisms.</p></div>
     </div>
   </section>
 
-  <section class="preview-cards">
-    <h2>The Foundation</h2>
-    <div class="preview-grid">
-      <a href="/tokenomics" class="preview-card">
-        <h3>Tokenomics</h3>
-        <p>1B max supply, declining emissions, fee burn. Sustainable value design.</p>
-        <span class="preview-link">View tokenomics →</span>
-      </a>
-      <a href="/roadmap" class="preview-card">
-        <h3>Roadmap</h3>
-        <p>From foundation to mainnet. Phased build with clear milestones.</p>
-        <span class="preview-link">View roadmap →</span>
-      </a>
-      <a href="/applications" class="preview-card">
-        <h3>Ecosystem</h3>
-        <p>Applications building on Boing. DeFi, infra, and more.</p>
-        <span class="preview-link">Explore ecosystem →</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="links">
+  <!-- Resources -->
+  <section class="section section-alt links-section">
     <h2>Resources</h2>
     <div class="link-grid">
       <a href="/docs/getting-started">Getting Started</a>
       <a href="/docs/rpc-api">RPC API</a>
       <a href="/developers/quickstart">Developer Quickstart</a>
       <a href="/network/status">Network Status</a>
+      <a href="/about">About</a>
+      <a href="/community">Community</a>
     </div>
   </section>
 </Layout>
 
+<script>
+  import { Chart, ArcElement, CategoryScale, LinearScale, LineElement, PointElement, Filler, Tooltip, Legend } from 'chart.js';
+  Chart.register(ArcElement, CategoryScale, LinearScale, LineElement, PointElement, Filler, Tooltip, Legend);
+
+  function initCharts() {
+    const c = { primary: '#3b82f6', secondary: '#8b5cf6', accent: '#06b6d4', burn: '#ef4444', grid: 'rgba(148,163,184,0.2)', text: '#cbd5e1' };
+    const feeCtx = document.getElementById('feeChart')?.getContext('2d');
+    if (feeCtx) new Chart(feeCtx, { type: 'doughnut', data: { labels: ['Validators', 'Treasury', 'Burn'], datasets: [{ data: [70, 20, 10], backgroundColor: [c.primary, c.secondary, c.burn], borderColor: '#1e293b', borderWidth: 2 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
+    const emissionCtx = document.getElementById('emissionChart')?.getContext('2d');
+    if (emissionCtx) new Chart(emissionCtx, { type: 'line', data: { labels: ['Y1', 'Y2', 'Y3', 'Y4', 'Y5', 'Y10+'], datasets: [{ data: [8, 6, 4.5, 3.4, 2.5, 1], borderColor: c.accent, backgroundColor: 'rgba(6,182,212,0.1)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { min: 0, max: 10, grid: { color: c.grid }, ticks: { color: c.text } }, x: { grid: { color: c.grid }, ticks: { color: c.text } } } } });
+  }
+  document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', initCharts) : initCharts();
+</script>
+
 <style>
-  .hero {
-    text-align: center;
-    padding: 4rem 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
+  /* Hero + animation */
+  .hero { position: relative; text-align: center; padding: 5rem 2rem; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; pointer-events: none; }
+  .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
+  .hero-orb-1 { width: 400px; height: 400px; background: radial-gradient(circle, #06b6d4 0%, transparent 70%); top: -20%; left: 10%; animation-delay: 0s; }
+  .hero-orb-2 { width: 300px; height: 300px; background: radial-gradient(circle, #3b82f6 0%, transparent 70%); bottom: -10%; right: 15%; animation-delay: -7s; }
+  .hero-orb-3 { width: 250px; height: 250px; background: radial-gradient(circle, #8b5cf6 0%, transparent 70%); top: 30%; right: 5%; animation-delay: -14s; }
+  @keyframes float { 0%, 100% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 15px) scale(0.95); } }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .hero-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin: 0 0 0.5rem; filter: drop-shadow(0 0 20px var(--glow-cyan-subtle)); }
+  .tagline { font-size: 1.25rem; margin: 0 0 0.5rem; filter: drop-shadow(0 0 12px var(--glow-cyan-subtle)); }
+  .pillars { color: var(--text-secondary); font-size: 0.95rem; margin: 1rem 0 2rem; }
+  .cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn { padding: 0.75rem 1.5rem; border-radius: 0.5rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .btn-primary { background: linear-gradient(to right, var(--primary-color), var(--secondary-color)); color: white; border: none; }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-secondary { background: var(--bg-tertiary); color: var(--text-primary); border: 1px solid var(--border-color); }
+  .btn-secondary:hover { border-color: var(--accent-neon); color: var(--accent-neon); }
 
-  .hero-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
-    margin: 0 0 0.5rem;
-    filter: drop-shadow(0 0 20px var(--glow-cyan-subtle));
-  }
+  /* Sections */
+  .section { padding: 4rem 2rem; max-width: 1000px; margin: 0 auto; }
+  .section-alt { background: var(--bg-secondary); }
+  .section h2 { text-align: center; margin-bottom: 0.5rem; color: var(--text-primary); }
+  .section-lead { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; font-size: 1rem; }
 
-  .tagline {
-    font-size: 1.25rem;
-    margin: 0 0 0.5rem;
-    filter: drop-shadow(0 0 12px var(--glow-cyan-subtle));
-  }
+  /* Tokenomics */
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem; text-align: center; }
+  .stat-value { display: block; font-size: 1.5rem; font-weight: 700; color: var(--accent-neon); }
+  .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
+  .charts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
+  .chart-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem; }
+  .chart-card h3 { font-size: 1rem; margin: 0 0 0.75rem; color: var(--text-primary); }
+  .chart-wrapper { height: 220px; }
+  .legend { list-style: none; padding: 0; margin: 0.5rem 0 0; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; font-size: 0.85rem; color: var(--text-secondary); }
+  .legend .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 0.25rem; vertical-align: middle; }
+  .value-loop { text-align: center; font-family: var(--font-mono); color: var(--accent-neon); background: var(--bg-tertiary); padding: 1rem; border-radius: 0.5rem; font-size: 0.95rem; }
 
-  .pillars {
-    color: var(--text-secondary);
-    font-size: 0.95rem;
-    margin: 1rem 0 2rem;
-  }
+  /* Roadmap */
+  .timeline-compact { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .t-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 0.5rem; font-size: 0.9rem; color: var(--text-secondary); }
+  .t-item.complete { border-color: rgba(16,185,129,0.4); color: #34d399; }
+  .t-item.in-progress { border-color: var(--accent-neon); color: var(--accent-neon); }
+  .t-marker { font-size: 0.75rem; }
 
-  .cta {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+  /* Ecosystem */
+  .apps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
+  .app-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.25rem; text-decoration: none; color: inherit; transition: all 0.2s; }
+  .app-card:hover { border-color: var(--accent-neon); box-shadow: 0 0 20px var(--glow-cyan-subtle); }
+  .app-card.featured { border-color: var(--primary-color); }
+  .app-card h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--text-primary); }
+  .app-card p { font-size: 0.875rem; color: var(--text-secondary); margin: 0 0 0.75rem; line-height: 1.4; }
+  .app-status { font-size: 0.75rem; text-transform: uppercase; font-weight: 600; }
+  .app-status.live { color: #34d399; }
+  .app-status.build { color: var(--accent-neon); }
 
-  .btn {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
+  /* Innovations grid */
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .card { padding: 1.25rem; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 1rem; transition: all 0.2s; }
+  .card:hover { border-color: var(--border-hover); box-shadow: 0 2px 16px var(--glow-cyan-subtle); }
+  .card h3 { font-size: 0.95rem; margin: 0 0 0.5rem; color: var(--text-primary); }
+  .card p { margin: 0; font-size: 0.85rem; color: var(--text-secondary); }
 
-  .btn-primary {
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    color: white;
-    border: none;
-  }
+  /* Links */
+  .link-grid { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .link-grid a { padding: 0.5rem 1rem; }
 
-  .btn-primary:hover {
-    filter: brightness(1.1);
-  }
-
-  .btn-secondary {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--accent-neon);
-    color: var(--accent-neon);
-  }
-
-  .features {
-    padding: 4rem 2rem;
-    background: var(--bg-secondary);
-  }
-
-  .features h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1.5rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .card {
-    padding: 1.5rem;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px var(--shadow);
-    transition: all 0.2s;
-  }
-
-  .card:hover {
-    border-color: var(--border-hover);
-    box-shadow: 0 2px 24px var(--glow-cyan-subtle);
-  }
-
-  .card h3 {
-    font-size: 1rem;
-    margin: 0 0 0.5rem;
-    color: var(--text-primary);
-  }
-
-  .card p {
-    margin: 0;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-  }
-
-  .preview-cards {
-    padding: 4rem 2rem;
-    background: var(--bg-secondary);
-  }
-
-  .preview-cards h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
-  }
-
-  .preview-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .preview-card {
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.2s;
-  }
-
-  .preview-card:hover {
-    border-color: var(--accent-neon);
-    box-shadow: 0 0 24px var(--glow-cyan-subtle);
-  }
-
-  .preview-card h3 {
-    font-size: 1.125rem;
-    margin: 0 0 0.5rem;
-    color: var(--text-primary);
-  }
-
-  .preview-card p {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin: 0 0 1rem;
-    flex: 1;
-  }
-
-  .preview-link {
-    font-size: 0.9rem;
-    color: var(--accent-neon);
-    font-weight: 500;
-  }
-
-  .links {
-    padding: 4rem 2rem;
-  }
-
-  .links h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--text-primary);
-  }
-
-  .link-grid {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .link-grid a {
-    padding: 0.5rem 1rem;
+  @media (max-width: 640px) { .stats-grid { grid-template-columns: 1fr; } }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-orb { animation: none; opacity: 0.25; }
   }
 </style>

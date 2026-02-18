@@ -47,6 +47,9 @@
   background-clip: text;
 }
 
+/* Smooth scroll for anchor links */
+html { scroll-behavior: smooth; }
+
 .gradient-text-hero {
   background: linear-gradient(to right, #22d3ee, #06b6d4, #3b82f6);
   -webkit-background-clip: text;
