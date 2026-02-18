@@ -58,6 +58,20 @@ html { scroll-behavior: smooth; }
   50% { transform: translateY(-8px); }
 }
 
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-10px); opacity: 0.6; }
+}
+
+@keyframes pulseFade {
+  0% { opacity: 0.1; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.1; }
+}
+
+.animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
+.animate-pulse-fade { animation: pulseFade 3s ease-in-out infinite; }
+
 @keyframes pulseGlow {
   0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 8px var(--glow-cyan-subtle)); }
   50% { opacity: 1; filter: drop-shadow(0 0 16px var(--glow-cyan)); }
