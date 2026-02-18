@@ -559,11 +559,11 @@ If fee revenue consistently exceeds validator costs, the network is **self-susta
 
 | Allocation | Share | Purpose |
 |------------|-------|---------|
-| **Validators** | 70% | Primary revenue; covers infra |
+| **Validators** | 80% | Primary revenue; covers infra |
 | **Treasury** | 20% | Grants, audits, ecosystem |
-| **Burn** | 10% | Deflationary; reduces supply as usage grows |
+| **Burn** | 0% (optional) | In the floor-triggered wave model, burn is optional; see [Burn in a Floor-Triggered Model](#burn-in-a-floor-triggered-model-optional). If enabled, governance-bounded (e.g. 0–5%). |
 
-**Fee burn:** As transaction volume increases, burned BOING increases → supply decreases → value accrual. Creates a sustainable flywheel: more usage → more burn → less supply → higher value.
+**Fee flow:** Fees go to validators and treasury. With uncapped supply and floor-triggered waves, value accrual comes from usage and sustainable rebalancing rather than from burn.
 
 ### Staking & Validator Economics
 
@@ -582,36 +582,37 @@ If fee revenue consistently exceeds validator costs, the network is **self-susta
 | **Total dApp pool** | % of fees (e.g. 5% of treasury share) | Bounded; doesn't dilute stakers |
 | **Overflow** | To treasury or burn | Excess flows back; no waste |
 
-### Deflationary Mechanisms
+### Deflationary Mechanisms (Optional in Floor-Triggered Model)
 
-1. **Fee burn (10%)** — Constant sell pressure reduction
-2. **Supply cap** — No new supply after emission schedule completes (or floor)
-3. **dApp cap overflow** — Unclaimed incentives → burn or treasury
+1. **Fee burn** — Optional (0% in base design). If enabled, governance-bounded. In a floor-triggered model, burn mainly accelerates how often waves are minted; see [Burn in a Floor-Triggered Model](#burn-in-a-floor-triggered-model-optional).
+2. **Floor-triggered waves** — When supply reaches the floor, new waves are minted to rebalance; no permanent deflation required.
+3. **dApp cap overflow** — Unclaimed incentives → treasury (or optional small burn if governance enables it).
 
 ### Value Accrual Loops
 
 ```
-Usage ↑ → Fees ↑ → Burn ↑ → Supply ↓ → Value ↑
 Usage ↑ → Fees ↑ → Validator revenue ↑ → Security ↑ → Trust ↑ → Usage ↑
+Usage ↑ → Fees ↑ → Treasury ↑ → Ecosystem ↑ → Usage ↑
+(Optional burn, if enabled: Usage ↑ → Fees ↑ → Burn ↑ → supply pressure; in floor-triggered model, waves then rebalance.)
 ```
 
 ### Sustainability Guardrails (On-Chain)
 
 | Guardrail | Implementation |
 |-----------|----------------|
-| **Emission cap** | Hard-coded max supply; contract rejects excess mint |
-| **Fee split** | Governance can adjust within bounds (e.g. burn 5–20%) |
+| **Uncapped supply, floor-triggered waves** | No hard cap; waves mint when supply reaches floor; rules on-chain and transparent |
+| **Fee split** | Governance can adjust within bounds (e.g. validators 70–90%, treasury 10–30%; burn 0% or optional 0–5%) |
 | **dApp cap** | Governance parameter; transparent, auditable |
-| **No reward cliffs** | Smooth decay; no sudden drops |
+| **No reward cliffs** | Wave size and trigger rules predictable; no sudden dilution |
 
 ### Summary: Why BOING Value Is Sustainable
 
-1. **Hard supply cap** — 1B max; no infinite inflation
-2. **Declining emissions** — Inflation trends to 1% or 0%
-3. **Fee burn** — Usage reduces supply
-4. **Fee-dominant revenue** — At maturity, validators earn from fees, not dilution
-5. **dApp caps** — Incentives bounded; no runaway dApp payouts
-6. **Fair launch** — No large pre-mine; aligned long-term holders
+1. **Uncapped supply with floor-triggered waves** — Predictable rebalancing; no arbitrary infinite inflation.
+2. **Fee-dominant revenue** — Validators and treasury earn from usage; waves only when supply reaches the floor.
+3. **Burn optional** — No required burn; avoids burn → wave → burn churn; value from usage and rebalancing.
+4. **dApp caps** — Incentives bounded; no runaway dApp payouts.
+5. **Fair launch** — Specific initial supply; aligned long-term holders.
+6. **Transparent parameters** — Floor, wave size, and fee split on-chain and verifiable.
 
 ### Unlimited Supply Alternative: Bounded Inflation
 
@@ -641,7 +642,7 @@ Boing uses an **uncapped supply** with a **floor-triggered rebalancing** mechani
 | Phase | Description |
 |-------|--------------|
 | **Genesis** | Start with a **specific initial supply** (e.g. fixed amount at mainnet launch). No infinite mint at day one. |
-| **Ongoing** | Normal activity: fee burn and usage reduce circulating supply over time. Validators earn from fees and any active emission. |
+| **Ongoing** | Normal activity: validators and treasury earn from fees. Circulating supply may decrease slowly (e.g. lost keys, optional burn if enabled) until the floor is reached. |
 | **Floor** | When circulating supply reaches a **defined floor** (or a threshold near it), the protocol treats this as a rebalancing trigger. |
 | **New wave** | A **new wave of tokens** is minted (size and destination defined by protocol/governance) to restore balance — e.g. validator incentives, treasury, or staking rewards — so the network remains secure and sustainable without arbitrary permanent deflation. |
 
@@ -661,6 +662,15 @@ Boing uses an **uncapped supply** with a **floor-triggered rebalancing** mechani
 - Minimum interval between waves (if any) to avoid gaming or excessive minting
 
 This model gives long-term sustainability without a hard cap, while keeping supply growth tied to observable, verifiable rules.
+
+### Burn in a Floor-Triggered Model: Optional
+
+With floor-triggered waves, **burn is not strictly necessary**. The logic:
+
+- **If you burn:** Supply falls faster → you hit the floor sooner → you mint a new wave. So burn mainly drives *how often* waves happen. Net effect over time can be “burn X, then mint Y” — i.e. more minting cycles.
+- **If you don’t burn:** Supply falls only from other sinks (e.g. lost keys, one-off sinks). You hit the floor less often; waves are rarer and more event-driven. The rebalance mechanism still works; you just don’t add a built-in deflationary driver that then requires more waves.
+
+**Conclusion:** In this model, **burn is optional**. Skipping burn (or making it 0%) simplifies design and avoids the loop of “burn → floor → mint → burn again.” Fee revenue can go entirely to validators and treasury (e.g. 85% / 15% or 80% / 20%). Value comes from usage and sustainable waves, not from burn-induced scarcity. If you still want a small burn for narrative or between-wave deflation, it can be governance-adjustable and bounded (e.g. 0–5%).
 
 ---
 

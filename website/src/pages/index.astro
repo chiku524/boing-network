@@ -53,7 +53,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="stat-card fade-in-up delay-3"><span class="stat-value">1%</span><span class="stat-label">Long-term Floor</span></div>
     </div>
     <div class="chart-card chart-fullwidth">
-      <h3>Token Supply Allocation (1B BOING)</h3>
+      <h3>Token Supply Allocation</h3>
       <div class="chart-wrapper chart-supply chart-pie-wrap">
         <svg viewBox="0 0 100 100" class="supply-pie-svg">
           <circle cx="50" cy="50" r="40" fill="none" stroke="#06b6d4" stroke-width="40" stroke-dasharray="226.2 25.1" stroke-dashoffset="0" transform="rotate(-90 50 50)" stroke-linecap="butt" />
@@ -66,22 +66,20 @@ import Layout from '../layouts/Layout.astro';
         <li><span class="dot" style="background:#8b5cf6"></span> Treasury 5%</li>
         <li><span class="dot" style="background:#22c55e"></span> Community & Grants 5%</li>
       </ul>
-      <p class="chart-note">Fee burn (10% of fees) reduces supply over time.</p>
+      <p class="chart-note">Uncapped supply; floor-triggered waves rebalance when needed.</p>
     </div>
     <div class="charts-row">
       <div class="chart-card">
         <h3>Fee Allocation</h3>
         <div class="chart-wrapper chart-doughnut">
           <svg viewBox="0 0 100 100" class="doughnut-svg">
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="20" stroke-dasharray="175.9 75.4" stroke-dashoffset="0" transform="rotate(-90 50 50)" />
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="20" stroke-dasharray="50.3 201" stroke-dashoffset="-175.9" transform="rotate(-90 50 50)" />
-            <circle cx="50" cy="50" r="40" fill="none" stroke="#ef4444" stroke-width="20" stroke-dasharray="25.1 226.2" stroke-dashoffset="-226.2" transform="rotate(-90 50 50)" />
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#3b82f6" stroke-width="20" stroke-dasharray="201 50.3" stroke-dashoffset="0" transform="rotate(-90 50 50)" />
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="20" stroke-dasharray="50.3 201" stroke-dashoffset="-201" transform="rotate(-90 50 50)" />
           </svg>
         </div>
         <ul class="legend">
-          <li><span class="dot" style="background:#3b82f6"></span> Validators 70%</li>
+          <li><span class="dot" style="background:#3b82f6"></span> Validators 80%</li>
           <li><span class="dot" style="background:#8b5cf6"></span> Treasury 20%</li>
-          <li><span class="dot" style="background:#ef4444"></span> Burn 10%</li>
         </ul>
       </div>
       <div class="chart-card">
@@ -100,7 +98,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
       </div>
     </div>
-    <p class="value-loop"><strong>Usage ↑</strong> → Fees ↑ → Burn ↑ → Supply ↓ → <strong>Value ↑</strong></p>
+    <p class="value-loop"><strong>Usage ↑</strong> → Fees ↑ → Validators & Treasury ↑ → Security & Ecosystem ↑ → <strong>Value ↑</strong></p>
   </section>
 
   <!-- Roadmap -->
