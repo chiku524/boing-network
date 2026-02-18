@@ -46,27 +46,28 @@ import Layout from '../layouts/Layout.astro';
   <!-- Tokenomics -->
   <section class="section section-alt fade-in-up" id="tokenomics">
     <h2>Tokenomics</h2>
-    <p class="section-lead">Sustainable value design — 1B max supply, declining emissions, fee burn.</p>
+    <p class="section-lead">Sustainable value design — <strong>uncapped total supply</strong> with a <strong>set initial supply</strong> at mainnet launch. When circulating supply reaches the floor, new waves are minted to rebalance.</p>
     <div class="stats-grid">
-      <div class="stat-card fade-in-up delay-1"><span class="stat-value">1B</span><span class="stat-label">Max Supply</span></div>
-      <div class="stat-card fade-in-up delay-2"><span class="stat-value">~2s</span><span class="stat-label">Block Time</span></div>
-      <div class="stat-card fade-in-up delay-3"><span class="stat-value">1%</span><span class="stat-label">Long-term Floor</span></div>
+      <div class="stat-card fade-in-up delay-1"><span class="stat-value">Uncapped</span><span class="stat-label">Total Supply</span></div>
+      <div class="stat-card fade-in-up delay-2"><span class="stat-value">Set at launch</span><span class="stat-label">Initial Supply</span></div>
+      <div class="stat-card fade-in-up delay-3"><span class="stat-value">~2s</span><span class="stat-label">Block Time</span></div>
     </div>
     <div class="chart-card chart-fullwidth">
-      <h3>Token Supply Allocation</h3>
+      <h3>Initial Supply Allocation</h3>
+      <p class="chart-intro">How the fixed initial supply (at mainnet launch) is allocated. Staking rewards are topped up by new waves when supply reaches the floor, so the initial allocation leans more toward treasury and community.</p>
       <div class="chart-wrapper chart-supply chart-pie-wrap">
         <svg viewBox="0 0 100 100" class="supply-pie-svg">
-          <circle cx="50" cy="50" r="40" fill="none" stroke="#06b6d4" stroke-width="40" stroke-dasharray="226.2 25.1" stroke-dashoffset="0" transform="rotate(-90 50 50)" stroke-linecap="butt" />
-          <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="40" stroke-dasharray="12.6 238.7" stroke-dashoffset="-226.2" transform="rotate(-90 50 50)" stroke-linecap="butt" />
-          <circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="40" stroke-dasharray="12.6 238.7" stroke-dashoffset="-238.8" transform="rotate(-90 50 50)" stroke-linecap="butt" />
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#06b6d4" stroke-width="40" stroke-dasharray="138.2 113.1" stroke-dashoffset="0" transform="rotate(-90 50 50)" stroke-linecap="butt" />
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#8b5cf6" stroke-width="40" stroke-dasharray="75.4 175.9" stroke-dashoffset="-138.2" transform="rotate(-90 50 50)" stroke-linecap="butt" />
+          <circle cx="50" cy="50" r="40" fill="none" stroke="#22c55e" stroke-width="40" stroke-dasharray="37.7 213.6" stroke-dashoffset="-213.6" transform="rotate(-90 50 50)" stroke-linecap="butt" />
         </svg>
       </div>
       <ul class="legend legend-inline">
-        <li><span class="dot" style="background:#06b6d4"></span> Staking Rewards 90%</li>
-        <li><span class="dot" style="background:#8b5cf6"></span> Treasury 5%</li>
-        <li><span class="dot" style="background:#22c55e"></span> Community & Grants 5%</li>
+        <li><span class="dot" style="background:#06b6d4"></span> Staking Rewards 55%</li>
+        <li><span class="dot" style="background:#8b5cf6"></span> Treasury 30%</li>
+        <li><span class="dot" style="background:#22c55e"></span> Community & Grants 15%</li>
       </ul>
-      <p class="chart-note">Uncapped supply; floor-triggered waves rebalance when needed.</p>
+      <p class="chart-note">Total supply is uncapped. Initial supply is fixed at mainnet launch; new waves mint when circulating supply reaches the floor.</p>
     </div>
     <div class="charts-row">
       <div class="chart-card">
@@ -261,6 +262,7 @@ import Layout from '../layouts/Layout.astro';
   .chart-fullwidth { margin-bottom: 1.5rem; }
   .chart-wrapper.chart-supply { height: 220px; min-height: 220px; display: flex; align-items: center; justify-content: center; }
   .chart-supply .supply-pie-svg { width: 100%; height: 100%; max-width: 220px; max-height: 220px; display: block; margin: 0 auto; }
+  .chart-intro { font-size: 0.875rem; color: var(--text-secondary); margin: 0 0 0.75rem; line-height: 1.45; }
   .chart-note { font-size: 0.8rem; color: var(--text-tertiary); margin: 0.5rem 0 0; font-style: italic; }
   .legend-inline { justify-content: flex-start; margin-top: 0.75rem; }
   .charts-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 1.5rem; }
