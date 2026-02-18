@@ -7,8 +7,8 @@ import Layout from '../layouts/Layout.astro';
   description="Authentic, decentralized L1 blockchain — built from first principles. Security, Scalability, Decentralization, Authenticity."
 >
   <section class="hero">
-    <h1>boing.network</h1>
-    <p class="tagline">Authentic L1 blockchain — built from first principles</p>
+    <h1 class="hero-title gradient-text-hero">boing.network</h1>
+    <p class="tagline gradient-text-hero">Authentic L1 blockchain — built from first principles</p>
     <p class="pillars">Security → Scalability → Decentralization → Authenticity</p>
     <div class="cta">
       <a href="/docs/getting-started" class="btn btn-primary">Get Started</a>
@@ -57,19 +57,21 @@ import Layout from '../layouts/Layout.astro';
     margin: 0 auto;
   }
 
-  .hero h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.5rem);
     font-weight: 700;
-    color: var(--accent);
+    margin: 0 0 0.5rem;
+    filter: drop-shadow(0 0 20px var(--glow-cyan-subtle));
   }
 
   .tagline {
     font-size: 1.25rem;
-    color: var(--text);
+    margin: 0 0 0.5rem;
+    filter: drop-shadow(0 0 12px var(--glow-cyan-subtle));
   }
 
   .pillars {
-    color: var(--text-muted);
+    color: var(--text-secondary);
     font-size: 0.95rem;
     margin: 1rem 0 2rem;
   }
@@ -83,37 +85,42 @@ import Layout from '../layouts/Layout.astro';
 
   .btn {
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     font-weight: 600;
     text-decoration: none;
+    transition: all 0.2s;
   }
 
   .btn-primary {
-    background: var(--accent);
-    color: var(--bg);
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
   }
 
   .btn-primary:hover {
-    background: var(--accent-dim);
+    filter: brightness(1.1);
   }
 
   .btn-secondary {
-    border: 1px solid var(--border);
-    color: var(--text);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
   }
 
   .btn-secondary:hover {
-    border-color: var(--accent);
+    border-color: var(--accent-neon);
+    color: var(--accent-neon);
   }
 
   .features {
     padding: 4rem 2rem;
-    background: var(--surface);
+    background: var(--bg-secondary);
   }
 
   .features h2 {
     text-align: center;
     margin-bottom: 2rem;
+    color: var(--text-primary);
   }
 
   .grid {
@@ -126,19 +133,28 @@ import Layout from '../layouts/Layout.astro';
 
   .card {
     padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px var(--shadow);
+    transition: all 0.2s;
+  }
+
+  .card:hover {
+    border-color: var(--border-hover);
+    box-shadow: 0 2px 24px var(--glow-cyan-subtle);
   }
 
   .card h3 {
     font-size: 1rem;
     margin: 0 0 0.5rem;
+    color: var(--text-primary);
   }
 
   .card p {
     margin: 0;
     font-size: 0.9rem;
-    color: var(--text-muted);
+    color: var(--text-secondary);
   }
 
   .links {
@@ -148,6 +164,7 @@ import Layout from '../layouts/Layout.astro';
   .links h2 {
     text-align: center;
     margin-bottom: 2rem;
+    color: var(--text-primary);
   }
 
   .link-grid {

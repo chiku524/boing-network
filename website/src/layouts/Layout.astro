@@ -1,4 +1,6 @@
 ---
+import '../styles/boing-theme.css';
+
 interface Props {
   title?: string;
   description?: string;
@@ -15,13 +17,10 @@ const { title = 'Boing Network', description = 'Authentic, decentralized L1 bloc
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title === 'Boing Network' ? title : `${title} | Boing Network`}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <header class="site-header">
-      <a href="/" class="logo">boing.network</a>
+      <a href="/" class="logo gradient-text">boing.network</a>
       <nav>
         <a href="/about">About</a>
         <a href="/docs/getting-started">Docs</a>
@@ -36,7 +35,8 @@ const { title = 'Boing Network', description = 'Authentic, decentralized L1 bloc
     <footer class="site-footer">
       <p>Boing Network — Authentic. Decentralized. Optimal. Sustainable.</p>
       <div class="footer-links">
-        <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://boing.finance" target="_blank" rel="noopener">boing.finance</a>
         <a href="/docs">Documentation</a>
       </div>
     </footer>
@@ -44,51 +44,88 @@ const { title = 'Boing Network', description = 'Authentic, decentralized L1 bloc
 </html>
 
 <style is:global>
-  :root {
-    --bg: #0a0b0f;
-    --surface: #12141c;
-    --border: #1e2230;
-    --text: #e8eaef;
-    --text-muted: #8b92a6;
-    --accent: #22d3ee;
-    --accent-dim: #0891b2;
-  }
   * { box-sizing: border-box; }
+
   html {
-    font-family: 'Outfit', system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: var(--font-sans);
+    background: var(--bg-primary);
+    color: var(--text-primary);
     line-height: 1.6;
   }
-  body { margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
   main { flex: 1; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+
+  a {
+    color: var(--accent-neon);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  a:hover {
+    color: var(--accent-purple);
+  }
+
   code {
-    font-family: 'JetBrains Mono', monospace;
-    background: var(--surface);
+    font-family: var(--font-mono);
+    background: var(--bg-tertiary);
     padding: 0.2em 0.4em;
-    border-radius: 4px;
+    border-radius: 6px;
     font-size: 0.9em;
   }
+
   .site-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-secondary);
   }
-  .logo { font-weight: 700; font-size: 1.25rem; color: var(--accent); }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    filter: drop-shadow(0 0 8px var(--glow-cyan-subtle));
+  }
+
+  .logo:hover {
+    filter: drop-shadow(0 0 12px var(--glow-cyan));
+  }
+
   .site-header nav { display: flex; gap: 1.5rem; }
-  .site-header nav a { color: var(--text-muted); font-weight: 500; }
-  .site-header nav a:hover { color: var(--text); }
+
+  .site-header nav a {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .site-header nav a:hover {
+    color: var(--text-primary);
+  }
+
   .site-footer {
     padding: 2rem;
-    border-top: 1px solid var(--border);
+    border-top: 1px solid var(--border-color);
     text-align: center;
-    color: var(--text-muted);
+    color: var(--text-tertiary);
     font-size: 0.875rem;
   }
-  .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 0.5rem; }
+
+  .site-footer a {
+    color: var(--accent-neon);
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
 </style>

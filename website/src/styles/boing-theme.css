@@ -1,0 +1,55 @@
+/* Boing brand theme — aligned with boing.finance */
+
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Dark theme (default for boing.network) */
+:root {
+  --font-sans: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --primary-color: #3b82f6;
+  --secondary-color: #8b5cf6;
+  --accent-color: #06b6d4;
+  --accent-neon: #00e0ff;
+  --accent-purple: #7b61ff;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #ef4444;
+
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-tertiary: #334155;
+  --bg-card: #1e293b;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-tertiary: #94a3b8;
+
+  --border-color: #334155;
+  --border-hover: #475569;
+
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+  --glow-cyan: rgba(0, 224, 255, 0.35);
+  --glow-cyan-subtle: rgba(6, 182, 212, 0.4);
+
+  /* Aliases */
+  --text-muted: var(--text-tertiary);
+  --surface: var(--bg-tertiary);
+  --border: var(--border-color);
+}
+
+/* Gradient utilities */
+.gradient-text {
+  background: linear-gradient(135deg, #22d3ee, #06b6d4, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-text-hero {
+  background: linear-gradient(to right, #22d3ee, #06b6d4, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

@@ -1,4 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
-  <rect width="32" height="32" rx="6" fill="#12141c"/>
-  <text x="16" y="22" font-family="system-ui,sans-serif" font-size="14" font-weight="700" fill="#22d3ee" text-anchor="middle">B</text>
+  <rect width="32" height="32" rx="6" fill="#1e293b"/>
+  <defs>
+    <linearGradient id="boing" x1="0" y1="0" x2="1" y2="1" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22d3ee"/>
+      <stop offset="0.5" stop-color="#06b6d4"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <text x="16" y="22" font-family="Comfortaa,system-ui,sans-serif" font-size="14" font-weight="700" fill="url(#boing)" text-anchor="middle">B</text>
 </svg>
