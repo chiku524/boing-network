@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* Dark theme (default for boing.network) */
+/* Dark theme (default for Boing Network) */
 :root {
   --font-sans: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
