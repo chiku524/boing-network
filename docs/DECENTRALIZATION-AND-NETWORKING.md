@@ -1,12 +1,13 @@
-# Boing Network — Advanced Decentralization Strategy
+# Boing Network — Decentralization Strategy & WebRTC Signaling
 
-> **Purpose:** Deepen decentralization beyond the core — P2P robustness, peer discovery, randomness, light clients, and cross-chain trustlessness.  
-> **References:** [BOING-BLOCKCHAIN-DESIGN-PLAN.md](./BOING-BLOCKCHAIN-DESIGN-PLAN.md), [BUILD-ROADMAP.md](./BUILD-ROADMAP.md)
+> **Purpose:** Deepen decentralization — P2P robustness, peer discovery, randomness, light clients, cross-chain trustlessness, and decentralized WebRTC signaling for browser light clients.  
+> **References:** [BOING-BLOCKCHAIN-DESIGN-PLAN.md](BOING-BLOCKCHAIN-DESIGN-PLAN.md), [BUILD-ROADMAP.md](BUILD-ROADMAP.md), [DEVELOPMENT-AND-ENHANCEMENTS.md](DEVELOPMENT-AND-ENHANCEMENTS.md)
 
 ---
 
 ## Table of Contents
 
+### Part 1: Decentralization Strategy
 1. [P2P Network Robustness & Discovery](#1-p2p-network-robustness--discovery)
 2. [Advanced Decentralized Peer Discovery Strategies](#2-advanced-decentralized-peer-discovery-strategies)
 3. [Randomness & Validator Selection](#3-randomness--validator-selection)
@@ -14,7 +15,19 @@
 5. [Cross-Chain Interoperability Decentralization](#5-cross-chain-interoperability-decentralization)
 6. [Network Topology Monitoring](#6-network-topology-monitoring)
 
+### Part 2: Decentralized WebRTC Signaling
+7. [WebRTC Overview](#7-webrtc-overview)
+8. [Boing Mainnet as Signaling Channel](#8-boing-mainnet-as-signaling-channel)
+9. [Preventing Offer/Answer Spam](#9-preventing-offeranswer-spam)
+10. [Decentralized Storage for Large Payloads](#10-decentralized-storage-for-large-payloads)
+11. [DHT-Enhanced Peer Discovery for WebRTC](#11-dht-enhanced-peer-discovery-for-webrtc)
+12. [Incentivized STUN/TURN Servers](#12-incentivized-stunturn-servers)
+13. [STUN/TURN Reputation System](#13-stunturn-reputation-system)
+14. [End-to-End Signaling Flow](#14-end-to-end-signaling-flow)
+
 ---
+
+# Part 1: Decentralization Strategy
 
 ## 1. P2P Network Robustness & Discovery
 
@@ -57,8 +70,8 @@
 | Aspect | Description |
 |--------|-------------|
 | **Rationale** | Browser-based light clients cannot use raw TCP. WebRTC enables direct P2P between browsers; WebSockets maintain persistent connections with full nodes or relayers. |
-| **Decentralized Signaling** | The signaling process (browsers exchanging connection info) must be decentralized. Options: Boing mainnet for signaling messages; or trust-minimized, community-run signaling servers. See [WEBRTC-SIGNALING.md](./WEBRTC-SIGNALING.md) for full design. |
-| **NAT Traversal** | ICE (Interactive Connectivity Establishment), STUN/TURN servers. Community members or protocol-incentivized operators run these to allow nodes behind NATs to connect. Incentivized STUN/TURN design in WEBRTC-SIGNALING. |
+| **Decentralized Signaling** | The signaling process (browsers exchanging connection info) must be decentralized. See [Part 2: Decentralized WebRTC Signaling](#part-2-decentralized-webrtc-signaling) below for full design. |
+| **NAT Traversal** | ICE (Interactive Connectivity Establishment), STUN/TURN servers. Community members or protocol-incentivized operators run these to allow nodes behind NATs to connect. |
 
 ### 2.4 Relayed Connections & Rendezvous Points
 
@@ -89,7 +102,7 @@
 
 | Approach | Description | Status |
 |----------|-------------|--------|
-| **VDF (Verifiable Delay Functions)** | Verifiable sequencing; contributes to fair ordering and resistance to validator collusion. Solana-style Proof of History. | Design target |
+| **VDF (Verifiable Delay Functions)** | Verifiable sequencing; contributes to fair ordering and resistance to validator collusion. | Design target |
 | **VRF (Verifiable Random Functions)** | Cryptographically secure randomness for leader election. Unpredictable until revealed. | Design target |
 | **Current** | Round-robin leader rotation in HotStuff. | Implemented |
 
@@ -138,6 +151,105 @@
 | **Absolute Decentralization** | Minimize reliance on fixed bootnodes and central components; peer discovery resilient to censorship. |
 | **Security** | Robust DHT and gossip resist Sybil, eclipse, and partition attacks. |
 | **Authenticity & Uniqueness** | Novel combination: reputation-enhanced DHT + gossip-first + incentivized relayers; on-chain signaling for WebRTC. |
+
+---
+
+# Part 2: Decentralized WebRTC Signaling
+
+## 7. WebRTC Overview
+
+WebRTC requires a **signaling** process to exchange network information (IP addresses, ports, SDPs) between peers before a direct P2P connection can be established. Centralized signaling servers are single points of failure and censorship.
+
+**Goal:** Eliminate centralized signaling; leverage Boing mainnet, decentralized storage, DHT, and incentivized NAT traversal.
+
+---
+
+## 8. Boing Mainnet as Signaling Channel
+
+### Offer/Answer Smart Contract
+
+| Component | Description |
+|-----------|-------------|
+| **Contract** | Dedicated signaling contract on Boing for offer/answer exchange. |
+| **Offer Flow** | Peer A encrypts WebRTC offer (SDP) with Peer B's public key; posts to contract or stores CID (see §10). |
+| **Answer Flow** | Peer B fetches offer, decrypts, generates answer, encrypts, posts back to contract. |
+| **Event Logging** | Contract emits events on offer/answer post; peers listen via Boing SDK. |
+
+### Benefits
+
+- **Native decentralization** — Inherits censorship resistance of Boing mainnet.
+- **Verifiable history** — Signaling exchanges recorded on-chain.
+- **Considerations** — Minimize tx cost and latency via efficient contract design; use off-chain storage for large SDPs.
+
+---
+
+## 9. Preventing Offer/Answer Spam
+
+| Mechanism | Description |
+|-----------|-------------|
+| **Transaction Fees (Gas)** | Every contract interaction incurs gas. Adaptive gas model and predictable pricing make high-volume spam prohibitively expensive. |
+| **On-Chain Rate Limiting** | Contract tracks `last_sent_timestamp` and `message_count` per address. E.g. max 5 offers per minute per address. |
+| **Staking or Deposit** | Initiating an offer requires a small BOING deposit held by the contract. Returned on successful connection or after expiration; forfeited or partially returned if rejected/expired. |
+| **Identity and Reputation** | Optional: require minimum reputation score or Soulbound credentials to send offers. |
+| **Challenge-Response** | For sensitive offers: recipient can request a lightweight proof before processing. |
+
+---
+
+## 10. Decentralized Storage for Large Payloads
+
+| Aspect | Description |
+|--------|-------------|
+| **Small Messages** | ICE candidates and small SDPs can go directly on-chain. |
+| **Large SDPs** | Store encrypted SDPs on IPFS/Filecoin/Arweave. |
+| **On-Chain Pointers** | Post only CID (Content Identifier) or hash + recipient public key to Boing contract. |
+| **Retrieval** | Recipient fetches CID from chain, downloads from decentralized storage, decrypts. |
+
+**Benefits:** Reduces on-chain load and costs; leverages specialized decentralized storage infrastructure.
+
+---
+
+## 11. DHT-Enhanced Peer Discovery for WebRTC
+
+| Component | Description |
+|-----------|-------------|
+| **DHT Announcement** | Peers announce WebRTC capability and public key/Boing address in Kademlia DHT. |
+| **Recipient Lookup** | Before initiating signaling, peer uses DHT to confirm recipient is online and fetch metadata. |
+| **Integration** | Complements libp2p discovery in Part 1. |
+
+**Benefits:** Resilient, dynamic discovery; no central directory.
+
+---
+
+## 12. Incentivized STUN/TURN Servers
+
+| Aspect | Description |
+|--------|-------------|
+| **Role** | STUN (Session Traversal Utilities for NAT) and TURN (Traversal Using Relays around NAT) handle NAT traversal. |
+| **Decentralization** | Community members run STUN/TURN nodes. |
+| **Protocol Incentives** | Reward reliable STUN/TURN providers (similar to validators or storage providers). |
+| **Distribution** | Ensures geographically distributed relay capacity. |
+
+---
+
+## 13. STUN/TURN Reputation System
+
+| Component | Description |
+|-----------|-------------|
+| **On-Chain Registry** | Smart contract for STUN/TURN server registration. Requires minimum BOING stake. Stores network address and metadata. |
+| **Performance Metrics** | Nodes/dApps monitor and report: **uptime**, **latency**, **success rate**, **bandwidth/throughput**. Data submitted to registry; optionally aggregated via decentralized oracle. |
+| **Reputation Score** | Contract maintains dynamic score per server from aggregated metrics. Score decays over time to prioritize recent performance. |
+| **Selection** | SDK allows dApps to query registry and select servers by reputation, geography, or other criteria. |
+| **Slashing** | Servers that underperform, act maliciously, or fail minimum uptime face stake slashing. Proportional to severity and duration. |
+
+---
+
+## 14. End-to-End Signaling Flow
+
+1. **Discovery:** Peers use DHT to find each other and confirm WebRTC readiness.
+2. **Offer:** Peer A encrypts SDP with Peer B's public key; uploads to IPFS or posts on-chain; posts CID to Boing contract.
+3. **Answer:** Peer B retrieves offer, decrypts, posts encrypted answer (or CID) to contract.
+4. **ICE Candidates:** Both exchange ICE candidates via contract or low-latency gossip.
+5. **Connection:** Direct WebRTC connection; use STUN/TURN for NAT traversal as needed.
 
 ---
 

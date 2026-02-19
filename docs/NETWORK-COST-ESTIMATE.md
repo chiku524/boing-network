@@ -103,7 +103,7 @@
 | **Success metrics** | Tx count, fees, volume, unique users, TVL | `f(metrics)` formula |
 | **Developer treasury** | Allocation for grants, audits, ecosystem | Governance-defined % |
 
-See [DEVELOPMENT-RECOMMENDATIONS.md](./DEVELOPMENT-RECOMMENDATIONS.md) for detailed dApp incentive design.
+See [DEVELOPMENT-AND-ENHANCEMENTS.md](DEVELOPMENT-AND-ENHANCEMENTS.md) for detailed dApp incentive design.
 
 ---
 

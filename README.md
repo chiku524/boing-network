@@ -24,19 +24,23 @@ cargo run -p boing-node
 
 ## Docs
 
-- [BETA-READINESS.md](./BETA-READINESS.md) — Beta checklist, validator & developer quick starts, verification commands
-- [BOING-BLOCKCHAIN-DESIGN-PLAN.md](./BOING-BLOCKCHAIN-DESIGN-PLAN.md) — Architecture, design decisions, innovations
-- [RUNBOOK.md](./RUNBOOK.md) — Operational runbook for node operators
-- [TESTNET.md](./TESTNET.md) — Join testnet: single vs multi-node, bootnodes, faucet
-- [VIBEMINER-INTEGRATION.md](./VIBEMINER-INTEGRATION.md) — One-click mining/validator integration (VibeMiner)
-- [DECENTRALIZATION-STRATEGY.md](./DECENTRALIZATION-STRATEGY.md) — Advanced P2P, peer discovery, light clients
-- [ENHANCEMENT-VISION.md](./ENHANCEMENT-VISION.md) — Intent-based execution, storage, Boing Studio
-- [WEBRTC-SIGNALING.md](./WEBRTC-SIGNALING.md) — Decentralized WebRTC signaling for browser light clients
-- [SECURITY-STANDARDS.md](./SECURITY-STANDARDS.md) — Protocol, network, application, and operational security
-- [BUILD-ROADMAP.md](./BUILD-ROADMAP.md) — Implementation tasks and phases
-- [DEVELOPMENT-RECOMMENDATIONS.md](./DEVELOPMENT-RECOMMENDATIONS.md) — SDK, automation, dApp incentive recommendations
-- [AUTOMATION-VERIFICATION.md](./AUTOMATION-VERIFICATION.md) — Cryptographic verification for decentralized automation
-- [NETWORK-COST-ESTIMATE.md](./NETWORK-COST-ESTIMATE.md) — Cost overview and economic parameters
+All project documentation lives in **[docs/](docs/)**:
+
+| Doc | Description |
+|-----|-------------|
+| [BETA-READINESS.md](docs/BETA-READINESS.md) | Beta checklist, validator & developer quick starts, verification commands |
+| [BOING-BLOCKCHAIN-DESIGN-PLAN.md](docs/BOING-BLOCKCHAIN-DESIGN-PLAN.md) | Architecture, design decisions, innovations |
+| [RUNBOOK.md](docs/RUNBOOK.md) | Operational runbook for node operators |
+| [TESTNET.md](docs/TESTNET.md) | Join testnet: single vs multi-node, bootnodes, faucet |
+| [VIBEMINER-INTEGRATION.md](docs/VIBEMINER-INTEGRATION.md) | One-click mining/validator integration (VibeMiner) |
+| [DECENTRALIZATION-AND-NETWORKING.md](docs/DECENTRALIZATION-AND-NETWORKING.md) | Advanced P2P, peer discovery, WebRTC signaling, light clients |
+| [DEVELOPMENT-AND-ENHANCEMENTS.md](docs/DEVELOPMENT-AND-ENHANCEMENTS.md) | SDK, automation, dApp incentives, enhancement vision |
+| [SECURITY-STANDARDS.md](docs/SECURITY-STANDARDS.md) | Protocol, network, application, and operational security |
+| [BUILD-ROADMAP.md](docs/BUILD-ROADMAP.md) | Implementation tasks and phases |
+| [AUTOMATION-VERIFICATION.md](docs/AUTOMATION-VERIFICATION.md) | Cryptographic verification for decentralized automation |
+| [NETWORK-COST-ESTIMATE.md](docs/NETWORK-COST-ESTIMATE.md) | Cost overview and economic parameters |
+| [RPC-API-SPEC.md](docs/RPC-API-SPEC.md) | JSON-RPC API reference |
+| [WALLET-PROJECT-PROMPT.md](docs/WALLET-PROJECT-PROMPT.md) | Boing wallet project bootstrap prompt |
 
 ## Website
 

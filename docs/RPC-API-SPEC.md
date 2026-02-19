@@ -3,13 +3,13 @@
 > **Version:** 0.1  
 > **Transport:** HTTP POST  
 > **Encoding:** JSON-RPC 2.0  
-> **References:** [RUNBOOK.md](../RUNBOOK.md)
+> **References:** [RUNBOOK.md](RUNBOOK.md)
 
 ---
 
 ## Overview
 
-Boing nodes expose a JSON-RPC HTTP interface for submitting transactions, querying chain state, and simulation. Rate limiting applies per `RateLimitConfig` (see [SECURITY-STANDARDS.md](../SECURITY-STANDARDS.md)).
+Boing nodes expose a JSON-RPC HTTP interface for submitting transactions, querying chain state, and simulation. Rate limiting applies per `RateLimitConfig` (see [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md)).
 
 ### Base URL
 

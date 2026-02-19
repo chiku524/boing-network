@@ -687,7 +687,7 @@ With floor-triggered waves, **burn is not strictly necessary**. The logic:
 | **Governance** | On-chain, transparent; avoid small-group control of parameters |
 | **Transparency** | 100% openness: protocol design, tokenomics, governance, treasury, security — all verifiable. Trust through verification. |
 | **Token Distribution** | Fair launch; avoid concentrated initial allocation |
-| **Networking** | Permissionless peer discovery; no whitelisted relayers or gatekeepers. Advanced: DHT + gossip-first, Sybil/eclipse resistance, incentivized relayers. See [DECENTRALIZATION-STRATEGY.md](./DECENTRALIZATION-STRATEGY.md). |
+| **Networking** | Permissionless peer discovery; no whitelisted relayers or gatekeepers. Advanced: DHT + gossip-first, Sybil/eclipse resistance, incentivized relayers. See [DECENTRALIZATION-AND-NETWORKING.md](DECENTRALIZATION-AND-NETWORKING.md). |
 
 ### Decentralization Architecture Overview
 
@@ -1005,7 +1005,7 @@ A coherent configuration that prioritizes **authenticity**, **efficiency**, and 
 |--------|------|
 | **Scope** | Multi-year effort; consensus + VM + networking + crypto |
 | **Team** | Requires distributed systems, crypto, and systems programming expertise |
-| **Security** | Audits essential before mainnet; **continuous** independent audits (not one-time). See [ENHANCEMENT-VISION.md](./ENHANCEMENT-VISION.md). |
+| **Security** | Audits essential before mainnet; **continuous** independent audits (not one-time). See [DEVELOPMENT-AND-ENHANCEMENTS.md](DEVELOPMENT-AND-ENHANCEMENTS.md). |
 | **Compatibility** | Non-EVM = full design freedom; plan for bridges if needed |
 | **DeFi Integration** | Align with boing.finance as primary use case |
 | **Community** | Actively foster validators, developers, users; clear documentation; educational programs; grant programs and hackathons. Make it easy to run nodes and contribute. |
@@ -1045,10 +1045,9 @@ Use this to drive design decisions:
 
 Boing commits to pushing beyond baseline decentralization and amplifying authenticity:
 
-- **[DECENTRALIZATION-STRATEGY.md](./DECENTRALIZATION-STRATEGY.md)** — Advanced P2P: DHT + gossip-first peer discovery, bootnode rotation, Sybil/eclipse resistance, WebRTC for browser light clients, incentivized relayers, VDF/VRF for randomness, trustless bridges, network topology monitoring.
-- **[ENHANCEMENT-VISION.md](./ENHANCEMENT-VISION.md)** — Intent-based execution, dynamic fee allocation & developer royalties, decentralized storage (Filecoin/Arweave), Boing Studio IDE, AI-assisted SDK, continuous security audits, community engagement.
-- **[WEBRTC-SIGNALING.md](./WEBRTC-SIGNALING.md)** — Decentralized WebRTC signaling: mainnet as channel, offer/answer contract, IPFS for large SDPs, DHT discovery, incentivized STUN/TURN.
-- **[SECURITY-STANDARDS.md](./SECURITY-STANDARDS.md)** — Layered security: protocol (consensus, crypto, VM, state), network (P2P, DDoS, Sybil/eclipse), application (SDK, automation), operational (audits, bug bounties, incident response).
+- **[DECENTRALIZATION-AND-NETWORKING.md](DECENTRALIZATION-AND-NETWORKING.md)** — Advanced P2P: DHT + gossip-first peer discovery, bootnode rotation, Sybil/eclipse resistance, WebRTC signaling for browser light clients, incentivized relayers, VDF/VRF for randomness, trustless bridges, network topology monitoring.
+- **[DEVELOPMENT-AND-ENHANCEMENTS.md](DEVELOPMENT-AND-ENHANCEMENTS.md)** — Intent-based execution, dynamic fee allocation & developer royalties, decentralized storage (Filecoin/Arweave), Boing Studio IDE, AI-assisted SDK, continuous security audits, community engagement.
+- **[SECURITY-STANDARDS.md](SECURITY-STANDARDS.md)** — Layered security: protocol (consensus, crypto, VM, state), network (P2P, DDoS, Sybil/eclipse), application (SDK, automation), operational (audits, bug bounties, incident response).
 
 ---
 

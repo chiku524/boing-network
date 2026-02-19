@@ -1,7 +1,7 @@
 # Boing Network — Testnet Guide
 
 > **Purpose:** Run nodes on the testnet, get testnet BOING from the faucet, and join as a validator or developer.  
-> **References:** [RUNBOOK.md](./RUNBOOK.md), [BETA-READINESS.md](./BETA-READINESS.md), [docs/RPC-API-SPEC.md](./docs/RPC-API-SPEC.md)
+> **References:** [RUNBOOK.md](RUNBOOK.md), [BETA-READINESS.md](BETA-READINESS.md), [RPC-API-SPEC.md](RPC-API-SPEC.md)
 
 ---
 
@@ -154,7 +154,7 @@ Until then, you can run a multi-node testnet locally by starting two nodes and h
 
 ## 7. One-click mining / validator UI (VibeMiner)
 
-For users who prefer a **desktop UI** instead of the terminal, Boing testnet can be used with **VibeMiner**, which provides one-click mining/validating. See [VIBEMINER-INTEGRATION.md](./VIBEMINER-INTEGRATION.md) for how networks (including Boing) integrate and how to run a node via VibeMiner.
+For users who prefer a **desktop UI** instead of the terminal, Boing testnet can be used with **VibeMiner**, which provides one-click mining/validating. See [VIBEMINER-INTEGRATION.md](VIBEMINER-INTEGRATION.md) for how networks (including Boing) integrate and how to run a node via VibeMiner.
 
 ---
 

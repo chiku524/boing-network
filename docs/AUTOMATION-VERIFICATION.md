@@ -1,7 +1,7 @@
 # Boing Network — Cryptographic Verification for Decentralized Automation
 
 > **Purpose:** Define how automated tasks are cryptographically verified for trustless, reliable execution.  
-> **References:** [DEVELOPMENT-RECOMMENDATIONS.md](./DEVELOPMENT-RECOMMENDATIONS.md), [BOING-BLOCKCHAIN-DESIGN-PLAN.md](./BOING-BLOCKCHAIN-DESIGN-PLAN.md)
+> **References:** [DEVELOPMENT-AND-ENHANCEMENTS.md](DEVELOPMENT-AND-ENHANCEMENTS.md), [BOING-BLOCKCHAIN-DESIGN-PLAN.md](BOING-BLOCKCHAIN-DESIGN-PLAN.md)
 
 ---
 

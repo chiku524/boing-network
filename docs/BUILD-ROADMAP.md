@@ -2,8 +2,8 @@
 
 > **Priorities:** Security → Scalability → Decentralization → Authenticity  
 > **Goal:** Build an authentic, efficient L1 with unique innovations.  
-> **Aligned with:** [BOING-BLOCKCHAIN-DESIGN-PLAN.md](./BOING-BLOCKCHAIN-DESIGN-PLAN.md) (UX, Technical Innovations, Sustainability)  
-> **Recommendations:** [DEVELOPMENT-RECOMMENDATIONS.md](./DEVELOPMENT-RECOMMENDATIONS.md) (SDK, Automation, dApp Incentives)
+> **Aligned with:** [BOING-BLOCKCHAIN-DESIGN-PLAN.md](BOING-BLOCKCHAIN-DESIGN-PLAN.md) (UX, Technical Innovations, Sustainability)  
+> **Recommendations:** [DEVELOPMENT-AND-ENHANCEMENTS.md](DEVELOPMENT-AND-ENHANCEMENTS.md) (SDK, Automation, dApp Incentives)
 
 ---
 
@@ -37,9 +37,9 @@ boing-network/
 │   ├── boing-cli/          # boing init, dev, deploy
 │   ├── boing-p2p/          # libp2p networking
 │   └── boing-node/         # Node binary
-├── BOING-BLOCKCHAIN-DESIGN-PLAN.md
-├── BUILD-ROADMAP.md        # This file
-└── NETWORK-COST-ESTIMATE.md
+├── docs/                   # All project documentation
+├── fuzz/                   # Cargo-fuzz harness (boing-primitives)
+└── website/                # boing.network site (Astro + Cloudflare)
 ```
 
 ---
@@ -92,7 +92,7 @@ boing-network/
 - [x] Request/response: get blocks by hash/height
 - [x] Block propagation and import (full node receives via gossip)
 
-### 2.2 Advanced Decentralized Peer Discovery (see [DECENTRALIZATION-STRATEGY.md](./DECENTRALIZATION-STRATEGY.md))
+### 2.2 Advanced Decentralized Peer Discovery (see [DECENTRALIZATION-AND-NETWORKING.md](DECENTRALIZATION-AND-NETWORKING.md))
 
 - [ ] DHT-based discovery (Kademlia); minimize fixed bootnode reliance
 - [ ] Gossip-first overlay: random peer selection, active probing
@@ -101,7 +101,7 @@ boing-network/
 - [ ] WebRTC/WebSockets for browser light clients; decentralized signaling
 - [ ] Incentivized relayers; DHT rendezvous for NAT traversal
 
-### 2.2b Decentralized WebRTC Signaling (see [WEBRTC-SIGNALING.md](./WEBRTC-SIGNALING.md))
+### 2.2b Decentralized WebRTC Signaling (see [DECENTRALIZATION-AND-NETWORKING.md](DECENTRALIZATION-AND-NETWORKING.md))
 
 - [ ] Signaling smart contract (offer/answer exchange, event emission)
 - [ ] Spam prevention: on-chain rate limiting, deposit/stake for offers, identity/reputation gate
@@ -183,7 +183,7 @@ boing-network/
 - [x] VDF/VRF for verifiable randomness (leader selection; leader_from_vrf, dummy_vrf_output)
 - [x] Replace or augment round-robin with VDF-driven selection (leader_from_vrf stub)
 
-### 4.5 Security Standards (see [SECURITY-STANDARDS.md](./SECURITY-STANDARDS.md))
+### 4.5 Security Standards (see [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md))
 
 - [x] DDoS resistance: RPC rate-limiting (RateLimitConfig, governor crate)
 - [x] Disk persistence (chain + state via --data-dir)
@@ -207,7 +207,7 @@ boing-network/
 - [ ] Pre-confirmation / outcome guarantees where feasible
 - [ ] Automatic chain routing (cross-chain UX)
 
-### 5.1b Intent-Based Execution (see [ENHANCEMENT-VISION.md](./ENHANCEMENT-VISION.md))
+### 5.1b Intent-Based Execution (see [DEVELOPMENT-AND-ENHANCEMENTS.md](DEVELOPMENT-AND-ENHANCEMENTS.md))
 
 - [x] Intent signing format (SignedIntent, IntentPool, boing_submitIntent RPC)
 - [ ] Meta-router: orchestrate optimal cross-chain path
@@ -236,7 +236,7 @@ boing-network/
 ### 5.5 Developer Experience
 
 - [x] Boing CLI (`boing init`, `boing dev`, `boing deploy`)
-- [x] RPC API specification (docs/RPC-API-SPEC.md)
+- [x] RPC API specification ([RPC-API-SPEC.md](RPC-API-SPEC.md))
 - [ ] Local/devnet parity for testing
 - [ ] Cross-chain simulation support
 
@@ -300,7 +300,7 @@ boing-network/
 
 ### 6.5 Open Standards
 
-- [x] RPC/API spec (docs/RPC-API-SPEC.md)
+- [x] RPC/API spec ([RPC-API-SPEC.md](RPC-API-SPEC.md))
 - [ ] Bridge protocol documentation
 - [ ] Reference implementations for interoperability
 

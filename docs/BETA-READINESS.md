@@ -1,7 +1,7 @@
 # Boing Network — Beta Readiness
 
 > **Purpose:** Ensure all tools, documentation, and operations are ready for public testing and beta onboarding.  
-> **References:** [RUNBOOK.md](./RUNBOOK.md), [BUILD-ROADMAP.md](./BUILD-ROADMAP.md), [docs/RPC-API-SPEC.md](./docs/RPC-API-SPEC.md), [SECURITY-STANDARDS.md](./SECURITY-STANDARDS.md)
+> **References:** [RUNBOOK.md](RUNBOOK.md), [BUILD-ROADMAP.md](BUILD-ROADMAP.md), [RPC-API-SPEC.md](RPC-API-SPEC.md), [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md)
 
 ---
 
@@ -42,7 +42,7 @@
 
 ### 1.4 RPC API
 
-All methods documented in [docs/RPC-API-SPEC.md](./docs/RPC-API-SPEC.md) are implemented and tested:
+All methods documented in [RPC-API-SPEC.md](RPC-API-SPEC.md) are implemented and tested:
 
 - `boing_submitTransaction`, `boing_chainHeight`, `boing_getBlockByHeight`, `boing_getBlockByHash`
 - `boing_getAccountProof`, `boing_verifyAccountProof`
@@ -54,13 +54,13 @@ Rate limiting and error codes match the spec.
 
 | Doc | Purpose |
 |-----|---------|
-| [RUNBOOK.md](./RUNBOOK.md) | Node setup, RPC, CLI, monitoring, incident response |
-| [BUILD-ROADMAP.md](./BUILD-ROADMAP.md) | Quick start, phases, current status |
-| [docs/RPC-API-SPEC.md](./docs/RPC-API-SPEC.md) | Full RPC reference |
-| [SECURITY-STANDARDS.md](./SECURITY-STANDARDS.md) | Security posture and incident contacts |
-| [TESTNET.md](./TESTNET.md) | Single vs multi-node, bootnodes, faucet, VibeMiner |
-| [VIBEMINER-INTEGRATION.md](./VIBEMINER-INTEGRATION.md) | One-click mining/validator integration for VibeMiner |
-| [WEBSITE-SPEC.md](./website/WEBSITE-SPEC.md) | Public site and developer docs mapping |
+| [RUNBOOK.md](RUNBOOK.md) | Node setup, RPC, CLI, monitoring, incident response |
+| [BUILD-ROADMAP.md](BUILD-ROADMAP.md) | Quick start, phases, current status |
+| [RPC-API-SPEC.md](RPC-API-SPEC.md) | Full RPC reference |
+| [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) | Security posture and incident contacts |
+| [TESTNET.md](TESTNET.md) | Single vs multi-node, bootnodes, faucet, VibeMiner |
+| [VIBEMINER-INTEGRATION.md](VIBEMINER-INTEGRATION.md) | One-click mining/validator integration for VibeMiner |
+| [WEBSITE-SPEC.md](../website/WEBSITE-SPEC.md) | Public site and developer docs mapping |
 
 ---
 
@@ -170,8 +170,8 @@ Stop the node with Ctrl+C. This confirms the node serves RPC and produces blocks
 
 | Step | Action |
 |------|--------|
-| **1. Testnet info** | Decide testnet name, genesis time (if applicable), and document bootnodes/faucet or “single-node first” in [RUNBOOK.md](./RUNBOOK.md) or `/network/testnet` on the website. |
-| **2. Website** | Ensure [boing.network](https://boing.network) (or staging) has “Join Testnet” / “Get Started” pointing to [BETA-READINESS.md](./BETA-READINESS.md) or the docs quick start. |
+| **1. Testnet info** | Decide testnet name, genesis time (if applicable), and document bootnodes/faucet or “single-node first” in [RUNBOOK.md](RUNBOOK.md) or `/network/testnet` on the website. |
+| **2. Website** | Ensure [boing.network](https://boing.network) (or staging) has “Join Testnet” / “Get Started” pointing to [BETA-READINESS.md](BETA-READINESS.md) or the docs quick start. |
 | **3. Binaries (optional)** | For users without Rust: build release artifacts and publish (e.g. GitHub Releases: `boing`, `boing-node` for Windows, Linux, macOS). |
 | **4. Feedback channel** | Set up Discord, GitHub Discussions, or a form so beta testers can report issues and UX feedback. |
 | **5. Announce** | Announce beta (blog, Twitter, Discord) with: repo link, “Quick Start” (build + run node / run CLI), link to docs and feedback channel. |
@@ -180,7 +180,7 @@ Stop the node with Ctrl+C. This confirms the node serves RPC and produces blocks
 
 - Monitor the feedback channel and GitHub issues.
 - Prioritize: crashes, RPC errors, and “I couldn’t get started” reports.
-- Iterate on [RUNBOOK.md](./RUNBOOK.md) and [BETA-READINESS.md](./BETA-READINESS.md) from common questions.
+- Iterate on [RUNBOOK.md](RUNBOOK.md) and [BETA-READINESS.md](BETA-READINESS.md) from common questions.
 
 ---
 

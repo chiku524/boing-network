@@ -1,7 +1,7 @@
 # Boing Network — Security Standards
 
 > **Purpose:** Top-tier security across protocol, network, application, and operational layers.  
-> **References:** [BOING-BLOCKCHAIN-DESIGN-PLAN.md](./BOING-BLOCKCHAIN-DESIGN-PLAN.md), [AUTOMATION-VERIFICATION.md](./AUTOMATION-VERIFICATION.md)
+> **References:** [BOING-BLOCKCHAIN-DESIGN-PLAN.md](BOING-BLOCKCHAIN-DESIGN-PLAN.md), [AUTOMATION-VERIFICATION.md](AUTOMATION-VERIFICATION.md)
 
 ---
 

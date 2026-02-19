@@ -1,7 +1,7 @@
 # Boing Network — Operational Runbook
 
 > **Purpose:** Operations guide for running and maintaining Boing Network nodes.  
-> **References:** [BUILD-ROADMAP.md](./BUILD-ROADMAP.md), [README.md](./README.md), [docs/RPC-API-SPEC.md](./docs/RPC-API-SPEC.md), [BETA-READINESS.md](./BETA-READINESS.md) (beta checklist and quick starts)
+> **References:** [BUILD-ROADMAP.md](BUILD-ROADMAP.md), [README.md](../README.md), [RPC-API-SPEC.md](RPC-API-SPEC.md), [BETA-READINESS.md](BETA-READINESS.md) (beta checklist and quick starts)
 
 ---
 
@@ -156,7 +156,7 @@ For security incidents and vulnerabilities:
 | 5. **Remediate** | Apply fixes; coordinate upgrades via governance if needed. |
 | 6. **Post-mortem** | Document cause, impact, and prevention. |
 
-**Contacts:** See [SECURITY-STANDARDS.md](./SECURITY-STANDARDS.md) for audit and bug bounty details.
+**Contacts:** See [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md) for audit and bug bounty details.
 
 ---
 

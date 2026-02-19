@@ -13,9 +13,9 @@ To support “one-click” running of a Boing node (validator or full node) from
 |------|----------------------|
 | **Node binary** | `boing-node` (single executable; build from this repo or use a published release). |
 | **How to run** | CLI flags: `--validator`, `--rpc-port`, `--data-dir`, `--p2p_listen`, `--bootnodes`, `--faucet-enable` (testnet). |
-| **RPC** | JSON-RPC over HTTP on `--rpc-port` (default 8545). Methods: `boing_chainHeight`, `boing_submitTransaction`, etc. See [docs/RPC-API-SPEC.md](./docs/RPC-API-SPEC.md). |
+| **RPC** | JSON-RPC over HTTP on `--rpc-port` (default 8545). Methods: `boing_chainHeight`, `boing_submitTransaction`, etc. See [RPC-API-SPEC.md](RPC-API-SPEC.md). |
 | **Testnet faucet** | RPC method `boing_faucetRequest([hex_account_id])` when node is started with `--faucet-enable`; or point users to the web faucet. |
-| **Bootnodes** | Comma-separated multiaddrs for testnet/mainnet; published on [TESTNET.md](./TESTNET.md) and website `/network/testnet`. |
+| **Bootnodes** | Comma-separated multiaddrs for testnet/mainnet; published on [TESTNET.md](TESTNET.md) and website `/network/testnet`. |
 
 No separate “miner” binary: **validating** is done by running `boing-node --validator`. PoS: validators stake BOING (bond/unbond via transactions).
 
@@ -77,7 +77,7 @@ No separate “miner” binary: **validating** is done by running `boing-node --
 
 | Network | Bootnodes | Public RPC (for faucet / read-only) |
 |---------|-----------|-------------------------------------|
-| **Testnet** | [TESTNET.md](./TESTNET.md) §6; website `/network/testnet` | To be published at testnet launch |
+| **Testnet** | [TESTNET.md](TESTNET.md) §6; website `/network/testnet` | To be published at testnet launch |
 | **Mainnet** | To be published | To be published |
 
 When Boing publishes the official testnet, the repo and website will list:
@@ -93,7 +93,7 @@ VibeMiner can read these from a config file, the website, or a small API so the 
 
 If you have **VibeMiner-specific onboarding** (e.g. app store links, install steps, or a “Add your network” form), we can:
 
-- Link to it from [TESTNET.md](./TESTNET.md) and the website “Join Testnet” / “One-click mining” section.
+- Link to it from [TESTNET.md](TESTNET.md) and the website “Join Testnet” / “One-click mining” section.
 - Describe it in this doc (e.g. “To add Boing to VibeMiner, follow …”).
 
 Share the onboarding flow (or a draft) and we’ll integrate it into the docs and site.

@@ -11,7 +11,7 @@ Seamless SDK for building dApps on Boing Network.
 
 ## Planned Enhancements
 
-See [DEVELOPMENT-RECOMMENDATIONS.md](../DEVELOPMENT-RECOMMENDATIONS.md):
+See [DEVELOPMENT-AND-ENHANCEMENTS.md](../docs/DEVELOPMENT-AND-ENHANCEMENTS.md):
 
 - CLI auto-completion
 - Contract templates and dApp scaffolding
@@ -20,4 +20,4 @@ See [DEVELOPMENT-RECOMMENDATIONS.md](../DEVELOPMENT-RECOMMENDATIONS.md):
 
 ## Status
 
-Implementation in progress. See [BUILD-ROADMAP.md](../BUILD-ROADMAP.md).
+Implementation in progress. See [BUILD-ROADMAP.md](../docs/BUILD-ROADMAP.md).
