@@ -8,3 +8,7 @@ target/
 # Local dev / Wrangler
 .wrangler/
 .astro/
+
+# Windows reserved device name (accidental file)
+nul
+NUL

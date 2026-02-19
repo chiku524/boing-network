@@ -1,0 +1,3 @@
+# Fuzz targets require nightly for libFuzzer (sanitizer coverage).
+[toolchain]
+channel = "nightly"
