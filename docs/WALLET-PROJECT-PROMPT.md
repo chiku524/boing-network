@@ -19,7 +19,7 @@ Create a new project for a crypto wallet with the following specs.
 - Boing is not EVM-compatible. It uses:
   - **Address / AccountId:** 32 bytes, derived from the **Ed25519 public key** (verifying key). Display and accept as 64-character hex, with or without "0x" prefix. This is the "address" users paste into the faucet and share for receives.
   - **Signing:** Ed25519. Transactions are serialized in a specific way, hashed with BLAKE3, then signed. See "Boing signing spec" below.
-  - **RPC:** JSON-RPC over HTTP. Key methods: boing_submitTransaction([hex_signed_tx]), boing_chainHeight([]), boing_getBlockByHeight([height]), boing_simulateTransaction([hex_signed_tx]), boing_faucetRequest([hex_account_id]) for testnet. Params and results are JSON-RPC 2.0. Reference: boing-network repo docs/RPC-API-SPEC.md.
+  - **RPC:** JSON-RPC over HTTP. Key methods: **boing_getBalance([hex_account_id])** and **boing_getAccount([hex_account_id])** for balance/nonce (wallet UI); boing_submitTransaction([hex_signed_tx]), boing_chainHeight([]), boing_getBlockByHeight([height]), boing_simulateTransaction([hex_signed_tx]), boing_faucetRequest([hex_account_id]) for testnet. Params and results are JSON-RPC 2.0. Reference: boing-network repo docs/RPC-API-SPEC.md.
 - **Transaction format (Boing):** A transaction has: nonce (u64), sender (AccountId), payload (Transfer | Bond | Unbond | ContractCall | ContractDeploy), access_list (read/write account IDs). The signed payload submitted to RPC is: hex(bincode(SignedTransaction)), where SignedTransaction = { tx: Transaction, signature: Signature } and Signature is 64-byte Ed25519. Serialization uses bincode (Rust-compatible). The wallet must implement (or use a small library for) Boing transaction construction and signing so it can produce valid hex_signed_tx for boing_submitTransaction.
 
 **Boing signing spec (must match boing-network)**
@@ -42,7 +42,7 @@ Create a new project for a crypto wallet with the following specs.
 - Create wallet (generate Ed25519 keypair, show backup phrase or export instructions).
 - Import wallet (from seed/phrase or hex private key, if you support it).
 - View Boing address (32-byte hex) with copy button — this is what users need for the faucet and for receiving.
-- Balance view (fetch from chain or RPC; if Boing RPC does not expose a simple "get balance" method, derive from state or a small indexer — document the approach).
+- Balance view: call **boing_getBalance([hex_account_id])** or **boing_getAccount([hex_account_id])** for balance (and nonce for building the next tx). Results use decimal strings for u128 to avoid JS precision issues.
 - Send BOING: form (to address, amount), build Transfer tx, sign, submit via boing_submitTransaction.
 - Testnet faucet: button or link that either (a) calls boing_faucetRequest with the current account address (if RPC supports it) or (b) opens the official faucet page (e.g. boing.network/network/faucet) with the address pre-filled.
 - Network selector: Boing Mainnet / Boing Testnet (different RPC URLs). Default to Testnet for now if appropriate.
@@ -64,7 +64,7 @@ When implementing the wallet, use the **boing-network** repo as the source of tr
 
 | What | Where |
 |------|--------|
-| RPC methods, params, errors | `docs/RPC-API-SPEC.md` |
+| RPC methods, params, errors | `docs/RPC-API-SPEC.md` (incl. boing_getBalance, boing_getAccount for wallet) |
 | Address = 32-byte AccountId (Ed25519 pubkey) | `crates/boing-primitives/src/types.rs` (AccountId) |
 | Transaction, payload, AccessList | `crates/boing-primitives/src/types.rs` |
 | Signable hash (BLAKE3 of nonce, sender, bincode payload, bincode access_list) | `crates/boing-primitives/src/signature.rs` (`signable_hash`) |

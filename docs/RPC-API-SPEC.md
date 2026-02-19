@@ -84,6 +84,32 @@ Return the current chain height (tip block number).
 
 ---
 
+### boing_getBalance
+
+Get the spendable balance for an account. **Recommended for wallets** (e.g. boing.express) to display balance without deriving from state.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| Params | `[hex_account_id]` | 32-byte AccountId (hex) |
+| Result | `{ balance: string }` | Balance in smallest units (u128 as decimal string to avoid JS precision loss) |
+
+**Example:** `{"jsonrpc":"2.0","id":1,"method":"boing_getBalance","params":["0x..."]}` → `{"jsonrpc":"2.0","id":1,"result":{"balance":"1000000"}}`
+
+---
+
+### boing_getAccount
+
+Get full account state (balance, nonce, stake). **Recommended for wallets** to build transactions (nonce) and show balance/stake.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| Params | `[hex_account_id]` | 32-byte AccountId (hex) |
+| Result | `{ balance: string, nonce: number, stake: string }` | balance and stake are u128 as decimal strings; nonce is u64. If account does not exist, returns balance "0", nonce 0, stake "0". |
+
+**Example:** `{"jsonrpc":"2.0","id":1,"method":"boing_getAccount","params":["0x..."]}` → `{"jsonrpc":"2.0","id":1,"result":{"balance":"1000000","nonce":5,"stake":"0"}}`
+
+---
+
 ### boing_getBlockByHeight
 
 Get a block by height.

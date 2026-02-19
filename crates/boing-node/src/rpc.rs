@@ -133,6 +133,52 @@ async fn handle_rpc(State(state): State<RpcState>, Json(req): Json<JsonRpcReques
             let height = n.chain.height();
             rpc_ok(id, serde_json::json!(height))
         }
+        "boing_getBalance" => {
+            let params = req.params.and_then(|p| serde_json::from_value::<Vec<String>>(p).ok());
+            let hex_account = match params {
+                Some(v) if !v.is_empty() => v[0].clone(),
+                _ => return (StatusCode::OK, Json(rpc_error(id, -32602, "Invalid params: expected [hex_account_id]".into()))),
+            };
+            match hex::decode(hex_account.trim_start_matches("0x")) {
+                Ok(bytes) if bytes.len() == 32 => {
+                    let mut arr = [0u8; 32];
+                    arr.copy_from_slice(&bytes);
+                    let account_id = boing_primitives::AccountId(arr);
+                    let n = node.read().await;
+                    let balance = n.state.get(&account_id).map(|s| s.balance).unwrap_or(0);
+                    rpc_ok(id, serde_json::json!({ "balance": balance.to_string() }))
+                }
+                _ => rpc_error(id, -32602, "Invalid account id: expected 32 bytes hex".into()),
+            }
+        }
+        "boing_getAccount" => {
+            let params = req.params.and_then(|p| serde_json::from_value::<Vec<String>>(p).ok());
+            let hex_account = match params {
+                Some(v) if !v.is_empty() => v[0].clone(),
+                _ => return (StatusCode::OK, Json(rpc_error(id, -32602, "Invalid params: expected [hex_account_id]".into()))),
+            };
+            match hex::decode(hex_account.trim_start_matches("0x")) {
+                Ok(bytes) if bytes.len() == 32 => {
+                    let mut arr = [0u8; 32];
+                    arr.copy_from_slice(&bytes);
+                    let account_id = boing_primitives::AccountId(arr);
+                    let n = node.read().await;
+                    match n.state.get(&account_id) {
+                        Some(s) => rpc_ok(id, serde_json::json!({
+                            "balance": s.balance.to_string(),
+                            "nonce": s.nonce,
+                            "stake": s.stake.to_string()
+                        })),
+                        None => rpc_ok(id, serde_json::json!({
+                            "balance": "0",
+                            "nonce": 0,
+                            "stake": "0"
+                        })),
+                    }
+                }
+                _ => rpc_error(id, -32602, "Invalid account id: expected 32 bytes hex".into()),
+            }
+        }
         "boing_getAccountProof" => {
             let params = req.params.and_then(|p| serde_json::from_value::<Vec<String>>(p).ok());
             let hex_account = match params {
