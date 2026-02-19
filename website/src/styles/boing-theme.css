@@ -32,6 +32,10 @@
   --shadow-hover: rgba(0, 0, 0, 0.4);
   --glow-cyan: rgba(0, 224, 255, 0.35);
   --glow-cyan-subtle: rgba(6, 182, 212, 0.4);
+  --accent-gold: #facc15;
+  --accent-gold-dim: #eab308;
+  --glow-gold: rgba(250, 204, 21, 0.35);
+  --glow-gold-subtle: rgba(234, 179, 8, 0.25);
 
   /* Aliases */
   --text-muted: var(--text-tertiary);
