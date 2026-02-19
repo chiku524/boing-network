@@ -67,6 +67,8 @@ const ogImage = `${siteUrl}/og.png`;
       <nav>
         <a href="/docs/getting-started">Docs</a>
         <a href="/developers/quickstart">Developers</a>
+        <a href="/network/testnet" class="nav-cta">Join Testnet</a>
+        <a href="/network/faucet">Faucet</a>
         <a href="/about">About</a>
         <a href="/community">Community</a>
       </nav>
@@ -77,6 +79,8 @@ const ogImage = `${siteUrl}/og.png`;
     <footer class="site-footer">
       <p>Boing Network — The DeFi that always bounces back. Authentic. Decentralized. Optimal. Sustainable.</p>
       <div class="footer-links">
+        <a href="/network/testnet">Join Testnet</a>
+        <a href="/network/faucet">Faucet</a>
         <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">GitHub</a>
         <a href="https://boing.finance" target="_blank" rel="noopener">boing.finance</a>
         <a href="/docs">Documentation</a>
@@ -164,6 +168,19 @@ const ogImage = `${siteUrl}/og.png`;
 
   .site-header nav a:hover {
     color: var(--text-primary);
+  }
+
+  .site-header nav a.nav-cta {
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.4rem 0.9rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+
+  .site-header nav a.nav-cta:hover {
+    color: white;
+    filter: brightness(1.1);
   }
 
   .site-footer {

@@ -1,0 +1,8 @@
+[package]
+name = "boing-tokenomics"
+version = "0.1.0"
+edition = "2021"
+description = "BOING tokenomics — sustainable value design"
+
+[dependencies]
+boing-primitives = { path = "../boing-primitives" }

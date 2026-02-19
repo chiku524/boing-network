@@ -24,8 +24,11 @@ cargo run -p boing-node
 
 ## Docs
 
+- [BETA-READINESS.md](./BETA-READINESS.md) — Beta checklist, validator & developer quick starts, verification commands
 - [BOING-BLOCKCHAIN-DESIGN-PLAN.md](./BOING-BLOCKCHAIN-DESIGN-PLAN.md) — Architecture, design decisions, innovations
 - [RUNBOOK.md](./RUNBOOK.md) — Operational runbook for node operators
+- [TESTNET.md](./TESTNET.md) — Join testnet: single vs multi-node, bootnodes, faucet
+- [VIBEMINER-INTEGRATION.md](./VIBEMINER-INTEGRATION.md) — One-click mining/validator integration (VibeMiner)
 - [DECENTRALIZATION-STRATEGY.md](./DECENTRALIZATION-STRATEGY.md) — Advanced P2P, peer discovery, light clients
 - [ENHANCEMENT-VISION.md](./ENHANCEMENT-VISION.md) — Intent-based execution, storage, Boing Studio
 - [WEBRTC-SIGNALING.md](./WEBRTC-SIGNALING.md) — Decentralized WebRTC signaling for browser light clients

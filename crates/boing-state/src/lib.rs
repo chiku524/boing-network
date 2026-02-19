@@ -1,0 +1,10 @@
+//! Boing State — Verkle tree state management
+//!
+//! Enables stateless clients and compact proofs.
+
+mod sparse_merkle;
+mod store;
+
+pub use sparse_merkle::{MerkleProof, ProofStep, SparseMerkleTree};
+pub use store::{StateCheckpoint, StateStore};
+pub use boing_primitives::{Account, AccountId, AccountState, Hash};

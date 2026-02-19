@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Single node vs multi-node"
+  description="When to run a single Boing node vs joining the multi-node testnet."
+>
+  <article class="page">
+    <h1>Single node vs multi-node</h1>
+    <p class="lead">
+      You can run Boing in two ways: <strong>single node</strong> (one machine, no P2P) or <strong>multi-node</strong> (join the testnet and sync with other nodes).
+    </p>
+
+    <section class="section">
+      <h2>Single node</h2>
+      <p><strong>Use case:</strong> Local development, trying the chain on your laptop, or running a private instance. No need to connect to anyone else.</p>
+      <p>Run the node <strong>without</strong> <code>--p2p_listen</code>. The node runs in isolation: it produces blocks if you pass <code>--validator</code>, and serves RPC. No bootnodes needed.</p>
+      <pre class="code-block"><code># Full node (no block production)
+./boing-node --rpc-port 8545 --data-dir ./data
+
+# Validator (produces blocks)
+./boing-node --validator --rpc-port 8545 --data-dir ./data</code></pre>
+      <p>RPC is available at <code>http://127.0.0.1:8545/</code>. Ideal for building and testing dApps against a local chain.</p>
+    </section>
+
+    <section class="section">
+      <h2>Multi-node testnet</h2>
+      <p><strong>Use case:</strong> Joining the public testnet — many nodes connected via P2P, syncing blocks and (optionally) validating together.</p>
+      <p>Run the node <strong>with</strong> <code>--p2p_listen</code> and <code>--bootnodes</code>. Your node will dial the bootnodes to discover the network, then sync and gossip with peers. If you pass <code>--validator</code>, it can produce blocks when it’s the leader.</p>
+      <pre class="code-block"><code>./boing-node --p2p_listen /ip4/0.0.0.0/tcp/4001 \
+  --bootnodes /ip4/&lt;BOOTNODE&gt;/tcp/4001 \
+  --validator --rpc-port 8545 --data-dir ./data</code></pre>
+      <p>See the <a href="/network/bootnodes">Bootnodes</a> page for how to get the official list, and <a href="/network/testnet">Join Testnet</a> for the full flow.</p>
+    </section>
+
+    <section class="section comparison">
+      <h2>Quick comparison</h2>
+      <table class="compare-table">
+        <thead>
+          <tr><th></th><th>Single node</th><th>Multi-node</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>P2P</td><td>Off</td><td>On (<code>--p2p_listen</code>)</td></tr>
+          <tr><td>Bootnodes</td><td>Not needed</td><td>Required (<code>--bootnodes</code>)</td></tr>
+          <tr><td>Sync</td><td>N/A (only your chain)</td><td>Syncs with peers</td></tr>
+          <tr><td>Best for</td><td>Local dev, private chain</td><td>Public testnet participation</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <nav class="section nav-links">
+      <a href="/network/testnet">← Join Testnet</a>
+      <a href="/network/bootnodes">Bootnodes →</a>
+    </nav>
+  </article>
+</Layout>
+
+<style>
+  .page { max-width: 720px; margin: 0 auto; padding: 2rem; }
+  .page h1 { color: var(--text-primary); }
+  .lead { color: var(--text-secondary); font-size: 1.1rem; }
+  .section { margin-top: 2rem; }
+  .section h2 { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+  .section p { color: var(--text-secondary); }
+  .section code { background: rgba(255,255,255,0.08); padding: 0.15rem 0.4rem; border-radius: 4px; font-size: 0.9em; }
+  .code-block { background: rgba(0,0,0,0.3); border: 1px solid rgba(34,211,238,0.2); border-radius: 8px; padding: 1rem; overflow-x: auto; }
+  .code-block code { background: none; padding: 0; font-size: 0.9rem; }
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  .compare-table th, .compare-table td { padding: 0.6rem 0.75rem; text-align: left; border: 1px solid rgba(34,211,238,0.2); color: var(--text-secondary); }
+  .compare-table th { color: var(--text-primary); background: rgba(6,182,212,0.08); }
+  .compare-table code { background: rgba(255,255,255,0.06); padding: 0.1rem 0.3rem; border-radius: 4px; }
+  .nav-links { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .nav-links a { color: var(--accent, #22c55e); font-weight: 500; }
+</style>

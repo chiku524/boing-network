@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/boing-cli",
+    "crates/boing-primitives",
+    "crates/boing-tokenomics",
+    "crates/boing-consensus",
+    "crates/boing-state",
+    "crates/boing-execution",
+    "crates/boing-p2p",
+    "crates/boing-governance",
+    "crates/boing-automation",
+    "crates/boing-node",
+]
+exclude = ["fuzz"]

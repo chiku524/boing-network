@@ -1,0 +1,23 @@
+[package]
+name = "boing-execution"
+version = "0.1.0"
+edition = "2021"
+description = "VM and parallel transaction execution for Boing blockchain"
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+proptest = "1"
+boing-primitives = { path = "../boing-primitives" }
+boing-state = { path = "../boing-state" }
+
+[[bench]]
+name = "execution"
+harness = false
+
+[dependencies]
+boing-primitives = { path = "../boing-primitives" }
+boing-state = { path = "../boing-state" }
+tracing = "0.1"
+async-trait = "0.1"
+thiserror = "1"
+rayon = "1.10"

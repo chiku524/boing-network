@@ -23,8 +23,11 @@ boing.network/
 │   └── /rpc-reference   → Full RPC docs + examples
 ├── /network/            → Network status & explorer
 │   ├── /status          → Uptime, validators, block height (D1 / API)
-│   ├── /explorer        → Block/tx/account lookup (when available)
-│   └── /testnet         → Testnet info, faucet, bootnodes
+│   ├── /testnet         → Join testnet hub (links to bootnodes, single-vs-multi, faucet)
+│   ├── /single-vs-multi → Dedicated page: single node vs multi-node
+│   ├── /bootnodes       → Dedicated page: what bootnodes are, how to use, official list
+│   ├── /faucet          → Dedicated page: request testnet BOING (RPC form)
+│   └── /explorer        → Block/tx/account lookup (when available)
 ├── /community           → GitHub, Discord, governance, grants
 └── /resources           → Tokenomics, roadmap, whitepapers, FAQs
 ```
@@ -69,7 +72,7 @@ boing.network/
 
 - **Headline:** Authentic L1 blockchain — built from first principles
 - **Subhead:** Security → Scalability → Decentralization → Authenticity
-- **CTA:** Get Started, Read Docs, Join Testnet
+- **CTA:** Join Testnet (primary), Get Started, Explore. Testnet CTA banner and Resources link to /network/testnet and /network/faucet.
 - **Features:** Native AA, Adaptive Gas, Cross-Chain Primitives, Transparent Slashing
 - **Footer:** GitHub, Docs, Community, Resources
 

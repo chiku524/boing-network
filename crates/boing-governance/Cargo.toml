@@ -1,0 +1,8 @@
+[package]
+name = "boing-governance"
+version = "0.1.0"
+edition = "2021"
+description = "Phased governance with time locks for Boing blockchain"
+
+[dependencies]
+thiserror = "1"

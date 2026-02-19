@@ -1,0 +1,11 @@
+[package]
+name = "boing-state"
+version = "0.1.0"
+edition = "2021"
+description = "State management and Verkle tree for Boing blockchain"
+
+[dependencies]
+boing-primitives = { path = "../boing-primitives" }
+serde = { version = "1", features = ["derive"] }
+tracing = "0.1"
+thiserror = "1"

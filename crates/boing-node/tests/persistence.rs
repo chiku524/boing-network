@@ -1,0 +1,55 @@
+//! Test disk persistence: run node, produce block, restart, verify state restored.
+
+use boing_node::chain::ChainState;
+use boing_node::persistence::Persistence;
+use boing_primitives::{Account, AccountId, AccountState, Block};
+use boing_state::StateStore;
+
+#[test]
+fn test_persistence_roundtrip() {
+    let temp = std::env::temp_dir().join("boing-persistence-test");
+    let _ = std::fs::remove_dir_all(&temp);
+
+    let proposer = AccountId([1u8; 32]);
+    let genesis = ChainState::genesis(proposer);
+    let chain = ChainState::from_genesis(genesis.clone());
+
+    let mut state = StateStore::new();
+    state.insert(Account {
+        id: proposer,
+        state: AccountState { balance: 1_000_000, nonce: 0, stake: 0 },
+    });
+
+    let p = Persistence::new(&temp);
+    p.ensure_dirs().unwrap();
+    p.save_block(&genesis).unwrap();
+    p.save_chain_meta(0, genesis.hash()).unwrap();
+    p.save_state(&state).unwrap();
+
+    let block1 = Block {
+        header: boing_primitives::BlockHeader {
+            parent_hash: genesis.hash(),
+            height: 1,
+            timestamp: 1,
+            proposer,
+            tx_root: boing_primitives::Hash::ZERO,
+            state_root: boing_primitives::Hash::ZERO,
+        },
+        transactions: vec![],
+    };
+    chain.append(block1.clone()).unwrap();
+    state.get_mut(&proposer).unwrap().nonce = 1;
+    state.get_mut(&proposer).unwrap().balance = 999_900;
+
+    p.save_block(&block1).unwrap();
+    p.save_chain_meta(1, block1.hash()).unwrap();
+    p.save_state(&state).unwrap();
+
+    let chain2 = p.load_chain().unwrap().expect("chain");
+    let state2 = p.load_state().unwrap().expect("state");
+
+    assert_eq!(chain2.height(), 1);
+    assert_eq!(chain2.latest_hash(), block1.hash());
+    assert_eq!(state2.get(&proposer).unwrap().balance, 999_900);
+    assert_eq!(state2.get(&proposer).unwrap().nonce, 1);
+}
