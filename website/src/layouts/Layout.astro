@@ -7,9 +7,11 @@ interface Props {
   title?: string;
   description?: string;
   canonical?: string;
+  /** Design takeover: 'page-landing' = Aquatic-Space bg, 'page-app' = hex grid. Omit = default (animated bg). */
+  pageClass?: 'page-landing' | 'page-app';
 }
 
-const { title = 'Boing Network', description = 'Boing Network — Authentic. Decentralized. Optimal. Quality-Assured. Authentic L1 blockchain built from first principles.', canonical } = Astro.props;
+const { title = 'Boing Network', description = 'Boing Network — Authentic. Decentralized. Optimal. Quality-Assured. Authentic L1 blockchain built from first principles.', canonical, pageClass } = Astro.props;
 
 const siteUrl = 'https://boing.network';
 const fullTitle = title === 'Boing Network' ? 'Boing Network | Authentic. Decentralized. Optimal. Quality-Assured.' : `${title} | Boing Network`;
@@ -58,12 +60,12 @@ const ogImage = `${siteUrl}/og.png`;
       "slogan": "Authentic. Decentralized. Optimal. Quality-Assured."
     })} />
   </head>
-  <body>
-    <EnhancedAnimatedBackground />
+  <body class:list={[pageClass]}>
+    {!pageClass && <EnhancedAnimatedBackground />}
     <BoingMascot />
     <header class="site-header">
       <a href="/" class="logo">
-      <img src="/logo.svg" alt="Boing" width="36" height="36" class="logo-icon" />
+      <img src="/assets/logo-boing-comic.png" alt="Boing" width="40" height="40" class="logo-icon logo-comic" />
       <span class="gradient-text">Boing Network</span>
     </a>
       <nav>
@@ -138,10 +140,11 @@ const ogImage = `${siteUrl}/og.png`;
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem 2rem;
-    border-bottom: 1px solid rgba(0, 229, 204, 0.3);
-    background: var(--bg-primary);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(0, 229, 204, 0.1);
+    border-bottom: 1px solid var(--border-color);
+    background: rgba(10, 14, 26, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 20px var(--shadow);
   }
 
   .logo {
@@ -155,6 +158,11 @@ const ogImage = `${siteUrl}/og.png`;
   .logo-icon {
     flex-shrink: 0;
     filter: drop-shadow(0 0 6px var(--glow-cyan-subtle));
+    object-fit: contain;
+  }
+  .logo-icon.logo-comic {
+    border-radius: 6px;
+    background: var(--bg-primary);
   }
 
   .logo:hover .logo-icon {
@@ -176,39 +184,41 @@ const ogImage = `${siteUrl}/og.png`;
     display: inline-block;
   }
 
-  .site-header nav a:hover {
-    color: var(--text-primary);
+  .site-header nav a:hover,
+  .site-header nav a.active {
+    color: var(--accent-teal);
   }
 
   .site-header nav a.nav-cta {
     padding: 0.35rem 0.75rem;
-    border-radius: 0.5rem;
+    border-radius: 8px;
     font-weight: 600;
     color: var(--accent-gold);
     background: rgba(250, 204, 21, 0.08);
-    border: 1px solid rgba(250, 204, 21, 0.4);
-    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    border: 1px solid var(--glow-gold);
+    transition: all var(--motion-transition);
   }
 
   .site-header nav a.nav-cta:hover {
     color: var(--accent-gold);
     background: rgba(250, 204, 21, 0.14);
-    border-color: rgba(250, 204, 21, 0.65);
+    border-color: var(--glow-gold);
+    box-shadow: 0 0 12px var(--glow-gold);
   }
 
   /* Shared Join Testnet CTA style (hero, banners) — matches nav-cta */
   .btn-testnet {
     color: var(--accent-gold) !important;
     background: rgba(250, 204, 21, 0.08) !important;
-    border: 1px solid rgba(250, 204, 21, 0.4) !important;
+    border: 1px solid var(--glow-gold) !important;
     font-weight: 600;
-    transition: border-color 0.2s, background 0.2s, color 0.2s;
+    transition: all var(--motion-transition);
   }
   .btn-testnet:hover {
     color: var(--accent-gold) !important;
     background: rgba(250, 204, 21, 0.14) !important;
-    border-color: rgba(250, 204, 21, 0.65) !important;
-    filter: none;
+    border-color: var(--glow-gold) !important;
+    box-shadow: 0 0 12px var(--glow-gold);
   }
 
   .site-footer {

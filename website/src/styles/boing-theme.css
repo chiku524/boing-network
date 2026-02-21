@@ -1,58 +1,383 @@
-/* Boing brand theme — Outerspace-Oceanic (Marketing Asset Package + launch video)
-   Primary #00E5CC, Secondary #00B4FF, Dark #0A0E1A, Comfortaa. Motifs: hexagonal grid, circuit lines, neon glow, jellyfish/coral. */
+/* ============================================================
+   BOING NETWORK — OFFICIAL DESIGN TOKENS & GLOBAL STYLES
+   Source: BOING_DESIGN_SYSTEM.md, Section 10
+   Design Takeover: Steps 2–7
+   ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* Step 3: Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Comfortaa:wght@400;700&family=Orbitron:wght@400;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 @import './motion-config.css';
 
-/* Dark theme (default for Boing Network) — Deep Navy, bioluminescent feel */
+/* Step 2: Design Token Foundation */
 :root {
+  /* === BACKGROUNDS === */
+  --bg-primary: #0A0E1A;
+  --bg-secondary: #121829;
+  --bg-tertiary: #1A2235;
+  --bg-card: rgba(18, 24, 41, 0.7);
+
+  /* === TEXT === */
+  --text-primary: #F0FFFE;
+  --text-secondary: #B8E6E3;
+  --text-tertiary: #7EB8B5;
+
+  /* === ACCENTS === */
+  --accent-teal: #00E5CC;
+  --accent-cyan: #00B4FF;
+  --accent-gold: #FACC15;
+  --accent-gold-dim: #EAB308;
+  --accent-purple: #9B59B6;
+  --mascot-yellow: #FFE000;
+
+  /* === BORDERS === */
+  --border-color: rgba(0, 229, 204, 0.2);
+  --border-hover: rgba(0, 229, 204, 0.5);
+
+  /* === GLOWS (for box-shadow / text-shadow) === */
+  --glow-cyan: rgba(0, 229, 204, 0.4);
+  --glow-blue: rgba(0, 180, 255, 0.35);
+  --glow-gold: rgba(250, 204, 21, 0.35);
+  --glow-purple: rgba(155, 89, 182, 0.35);
+
+  /* === SHADOWS === */
+  --shadow: rgba(0, 0, 0, 0.35);
+  --shadow-hover: rgba(0, 0, 0, 0.45);
+
+  /* === TYPOGRAPHY === */
   --font-sans: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+  --font-display-serif: 'Cinzel', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* PDF: Primary Accent Teal/Cyan #00E5CC, Secondary Electric Blue #00B4FF */
-  --primary-color: #00E5CC;
-  --secondary-color: #00B4FF;
-  --accent-color: #00E5CC;
-  --accent-neon: #00E5CC;
-  --accent-electric: #00B4FF;
+  /* === MOTION === */
+  --motion-float-duration: 9s;
+  --motion-glow-duration: 5s;
+  --motion-transition: 0.3s ease;
+  --motion-easing: ease-in-out;
+
+  /* Aliases (compatibility) */
+  --primary-color: var(--accent-teal);
+  --secondary-color: var(--accent-cyan);
+  --accent-color: var(--accent-teal);
+  --accent-neon: var(--accent-teal);
+  --accent-electric: var(--accent-cyan);
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
-
-  /* PDF: Dark Background #0A0E1A (Deep Navy), Light Background #F0FFFE (Soft White-Teal) */
-  --bg-primary: #0A0E1A;
-  --bg-secondary: #121829;
-  --bg-tertiary: #1a2235;
-  --bg-card: #121829;
-
-  --text-primary: #f0fffe;
-  --text-secondary: #b8e6e3;
-  --text-tertiary: #7eb8b5;
-
-  --border-color: #1a2235;
-  --border-hover: #243044;
-
-  --shadow: rgba(0, 0, 0, 0.35);
-  --shadow-hover: rgba(0, 0, 0, 0.45);
-  --glow-cyan: rgba(0, 229, 204, 0.4);
-  --glow-cyan-subtle: rgba(0, 229, 204, 0.35);
-  --glow-blue: rgba(0, 180, 255, 0.35);
-  --accent-gold: #facc15;
-  --accent-gold-dim: #eab308;
-  --glow-gold: rgba(250, 204, 21, 0.35);
-  --glow-gold-subtle: rgba(234, 179, 8, 0.25);
-
-  /* Aliases (accent-purple kept for compatibility, maps to electric blue) */
-  --accent-purple: #00B4FF;
   --text-muted: var(--text-tertiary);
   --surface: var(--bg-tertiary);
   --border: var(--border-color);
+  --glow-cyan-subtle: rgba(0, 229, 204, 0.35);
+  --glow-gold-subtle: rgba(234, 179, 8, 0.25);
 }
 
-/* Smooth scroll for anchor links */
-html { scroll-behavior: smooth; }
+/* Step 4: Base Body Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
-/* Animations — transform-only so content is always visible even if animation fails */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+main {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+}
+
+h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; text-shadow: 0 0 20px var(--glow-cyan); }
+h2 { font-size: clamp(1.5rem, 4vw, 2.5rem); font-weight: 700; text-shadow: 0 0 12px var(--glow-cyan); }
+
+/* H3 (card/section titles) per Official Visual Design System: Comfortaa 700 1.25rem */
+h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+}
+
+h4 { font-size: 1.125rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+a {
+  color: var(--accent-cyan);
+  text-decoration: none;
+  transition: all var(--motion-transition);
+}
+
+a:hover {
+  filter: brightness(1.2);
+  text-shadow: 0 0 8px var(--glow-blue);
+}
+
+code, pre, .monospace {
+  font-family: var(--font-mono);
+  color: var(--accent-teal);
+  background-color: var(--bg-tertiary);
+  border-radius: 4px;
+  padding: 2px 6px;
+}
+
+/* High-impact display titles (e.g. "The Pillars of the Boing Network") — Official Visual Design System */
+.display-title {
+  font-family: var(--font-display-serif);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* ========== Step 5: UI Components ========== */
+
+/* Buttons */
+.btn-primary,
+button[data-variant="primary"],
+.btn.btn-primary {
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+  color: var(--bg-primary);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all var(--motion-transition);
+  box-shadow: 0 0 16px var(--glow-cyan);
+}
+
+.btn-primary:hover,
+button[data-variant="primary"]:hover,
+.btn.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 28px var(--glow-cyan);
+}
+
+.btn-secondary,
+button[data-variant="secondary"],
+.btn.btn-secondary {
+  background-color: transparent;
+  color: var(--accent-cyan);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all var(--motion-transition);
+}
+
+.btn-secondary:hover,
+button[data-variant="secondary"]:hover,
+.btn.btn-secondary:hover {
+  background-color: rgba(0, 180, 255, 0.1);
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px var(--glow-blue);
+}
+
+.btn-outline,
+.btn.btn-outline {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 28px;
+  cursor: pointer;
+  transition: all var(--motion-transition);
+}
+
+.btn-outline:hover,
+.btn.btn-outline:hover {
+  border-color: var(--border-hover);
+  color: var(--accent-teal);
+  box-shadow: 0 0 12px var(--glow-cyan);
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all var(--motion-transition);
+  display: inline-block;
+  font-family: var(--font-sans);
+}
+
+/* Cards & Panels */
+.card,
+[class*="card-"],
+[class*="-card"],
+.stat-card,
+.chart-card,
+.app-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px var(--shadow);
+  transition: border-color var(--motion-transition), box-shadow var(--motion-transition);
+}
+
+.card:hover,
+[class*="card-"]:hover,
+[class*="-card"]:hover,
+.stat-card:hover,
+.chart-card:hover,
+.app-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 4px 30px var(--glow-cyan);
+}
+
+/* Navigation Bar */
+nav,
+.navbar,
+header,
+.site-header {
+  background: rgba(10, 14, 26, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 12px 32px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav a,
+.navbar a,
+.site-header nav a {
+  color: var(--text-secondary);
+  font-family: var(--font-sans);
+  transition: color var(--motion-transition);
+}
+
+nav a:hover,
+.navbar a:hover,
+.site-header nav a:hover,
+nav a.active,
+.navbar a.active {
+  color: var(--accent-teal);
+  text-shadow: none;
+}
+
+/* Input Fields & Form Elements */
+input,
+textarea,
+select {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  padding: 12px 16px;
+  width: 100%;
+  transition: border-color var(--motion-transition), box-shadow var(--motion-transition);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent-teal);
+  box-shadow: 0 0 8px var(--glow-cyan);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ========== Step 6: Background Styles ========== */
+
+/* Landing Pages — Aquatic-Space background */
+.page-landing {
+  background-image: url('/assets/boing-aquatic-space-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.page-landing::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 14, 26, 0.3) 0%,
+    rgba(10, 14, 26, 0.6) 100%
+  );
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Application / Dashboard Pages — Hexagonal grid */
+.page-app {
+  background-color: var(--bg-primary);
+  background-image: url('/assets/hex-grid.svg');
+  background-repeat: repeat;
+  background-size: 60px 60px;
+  min-height: 100vh;
+}
+
+/* ========== Step 7: Motion & Animation Keyframes ========== */
+
+@keyframes boing-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes boing-glow-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--glow-cyan); }
+  50% { box-shadow: 0 0 20px var(--glow-cyan), 0 0 40px rgba(0, 229, 204, 0.2); }
+}
+
+@keyframes boing-fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes boing-shoot-star {
+  from { transform: translateX(-100px) translateY(0) rotate(-30deg); opacity: 1; }
+  to { transform: translateX(120vw) translateY(-50px) rotate(-30deg); opacity: 0; }
+}
+
+.animate-float {
+  animation: boing-float var(--motion-float-duration) var(--motion-easing) infinite;
+}
+
+.animate-glow-pulse {
+  animation: boing-glow-pulse var(--motion-glow-duration) var(--motion-easing) infinite;
+}
+
+.animate-fade-in-up {
+  animation: boing-fade-in-up 0.6s ease-out both;
+}
+
+/* Legacy animation names (keep for existing classes) */
 @keyframes fadeInUp {
   from { transform: translateY(24px); }
   to { transform: translateY(0); }
@@ -79,60 +404,37 @@ html { scroll-behavior: smooth; }
   100% { opacity: 0.1; }
 }
 
-.animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
-.animate-pulse-fade { animation: pulseFade 3s ease-in-out infinite; }
-
 @keyframes pulseGlow {
   0%, 100% { opacity: 0.6; filter: drop-shadow(0 0 8px var(--glow-cyan-subtle)); }
   50% { opacity: 1; filter: drop-shadow(0 0 16px var(--glow-cyan)); }
 }
 
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+.animate-float-slow { animation: floatSlow 6s ease-in-out infinite; }
+.animate-pulse-fade { animation: pulseFade 3s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
 
-/* Load-time slide-up (transform only; content stays visible) */
 .fade-in-up {
   animation: fadeInUp 0.6s ease-out both;
 }
 
-.section.fade-in-up#tokenomics { animation-delay: 0.1s; }
-.section.fade-in-up#roadmap { animation-delay: 0.2s; }
-.section.fade-in-up#ecosystem { animation-delay: 0.3s; }
-.section.fade-in-up#innovations { animation-delay: 0.4s; }
-.section.fade-in-up.links-section { animation-delay: 0.5s; }
-
-.fade-in-up.delay-1 { animation-delay: 0.25s; }
-.fade-in-up.delay-2 { animation-delay: 0.35s; }
-.fade-in-up.delay-3 { animation-delay: 0.45s; }
-
-.animate-float {
+.animate-float-legacy {
   animation: float 4s ease-in-out infinite;
 }
 
-.animate-pulse-glow {
-  animation: pulseGlow 3s ease-in-out infinite;
-}
-
-/* Gradient utilities — PDF Primary #00E5CC, Secondary #00B4FF */
-.gradient-text {
-  background: linear-gradient(135deg, #00E5CC, #00B4FF);
+/* Gradient text (design tokens) */
+.gradient-text,
+.gradient-text-hero {
+  background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-hero {
-  background: linear-gradient(135deg, #00E5CC, #00B4FF);
   background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
-/* Site-wide 3D motion (cards, links) — uses motion-config.css vars */
+/* Site-wide 3D motion (cards, links) — uses motion-config.css */
 .card-3d,
 .stat-card,
 .chart-card,
@@ -143,6 +445,7 @@ html { scroll-behavior: smooth; }
     box-shadow var(--motion-cards-transition_duration) var(--motion-cards-easing),
     border-color var(--motion-cards-transition_duration);
 }
+
 .card-3d,
 .stat-card,
 .chart-card,
@@ -150,6 +453,7 @@ html { scroll-behavior: smooth; }
 .card {
   transform: perspective(var(--motion-cards-perspective)) rotateX(0) rotateY(0);
 }
+
 .card-3d:hover,
 .stat-card:hover,
 .chart-card:hover,
@@ -157,20 +461,28 @@ html { scroll-behavior: smooth; }
 .card:hover {
   transform: perspective(var(--motion-cards-perspective)) rotateX(var(--motion-cards-tilt_hover_deg_x)) rotateY(var(--motion-cards-tilt_hover_deg_y)) translateY(-2px);
 }
+
 .link-3d {
   display: inline-block;
   transition: transform var(--motion-links-transition_duration) ease-out;
 }
+
 .link-3d:hover {
   transform: rotateX(var(--motion-links-tilt_max_deg)) rotateY(var(--motion-links-tilt_max_deg));
 }
-@media (prefers-reduced-motion: reduce) {
-  .card-3d:hover, .stat-card:hover, .chart-card:hover, .app-card:hover, .card:hover,
-  .link-3d:hover { transform: none; }
-}
 
-/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .fade-in-up, .animate-float, .animate-pulse-glow { animation: none; }
+  .card-3d:hover,
+  .stat-card:hover,
+  .chart-card:hover,
+  .app-card:hover,
+  .card:hover,
+  .link-3d:hover { transform: none; }
+  .fade-in-up,
+  .animate-float,
+  .animate-float-legacy,
+  .animate-pulse-glow,
+  .animate-float-slow,
+  .animate-pulse-fade { animation: none; }
   .fade-in-up { opacity: 1; transform: none; }
 }
