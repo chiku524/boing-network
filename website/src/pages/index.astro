@@ -35,7 +35,11 @@ import Layout from '../layouts/Layout.astro';
       <div class="shooting-star shooting-star-8"><div class="shooting-star-line line-8"></div></div>
     </div>
     <div class="hero-content">
-      <img src="/assets/logo-boing-comic.png" alt="BOING!" class="hero-logo-comic" width="280" height="120" />
+      <picture class="hero-logo-picture">
+        <source srcset="/assets/logo-dark-transparent.png" media="(prefers-color-scheme: dark)" />
+        <source srcset="/assets/logo-light-transparent.png" media="(prefers-color-scheme: light)" />
+        <img src="/assets/logo-dark-transparent.png" alt="Boing Network" class="hero-logo-img" width="200" height="80" />
+      </picture>
       <h1 class="hero-title gradient-text-hero animate-pulse-glow">Boing Network</h1>
       <p class="tagline gradient-text-hero">Authentic. Decentralized. Optimal. Quality-Assured.</p>
       <div class="hero-highlights">
@@ -346,7 +350,8 @@ import Layout from '../layouts/Layout.astro';
   @keyframes shoot7 { 0% { transform: translate(0, 0); opacity: 0; } 12% { opacity: 0.4; } 88% { opacity: 0.4; } 100% { transform: translate(100vw, 70vw); opacity: 0; } } /* 35° */
   @keyframes shoot8 { 0% { transform: translate(0, 0); opacity: 0; } 7% { opacity: 0.35; } 93% { opacity: 0.35; } 100% { transform: translate(-60vw, -60vw); opacity: 0; } } /* 225° */
   .hero-content { position: relative; z-index: 3; max-width: 800px; margin: 0 auto; }
-  .hero-logo-comic { display: block; max-width: min(280px, 60vw); height: auto; margin: 0 auto 0.5rem; object-fit: contain; filter: drop-shadow(0 0 16px var(--glow-cyan)); }
+  .hero-logo-picture { display: block; margin: 0 auto 0.5rem; line-height: 0; }
+  .hero-logo-img { display: block; max-width: min(200px, 50vw); height: auto; margin: 0 auto; object-fit: contain; filter: drop-shadow(0 0 16px var(--glow-cyan)); }
   .hero-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin: 0 0 0.5rem; background: linear-gradient(to right, var(--accent-teal), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px var(--glow-cyan)); }
   .tagline { font-size: 1.25rem; margin: 0 0 0.5rem; background: linear-gradient(to right, var(--accent-teal), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 12px var(--glow-cyan)); }
   .hero-highlights { display: flex; flex-wrap: wrap; gap: 0.5rem 1rem; justify-content: center; margin: 1.5rem 0 2rem; }

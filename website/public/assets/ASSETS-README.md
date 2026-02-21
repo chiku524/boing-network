@@ -7,7 +7,8 @@ Place the following assets in this directory (`/public/assets/`) so they resolve
 | Filename | Used for |
 |----------|----------|
 | **boing-aquatic-space-bg.png** | Landing page background (`.page-landing`). Aquatic-Space illustration (coral, jellyfish, starfield). |
-| **logo-boing-comic.png** | Comic-style "BOING!" logo. Header nav + hero. |
+| **logo-dark-transparent.png** | Main Boing logo (transparent) for dark mode. Header nav + hero. |
+| **logo-light-transparent.png** | Main Boing logo (transparent) for light mode. Header nav + hero when `prefers-color-scheme: light`. |
 | **mascot-default.png** | Corner mascot (fixed bottom-right). Default pose. |
 | **mascot-excited.png** | Hero section mascot. Energetic pose. |
 | **pillar-security.png** | Pillars section — Security. |

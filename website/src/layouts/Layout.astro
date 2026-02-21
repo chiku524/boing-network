@@ -65,7 +65,11 @@ const ogImage = `${siteUrl}/og.png`;
     <BoingMascot />
     <header class="site-header">
       <a href="/" class="logo">
-      <img src="/assets/logo-boing-comic.png" alt="Boing" width="40" height="40" class="logo-icon logo-comic" />
+      <picture class="logo-picture">
+        <source srcset="/assets/logo-dark-transparent.png" media="(prefers-color-scheme: dark)" />
+        <source srcset="/assets/logo-light-transparent.png" media="(prefers-color-scheme: light)" />
+        <img src="/assets/logo-dark-transparent.png" alt="Boing" width="40" height="40" class="logo-icon" />
+      </picture>
       <span class="gradient-text">Boing Network</span>
     </a>
       <nav>
@@ -155,14 +159,17 @@ const ogImage = `${siteUrl}/og.png`;
     font-size: 1.25rem;
     text-decoration: none;
   }
-  .logo-icon {
+  .logo-picture {
+    display: block;
     flex-shrink: 0;
-    filter: drop-shadow(0 0 6px var(--glow-cyan-subtle));
-    object-fit: contain;
+    line-height: 0;
   }
-  .logo-icon.logo-comic {
-    border-radius: 6px;
-    background: var(--bg-primary);
+  .logo-icon {
+    display: block;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 6px var(--glow-cyan-subtle));
   }
 
   .logo:hover .logo-icon {
