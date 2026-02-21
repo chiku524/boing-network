@@ -226,6 +226,19 @@ impl Interpreter {
     }
 }
 
+impl StorageAccess for StateStore {
+    fn sload(&self, contract: AccountId, key: [u8; 32]) -> [u8; 32] {
+        self.contract_storage
+            .get(&(contract, key))
+            .copied()
+            .unwrap_or([0u8; 32])
+    }
+
+    fn sstore(&mut self, contract: AccountId, key: [u8; 32], value: [u8; 32]) {
+        self.contract_storage.insert((contract, key), value);
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -250,18 +263,5 @@ mod tests {
         assert!(gas > 0);
         assert_eq!(interpreter.stack.len(), 1);
         assert_eq!(interpreter.stack[0][31], 5); // low byte = 5
-    }
-}
-
-impl StorageAccess for StateStore {
-    fn sload(&self, contract: AccountId, key: [u8; 32]) -> [u8; 32] {
-        self.contract_storage
-            .get(&(contract, key))
-            .copied()
-            .unwrap_or([0u8; 32])
-    }
-
-    fn sstore(&mut self, contract: AccountId, key: [u8; 32], value: [u8; 32]) {
-        self.contract_storage.insert((contract, key), value);
     }
 }

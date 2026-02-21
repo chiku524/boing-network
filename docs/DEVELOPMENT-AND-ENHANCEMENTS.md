@@ -19,8 +19,9 @@
    - 2.3 [Decentralized Storage Integration](#23-decentralized-storage-integration)
    - 2.4 [Authentic Developer Experience](#24-authentic-developer-experience)
    - 2.5 [Practical Implementation Focus](#25-practical-implementation-focus)
-3. [Implementation Status](#implementation-status)
-4. [Cross-References](#cross-references)
+3. [Network-Wide Enhancements: Implemented & Planned](#network-wide-enhancements-implemented--planned)
+4. [Implementation Status](#implementation-status)
+5. [Cross-References](#cross-references)
 
 ---
 
@@ -273,6 +274,40 @@
 
 ---
 
+# Network-Wide Enhancements: Implemented & Planned
+
+This section tracks **overall network** enhancements (not limited to one pillar). See also [BOING-NETWORK-ESSENTIALS.md](BOING-NETWORK-ESSENTIALS.md) for the six pillars and [QUALITY-ASSURANCE-NETWORK.md](QUALITY-ASSURANCE-NETWORK.md) for the QA pillar.
+
+## Implemented (recent pass)
+
+| Area | Enhancement | Where |
+|------|-------------|-------|
+| Priorities | Sixth pillar (True QA) in README | README.md |
+| Block production | Re-insert txs into mempool on execution/consensus failure | mempool.reinsert, block_producer |
+| Mempool | drain_for_block returns Vec<SignedTransaction> for re-insert | mempool.rs |
+| Roadmap | Protocol QA phase (4.6) | BUILD-ROADMAP.md §4.6 |
+| RPC spec | boing_qaCheck, QA error codes -32050, -32051 | RPC-API-SPEC.md |
+| Essentials doc | Six pillars, tech stack, key docs | BOING-NETWORK-ESSENTIALS.md |
+| RUNBOOK | Six pillars section, getBalance/getAccount in RPC table | RUNBOOK.md |
+
+## Enhancements by area (status)
+
+| Area | Done | Planned / reference |
+|------|------|---------------------|
+| **Resilience** | Re-insert txs on failure | P2P connection management, formal verification (BUILD-ROADMAP §4.3) |
+| **Protocol QA** | boing-qa crate stub, RPC spec | Node integration, community pool, governance of rules (BUILD-ROADMAP §4.6) |
+| **Developer experience** | — | CLI auto-completion, TS/JS SDK, guides (this doc §1.1; BUILD-ROADMAP §5.5) |
+| **Decentralization & P2P** | — | DHT, bootnode rotation, peer scoring (BUILD-ROADMAP §2.2) |
+| **Automation & UX** | — | Conditional triggers, automation SDK (this doc §1.2; BUILD-ROADMAP §5.7) |
+| **Security** | — | Bug bounty, post-quantum path, audit (BUILD-ROADMAP §4.3) |
+
+## Priority overview
+
+- **High impact next:** boing-qa node integration; CLI auto-completion and TS/JS SDK; DHT and peer scoring.
+- **Ongoing:** [BUILD-ROADMAP.md](BUILD-ROADMAP.md) and this document for phased tasks.
+
+---
+
 # Implementation Status
 
 | Area | Implemented | Notes |
@@ -293,6 +328,8 @@
 
 # Cross-References
 
+- **BOING-NETWORK-ESSENTIALS.md** — Six pillars, design philosophy, priorities, tech stack
+- **QUALITY-ASSURANCE-NETWORK.md** — Protocol QA (sixth pillar); automation and community pool
 - **BUILD-ROADMAP.md** — Phase 5.5 (Developer Experience), 5.6 (Success-Based dApp Incentives), 5.7 (Decentralized Automation)
 - **AUTOMATION-VERIFICATION.md** — Cryptographic verification for on-chain and off-chain automation
 - **NETWORK-COST-ESTIMATE.md** — Phased Cost Overview; economic parameters

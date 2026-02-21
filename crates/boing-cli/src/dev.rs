@@ -42,7 +42,7 @@ pub async fn run(port: u16) -> anyhow::Result<()> {
     let (mut child, used_cargo) = if let Some(node_path) = find_boing_node() {
         info!("Using boing-node at {}", node_path.display());
         let child = Command::new(&node_path)
-            .args(&node_args)
+            .args(node_args)
             .stdout(Stdio::inherit())
             .stderr(Stdio::inherit())
             .spawn()?;

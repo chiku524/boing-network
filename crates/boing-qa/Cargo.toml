@@ -1,0 +1,8 @@
+[package]
+name = "boing-qa"
+version = "0.1.0"
+edition = "2021"
+description = "Protocol quality assurance: deterministic checks for deployment (Allow / Reject / Unsure). See docs/QUALITY-ASSURANCE-NETWORK.md"
+
+[dependencies]
+boing-primitives = { path = "../boing-primitives" }

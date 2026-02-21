@@ -194,6 +194,16 @@ boing-network/
 - [ ] Post-quantum cryptography research and integration path
 - [x] HD wallet path type (HdPath in boing-primitives)
 
+### 4.6 Protocol Quality Assurance (QA) — see [QUALITY-ASSURANCE-NETWORK.md](QUALITY-ASSURANCE-NETWORK.md)
+
+- [ ] **boing-qa crate:** Rule types (Allow / Reject / Unsure), central rule registry, deterministic checks (bytecode size, opcode whitelist, well-formedness, purpose categories including meme/community/entertainment)
+- [ ] **Known edge-case resolution:** Implement §11 mappings so automation handles meme leniency, ambiguous declaration, new/unknown pattern, conflicting signals, soft-rule handling
+- [x] **Node integration:** Run QA at submit and/or mempool insert for ContractDeploy; structured rejection (rule_id, message); optional `boing_qaCheck` RPC
+- [ ] **Execution defense in depth:** QA check in `execute_contract_deploy` before `set_contract_code`
+- [ ] **Community QA pool:** Pending QA queue, pool members, voting, max time T, default outcome at expiry; integrate QA-approved deploys into block production
+- [ ] **Governance of rules:** Add/modify rules via time-locked governance; versioned rule sets
+- [x] **Additional enhancements (optional):** Pre-flight SDK/CLI (boing_qaCheck RPC + SDK `client.qaCheck()`), public QA metrics, appeal path, canonical malice definition, deployer checklist (in progress)
+
 ---
 
 ## Phase 5: UX & Human-Centered Innovations (Weeks 41–52)

@@ -1,7 +1,7 @@
 # Boing Network — Beta Readiness
 
 > **Purpose:** Ensure all tools, documentation, and operations are ready for public testing and beta onboarding.  
-> **References:** [RUNBOOK.md](RUNBOOK.md), [BUILD-ROADMAP.md](BUILD-ROADMAP.md), [RPC-API-SPEC.md](RPC-API-SPEC.md), [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md)
+> **References:** [BOING-NETWORK-ESSENTIALS.md](BOING-NETWORK-ESSENTIALS.md) (six pillars and essentials), [RUNBOOK.md](RUNBOOK.md), [BUILD-ROADMAP.md](BUILD-ROADMAP.md), [RPC-API-SPEC.md](RPC-API-SPEC.md), [SECURITY-STANDARDS.md](SECURITY-STANDARDS.md)
 
 ---
 

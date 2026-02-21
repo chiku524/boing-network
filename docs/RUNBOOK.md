@@ -1,7 +1,13 @@
 # Boing Network — Operational Runbook
 
 > **Purpose:** Operations guide for running and maintaining Boing Network nodes.  
-> **References:** [BUILD-ROADMAP.md](BUILD-ROADMAP.md), [README.md](../README.md), [RPC-API-SPEC.md](RPC-API-SPEC.md), [BETA-READINESS.md](BETA-READINESS.md) (beta checklist and quick starts)
+> **References:** [BOING-NETWORK-ESSENTIALS.md](BOING-NETWORK-ESSENTIALS.md) (six pillars and network essentials), [BUILD-ROADMAP.md](BUILD-ROADMAP.md), [README.md](../README.md), [RPC-API-SPEC.md](RPC-API-SPEC.md), [BETA-READINESS.md](BETA-READINESS.md) (beta checklist and quick starts)
+
+---
+
+## Network essentials (six pillars)
+
+The network prioritizes, in order: **1. Security** → **2. Scalability** → **3. Decentralization** → **4. Authenticity** → **5. Transparency** → **6. True quality assurance**. For the full description of each pillar and design philosophy, see [BOING-NETWORK-ESSENTIALS.md](BOING-NETWORK-ESSENTIALS.md).
 
 ---
 
@@ -72,6 +78,8 @@ cargo run -p boing-node -- --data-dir ./boing-data --rpc-port 8545
 |--------|--------|-------------|
 | `boing_submitTransaction` | `[hex_signed_tx]` | Submit a signed transaction |
 | `boing_chainHeight` | `[]` | Current chain height |
+| `boing_getBalance` | `[hex_account_id]` | Spendable balance (decimal string) |
+| `boing_getAccount` | `[hex_account_id]` | Balance, nonce, stake (for wallets and tx building) |
 | `boing_getBlockByHeight` | `[height]` | Block at height (u64) |
 | `boing_getBlockByHash` | `[hex_block_hash]` | Block by hash (32 bytes hex) |
 | `boing_getAccountProof` | `[hex_account_id]` | Merkle proof for account |
@@ -173,6 +181,7 @@ For security incidents and vulnerabilities:
 - Validator mode must be enabled for block production.
 - Check mempool size and nonce ordering.
 - Simulate first: `boing_simulateTransaction` to validate.
+- **Note:** If block production or consensus fails, transactions are re-inserted into the mempool automatically so they can be retried in the next round.
 
 ### RPC returns "Method not found"
 

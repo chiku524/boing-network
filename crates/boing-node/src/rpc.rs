@@ -22,11 +22,13 @@ use tokio::sync::RwLock;
 use tracing::info;
 
 use crate::faucet::{self, testnet_faucet_account_id};
+use crate::mempool::MempoolError;
 use crate::node::BoingNode;
 use crate::security::RateLimitConfig;
 use boing_primitives::{
     AccessList, AccountId, SignedIntent, SignedTransaction, Transaction, TransactionPayload,
 };
+use boing_qa::{check_contract_deploy, QaResult, RuleRegistry};
 
 /// Shared node state for RPC and validator loop.
 pub type NodeState = Arc<RwLock<BoingNode>>;
@@ -67,6 +69,8 @@ struct JsonRpcResponse {
 struct JsonRpcError {
     code: i32,
     message: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    data: Option<serde_json::Value>,
 }
 
 fn rpc_error(id: Option<serde_json::Value>, code: i32, message: String) -> JsonRpcResponse {
@@ -74,7 +78,29 @@ fn rpc_error(id: Option<serde_json::Value>, code: i32, message: String) -> JsonR
         jsonrpc: "2.0",
         id,
         result: None,
-        error: Some(JsonRpcError { code, message }),
+        error: Some(JsonRpcError {
+            code,
+            message,
+            data: None,
+        }),
+    }
+}
+
+fn rpc_error_with_data(
+    id: Option<serde_json::Value>,
+    code: i32,
+    message: String,
+    data: serde_json::Value,
+) -> JsonRpcResponse {
+    JsonRpcResponse {
+        jsonrpc: "2.0",
+        id,
+        result: None,
+        error: Some(JsonRpcError {
+            code,
+            message,
+            data: Some(data),
+        }),
     }
 }
 
@@ -120,6 +146,17 @@ async fn handle_rpc(State(state): State<RpcState>, Json(req): Json<JsonRpcReques
                                 info!("RPC: transaction submitted");
                                 rpc_ok(id, serde_json::json!({"tx_hash": "ok"}))
                             }
+                            Err(MempoolError::QaRejected(r)) => rpc_error_with_data(
+                                id,
+                                -32050,
+                                format!("Deployment rejected by QA: {}", r.message),
+                                serde_json::json!({ "rule_id": r.rule_id.0, "message": r.message }),
+                            ),
+                            Err(MempoolError::QaPendingPool) => rpc_error(
+                                id,
+                                -32051,
+                                "Deployment referred to community QA pool.".into(),
+                            ),
                             Err(e) => rpc_error(id, -32000, format!("{}", e)),
                         }
                     }
@@ -326,6 +363,47 @@ async fn handle_rpc(State(state): State<RpcState>, Json(req): Json<JsonRpcReques
                 }
                 (Err(e), _) | (_, Err(e)) => rpc_error(id, -32602, e),
             }
+        }
+        "boing_qaCheck" => {
+            let params = req.params.and_then(|p| serde_json::from_value::<Vec<serde_json::Value>>(p).ok());
+            let hex_bytecode = match params.as_ref().and_then(|v| v.first()) {
+                Some(serde_json::Value::String(s)) => s.clone(),
+                _ => return (StatusCode::OK, Json(rpc_error(id, -32602, "Invalid params: expected [hex_bytecode] or [hex_bytecode, purpose_category?, description_hash?]".into()))),
+            };
+            let bytecode = match hex::decode(hex_bytecode.trim_start_matches("0x")) {
+                Ok(b) => b,
+                Err(e) => return (StatusCode::OK, Json(rpc_error(id, -32602, format!("Invalid hex bytecode: {}", e)))),
+            };
+            let purpose = params.as_ref()
+                .and_then(|v| v.get(1))
+                .and_then(|v| v.as_str())
+                .map(|s| s.to_string());
+            let desc_hash = params.as_ref()
+                .and_then(|v| v.get(2))
+                .and_then(|v| v.as_str())
+                .and_then(|s| hex::decode(s.trim_start_matches("0x")).ok())
+                .filter(|b| b.len() == 32);
+            let registry = RuleRegistry::new();
+            let result = check_contract_deploy(
+                &bytecode,
+                purpose.as_deref(),
+                desc_hash.as_deref(),
+                registry.max_bytecode_size(),
+            );
+            let (result_str, rule_id, message) = match result {
+                QaResult::Allow => ("allow".to_string(), None, None),
+                QaResult::Reject(r) => ("reject".to_string(), Some(r.rule_id.0), Some(r.message)),
+                QaResult::Unsure => ("unsure".to_string(), None, None),
+            };
+            let mut obj = serde_json::Map::new();
+            obj.insert("result".to_string(), serde_json::Value::String(result_str));
+            if let Some(rid) = rule_id {
+                obj.insert("rule_id".to_string(), serde_json::Value::String(rid));
+            }
+            if let Some(msg) = message {
+                obj.insert("message".to_string(), serde_json::Value::String(msg));
+            }
+            rpc_ok(id, serde_json::Value::Object(obj))
         }
         "boing_submitIntent" => {
             let params = req.params.and_then(|p| serde_json::from_value::<Vec<String>>(p).ok());

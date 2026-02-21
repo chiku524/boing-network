@@ -194,6 +194,19 @@ Submit a signed intent for solver fulfillment.
 
 ---
 
+### boing_qaCheck (optional — when QA is enabled)
+
+Pre-flight check for a deployment without submitting. Allows clients to see whether bytecode (and optional purpose declaration) would be **Allow**, **Reject**, or **Unsure** (pool) before calling `boing_submitTransaction`.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| Params | `[hex_bytecode]` or `[hex_bytecode, purpose_category, description_hash?]` | Contract bytecode (hex); optionally purpose category and description hash for purpose checks. |
+| Result | `{ result, rule_id?, message? }` | `result`: `"allow"` (would be accepted), `"reject"` (would be rejected; rule_id and message when applicable), or `"unsure"` (would go to community QA pool). |
+
+**Errors:** When QA is not enabled, returns `-32601` (method not found) or a dedicated code. When QA rejects: use structured error code below.
+
+---
+
 ### boing_faucetRequest (testnet only)
 
 Request testnet BOING for an account. Only available when the node is started with `--faucet-enable`. **Do not enable on mainnet.**
@@ -219,6 +232,8 @@ Request testnet BOING for an account. Only available when the node is started wi
 | -32602 | Invalid params |
 | -32000 | Server error |
 | -32016 | Rate limit exceeded |
+| -32050 | **QA: Deployment rejected** — Transaction rejected by protocol QA (e.g. bytecode or purpose rule). Response SHOULD include `data: { rule_id: string, message: string }` for structured feedback. See [QUALITY-ASSURANCE-NETWORK.md](QUALITY-ASSURANCE-NETWORK.md). |
+| -32051 | **QA: Pending pool** — Deployment referred to community QA pool (result: Unsure). Response MAY include `data: { pending_id: string, deadline: number }`. |
 
 ---
 

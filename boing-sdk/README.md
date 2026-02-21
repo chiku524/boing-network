@@ -1,23 +1,76 @@
 # Boing SDK
 
-Seamless SDK for building dApps on Boing Network.
+TypeScript/JavaScript client for [Boing Network](https://github.com/boing-network/boing-network): typed RPC client, hex utilities, and structured errors (including QA rejection feedback).
 
-## Commands
+## Install
 
-- `boing init` — Scaffold project
-- `boing dev` — Local chain + funded wallet + hot reload
-- `boing deploy` — Deploy to testnet/mainnet
-- `boing metrics register` — Register contracts for success-based incentives
+```bash
+npm install
+npm run build
+```
 
-## Planned Enhancements
+Or from a parent repo (when published): `npm install boing-sdk`.
 
-See [DEVELOPMENT-AND-ENHANCEMENTS.md](../docs/DEVELOPMENT-AND-ENHANCEMENTS.md):
+## Quick start
 
-- CLI auto-completion
-- Contract templates and dApp scaffolding
-- TypeScript/JavaScript client for web frontends
-- Interactive tutorials and example dApps
+```ts
+import { createClient, BoingRpcError } from 'boing-sdk';
 
-## Status
+const client = createClient('http://localhost:8545');
 
-Implementation in progress. See [BUILD-ROADMAP.md](../docs/BUILD-ROADMAP.md).
+// Read chain and account state
+const height = await client.chainHeight();
+const account = await client.getAccount('0x' + '00'.repeat(32)); // 32-byte hex
+console.log(account.balance, account.nonce, account.stake);
+
+// Pre-flight QA check before deploying a contract
+const qa = await client.qaCheck('0x600160005260206000f3'); // hex bytecode
+if (qa.result === 'reject') {
+  console.error('QA rejected:', qa.rule_id, qa.message);
+} else if (qa.result === 'allow') {
+  // Submit signed tx (hex from Rust CLI or future signer)
+  await client.submitTransaction(hexSignedTx);
+}
+
+// Handle structured QA errors on submit
+try {
+  await client.submitTransaction(hexSignedTx);
+} catch (e) {
+  if (e instanceof BoingRpcError && e.isQaRejected) {
+    const { rule_id, message } = e.qaData ?? {};
+    console.error('Deployment rejected:', rule_id, message);
+  }
+  throw e;
+}
+```
+
+## API
+
+- **createClient(config)** — `config` can be a URL string or `{ baseUrl, fetch?, timeoutMs? }`. Default timeout 30s; set `timeoutMs: 0` to disable.
+- **BoingClient** — typed methods for all RPCs (32-byte account/hash params are validated locally before sending):
+  - `chainHeight()`, `getBalance(hexAccountId)`, `getAccount(hexAccountId)`
+  - `getBlockByHeight(height)`, `getBlockByHash(hexHash)`
+  - `getAccountProof(hexAccountId)`, `verifyAccountProof(hexProof, hexStateRoot)`
+  - `simulateTransaction(hexSignedTx)`, `submitTransaction(hexSignedTx)`
+  - `registerDappMetrics(hexContract, hexOwner)`, `submitIntent(hexSignedIntent)`
+  - `qaCheck(hexBytecode, purposeCategory?, descriptionHash?)` — pre-flight QA without submitting
+  - `faucetRequest(hexAccountId)` — testnet only
+- **BoingRpcError** — `code`, `message`, `data`, `method` (RPC method that failed); `isQaRejected`, `isQaPendingPool`, `qaData`; `toString()` for logging.
+- **Hex helpers** — `ensureHex`, `bytesToHex`, `hexToBytes`, `accountIdToHex`, `hexToAccountId`, `validateHex32` (normalize + require 32 bytes).
+
+All 32-byte IDs (account, hash) are hex strings with or without `0x` prefix. Invalid hex or wrong length throws before the request.
+
+## Submitting transactions
+
+The node expects **hex-encoded bincode-serialized SignedTransaction**. To produce that today:
+
+1. Use the **Rust CLI** in this repo: `cargo run -p boing-cli -- dev` (local chain) and sign/build txs via the CLI.
+2. Use **boing_simulateTransaction** and **boing_qaCheck** from this SDK to validate before submitting.
+3. A future release may add a JS/TS signer or accept JSON-submit on the node.
+
+See [RPC-API-SPEC.md](../docs/RPC-API-SPEC.md) and [BUILD-ROADMAP.md](../docs/BUILD-ROADMAP.md).
+
+## Planned
+
+- Transaction builder and optional signing (when bincode/encoding is available in JS or node accepts JSON).
+- CLI auto-completion, contract templates, tutorials. See [DEVELOPMENT-AND-ENHANCEMENTS.md](../docs/DEVELOPMENT-AND-ENHANCEMENTS.md).

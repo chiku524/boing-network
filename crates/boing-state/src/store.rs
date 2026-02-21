@@ -6,6 +6,16 @@ use boing_primitives::{Account, AccountId, AccountState, Hash};
 
 use crate::sparse_merkle::SparseMerkleTree;
 
+/// Type alias for persisted contract storage entries: ((contract, key), value).
+pub type ContractStorageEntry = ((AccountId, [u8; 32]), [u8; 32]);
+
+/// Return type of `export_for_persistence`: accounts, contract code, contract storage.
+pub type PersistenceExport = (
+    Vec<(AccountId, AccountState)>,
+    Vec<(AccountId, Vec<u8>)>,
+    Vec<ContractStorageEntry>,
+);
+
 /// Checkpoint handle for revert. Created by `checkpoint()`.
 #[derive(Clone)]
 pub struct StateCheckpoint {
@@ -113,13 +123,7 @@ impl StateStore {
     }
 
     /// Export state for disk persistence.
-    pub fn export_for_persistence(
-        &self,
-    ) -> (
-        Vec<(AccountId, AccountState)>,
-        Vec<(AccountId, Vec<u8>)>,
-        Vec<((AccountId, [u8; 32]), [u8; 32])>,
-    ) {
+    pub fn export_for_persistence(&self) -> PersistenceExport {
         let accounts: Vec<_> = self.accounts.iter().map(|(k, v)| (*k, v.clone())).collect();
         let contract_code: Vec<_> = self.contract_code.iter().map(|(k, v)| (*k, v.clone())).collect();
         let contract_storage: Vec<_> = self.contract_storage.iter().map(|(k, v)| (*k, *v)).collect();
@@ -130,7 +134,7 @@ impl StateStore {
     pub fn load_from_persistence(
         accounts: Vec<(AccountId, AccountState)>,
         contract_code: Vec<(AccountId, Vec<u8>)>,
-        contract_storage: Vec<((AccountId, [u8; 32]), [u8; 32])>,
+        contract_storage: Vec<ContractStorageEntry>,
     ) -> Self {
         let mut state = StateStore::new();
         for (id, account_state) in accounts {

@@ -20,6 +20,7 @@ rand = "0.8"
 boing-consensus = { path = "../boing-consensus" }
 boing-state = { path = "../boing-state" }
 boing-execution = { path = "../boing-execution" }
+boing-qa = { path = "../boing-qa" }
 boing-p2p = { path = "../boing-p2p" }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }

@@ -2,7 +2,7 @@
 
 use tracing::{info, warn};
 
-use boing_primitives::{tx_root, Account, AccountId, AccountState, Block, BlockHeader, Hash};
+use boing_primitives::{tx_root, Account, AccountId, AccountState, Block, BlockHeader, Hash, Transaction};
 use boing_consensus::ConsensusEngine;
 use boing_execution::BlockExecutor;
 use boing_state::StateStore;
@@ -44,20 +44,22 @@ impl BlockProducer {
         if consensus.leader(next_height) != self.proposer {
             return None; // Not our turn to propose
         }
-        let txs = mempool.drain_for_block(self.max_txs_per_block);
-        if txs.is_empty() {
+        let signed_txs = mempool.drain_for_block(self.max_txs_per_block);
+        if signed_txs.is_empty() {
             return None;
         }
+        let txs: Vec<Transaction> = signed_txs.iter().map(|s| s.tx.clone()).collect();
 
         let parent_hash = chain.parent_hash();
         let height = chain.height() + 1;
         let tx_root = tx_root(&txs);
 
-        // Execute transactions; revert on failure
+        // Execute transactions; revert on failure and re-insert txs so they can be retried
         let checkpoint = state.checkpoint();
         if let Err(e) = executor.execute_block(&txs, state) {
             warn!("Block execution failed: {}", e);
             state.revert(checkpoint);
+            mempool.reinsert(signed_txs);
             return None;
         }
 
@@ -97,6 +99,7 @@ impl BlockProducer {
                 if let Err(e) = chain.append(block) {
                     warn!("Failed to append block to chain: {}", e);
                     state.revert(checkpoint);
+                    mempool.reinsert(signed_txs);
                     return None;
                 }
                 info!("Block committed: height={} hash={:?}", height, hash);
@@ -105,7 +108,7 @@ impl BlockProducer {
             Err(e) => {
                 warn!("Consensus failed: {}", e);
                 state.revert(checkpoint);
-                // TODO: Re-insert txs into mempool on failure
+                mempool.reinsert(signed_txs);
                 None
             }
         }

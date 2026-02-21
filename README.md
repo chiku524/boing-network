@@ -18,6 +18,7 @@ cargo run -p boing-node
 | `boing-state` | State store (Verkle tree target) |
 | `boing-execution` | VM + parallel transaction scheduler |
 | `boing-automation` | Scheduler, triggers, executor incentives |
+| `boing-qa` | Protocol QA: Allow/Reject/Unsure checks for deployment (see [QUALITY-ASSURANCE-NETWORK.md](docs/QUALITY-ASSURANCE-NETWORK.md)) |
 | `boing-cli` | `boing init`, `boing dev`, `boing deploy` |
 | `boing-p2p` | libp2p networking |
 | `boing-node` | Node binary |
@@ -28,6 +29,7 @@ All project documentation lives in **[docs/](docs/)**:
 
 | Doc | Description |
 |-----|-------------|
+| [**BOING-NETWORK-ESSENTIALS.md**](docs/BOING-NETWORK-ESSENTIALS.md) | **Six pillars, design philosophy, priorities, tech stack, key docs — start here** |
 | [BETA-READINESS.md](docs/BETA-READINESS.md) | Beta checklist, validator & developer quick starts, verification commands |
 | [BOING-BLOCKCHAIN-DESIGN-PLAN.md](docs/BOING-BLOCKCHAIN-DESIGN-PLAN.md) | Architecture, design decisions, innovations |
 | [RUNBOOK.md](docs/RUNBOOK.md) | Operational runbook for node operators |
@@ -36,11 +38,13 @@ All project documentation lives in **[docs/](docs/)**:
 | [DECENTRALIZATION-AND-NETWORKING.md](docs/DECENTRALIZATION-AND-NETWORKING.md) | Advanced P2P, peer discovery, WebRTC signaling, light clients |
 | [DEVELOPMENT-AND-ENHANCEMENTS.md](docs/DEVELOPMENT-AND-ENHANCEMENTS.md) | SDK, automation, dApp incentives, enhancement vision |
 | [SECURITY-STANDARDS.md](docs/SECURITY-STANDARDS.md) | Protocol, network, application, and operational security |
+| [QUALITY-ASSURANCE-NETWORK.md](docs/QUALITY-ASSURANCE-NETWORK.md) | Protocol-enforced QA: only quality assets allowed on-chain; automation + community pool |
+| [DEVELOPMENT-AND-ENHANCEMENTS.md](docs/DEVELOPMENT-AND-ENHANCEMENTS.md) | SDK, automation, dApp incentives; network-wide enhancements (implemented and planned) |
 | [BUILD-ROADMAP.md](docs/BUILD-ROADMAP.md) | Implementation tasks and phases |
 | [AUTOMATION-VERIFICATION.md](docs/AUTOMATION-VERIFICATION.md) | Cryptographic verification for decentralized automation |
 | [NETWORK-COST-ESTIMATE.md](docs/NETWORK-COST-ESTIMATE.md) | Cost overview and economic parameters |
 | [RPC-API-SPEC.md](docs/RPC-API-SPEC.md) | JSON-RPC API reference |
-| [WALLET-PROJECT-PROMPT.md](docs/WALLET-PROJECT-PROMPT.md) | Boing wallet project bootstrap prompt |
+| [BOING-EXPRESS-WALLET.md](docs/BOING-EXPRESS-WALLET.md) | Boing Express wallet: bootstrap, integration & Chrome Web Store |
 
 ## Website
 
@@ -48,4 +52,4 @@ The [boing.network](https://boing.network) website lives in `website/`. It's bui
 
 ## Priorities
 
-Security → Scalability → Decentralization → Authenticity
+Security → Scalability → Decentralization → Authenticity → **True quality assurance** (protocol-enforced QA: only quality assets on-chain; automation + community pool for edge cases). See [QUALITY-ASSURANCE-NETWORK.md](docs/QUALITY-ASSURANCE-NETWORK.md).

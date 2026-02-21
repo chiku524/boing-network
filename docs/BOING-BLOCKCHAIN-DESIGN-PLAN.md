@@ -1,6 +1,7 @@
 # Boing Blockchain: Authentic Network Design Plan
 
-> **Core Principle:** An authentic, unique L1 blockchain built from first principles — optimized for efficiency, free from dependencies on other chains, designed for **absolute decentralization**, and committed to **100% transparency** in how we build, govern, and operate.
+> **Core Principle:** An authentic, unique L1 blockchain built from first principles — optimized for efficiency, free from dependencies on other chains, designed for **absolute decentralization**, and committed to **100% transparency** in how we build, govern, and operate.  
+> **Quick overview:** For the six pillars, priorities, and essentials in one place, see [BOING-NETWORK-ESSENTIALS.md](BOING-NETWORK-ESSENTIALS.md).
 
 ---
 
@@ -68,6 +69,7 @@ The Boing blockchain prioritizes, in order:
 3. **Decentralization** — Permissionless participation at every layer
 4. **Authenticity** — Unique architecture and identity
 5. **Transparency** — 100% openness in design, governance, and operations — the foundation for community trust
+6. **True quality assurance** — Top-notch standards with built-in automation: only assets that meet protocol-defined rules and security bar are allowed on-chain. All **currently known** edge cases are resolved by the automated regulatory QA system (Allow or Reject); **leniency for meme culture** (meme/community/entertainment are valid purposes), with **no maliciousness or malignancy** allowed (blocklist and scam checks enforced). The community QA pool is only for genuinely unknown or policy-mandated cases. See [QUALITY-ASSURANCE-NETWORK.md](QUALITY-ASSURANCE-NETWORK.md).
 
 ---
 
@@ -93,31 +95,41 @@ Boing aims to introduce **distinctive functionalities** that differentiate it fr
 |------------|-------------|-----------------|
 | **Protocol-level bridges** | Light client verification and cross-chain messaging as protocol primitives, not third-party contracts. | Bridges today are typically trust-minimized contracts. Boing could design cross-chain into the base layer. |
 
-### 4. Delegated Staking with Slashing Transparency
+### 4. Protocol-Enforced Quality Assurance (No Other Chain Does This)
+
+| Innovation | Description | Differentiation |
+|------------|-------------|-----------------|
+| **Built-in QA automation** | Only deployments that meet defined standards (bytecode rules, security heuristics) are accepted. Reject at submit/mempool and execution; no “deploy anything” by default. | EVM and most chains allow any bytecode; standards are conventions only. Boing enforces at the protocol. |
+| **Community QA pool** | When automation is unsure, a pool of community members votes Allow/Reject. Transparent, time-bounded, with clear outcomes. | Edge cases are handled without a single gatekeeper; aligns with decentralization. |
+| **Single source of truth** | A clear set of rules and attributes each asset type must satisfy; updatable via governance. | Developers and users know exactly what is allowed on-chain. |
+
+See [QUALITY-ASSURANCE-NETWORK.md](QUALITY-ASSURANCE-NETWORK.md) for the full design.
+
+### 5. Delegated Staking with Slashing Transparency
 
 | Innovation | Description | Differentiation |
 |------------|-------------|-----------------|
 | **Transparent slashing** | Clear, auditable slashing conditions with appeal mechanisms. Delegators see exactly why validators were slashed. | Improves trust and decentralization of staking. |
 
-### 5. On-Chain Governance with Time Locks
+### 6. On-Chain Governance with Time Locks
 
 | Innovation | Description | Differentiation |
 |------------|-------------|-----------------|
 | **Phased governance** | Parameter changes go through time-locked stages (proposal → cooling → execution) to allow for community response and exit. | Reduces risk of sudden, controversial upgrades. |
 
-### 6. Verifiable Delay + Ordering (Boing-specific VDF)
+### 7. Verifiable Delay + Ordering (Boing-specific VDF)
 
 | Innovation | Description | Differentiation |
 |------------|-------------|-----------------|
 | **Custom VDF** | A verifiable delay function for fair ordering that doesn't depend on any external chain's PoH. Boing-native, audit-friendly design. | Unique to Boing; enables fair ordering without external dependencies. |
 
-### 7. State Rent with Grace Periods
+### 8. State Rent with Grace Periods
 
 | Innovation | Description | Differentiation |
 |------------|-------------|-----------------|
 | **Rent with grace** | Inactive accounts pay state rent, but with long grace periods and clear notifications before eviction. Balances state bloat with user experience. | More user-friendly than abrupt state eviction. |
 
-### 8. Native DeFi Primitives (boing.finance Integration)
+### 9. Native DeFi Primitives (boing.finance Integration)
 
 | Innovation | Description | Differentiation |
 |------------|-------------|-----------------|

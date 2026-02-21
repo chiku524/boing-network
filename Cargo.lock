@@ -458,6 +458,7 @@ dependencies = [
  "boing-execution",
  "boing-p2p",
  "boing-primitives",
+ "boing-qa",
  "boing-state",
  "boing-tokenomics",
  "clap",
@@ -501,6 +502,13 @@ dependencies = [
  "serde",
  "sha2",
  "thiserror 1.0.69",
+]
+
+[[package]]
+name = "boing-qa"
+version = "0.1.0"
+dependencies = [
+ "boing-primitives",
 ]
 
 [[package]]

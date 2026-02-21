@@ -6,7 +6,7 @@
 use std::path::{Path, PathBuf};
 
 use boing_primitives::{AccountId, AccountState, Block, Hash};
-use boing_state::StateStore;
+use boing_state::{ContractStorageEntry, StateStore};
 
 use crate::chain::ChainState;
 
@@ -28,7 +28,7 @@ struct ChainMeta {
 struct PersistedState {
     accounts: Vec<(AccountId, AccountState)>,
     contract_code: Vec<(AccountId, Vec<u8>)>,
-    contract_storage: Vec<((AccountId, [u8; 32]), [u8; 32])>,
+    contract_storage: Vec<ContractStorageEntry>,
 }
 
 #[derive(Debug, thiserror::Error)]

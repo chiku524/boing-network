@@ -1,14 +1,21 @@
 //! Transaction mempool — pending transactions awaiting inclusion in a block.
+//! Runs protocol QA on ContractDeploy before accepting; rejects with structured reason when QA fails.
 
 use std::collections::{BTreeMap, HashMap};
 use std::sync::Mutex;
 
-use boing_primitives::{AccountId, SignedTransaction, Transaction};
+use boing_primitives::{AccountId, SignedTransaction, TransactionPayload};
+use boing_qa::{check_contract_deploy, RuleRegistry, QaReject, QaResult};
 
 /// In-memory mempool. Tracks pending transactions by sender nonce.
 #[derive(Default)]
 pub struct Mempool {
     inner: Mutex<MempoolInner>,
+}
+
+/// Default rule registry for QA (max bytecode size, etc.). Can be replaced with on-chain config later.
+fn default_qa_registry() -> RuleRegistry {
+    RuleRegistry::new()
 }
 
 #[derive(Default)]
@@ -26,9 +33,22 @@ impl Mempool {
         Self::default()
     }
 
-    /// Insert a signed transaction. Rejects duplicates and invalid nonces.
+    /// Insert a signed transaction. Rejects duplicates, invalid nonces, and ContractDeploy that fail QA.
     pub fn insert(&self, signed: SignedTransaction) -> Result<(), MempoolError> {
         signed.verify().map_err(|_| MempoolError::InvalidSignature)?;
+        if let TransactionPayload::ContractDeploy { bytecode } = &signed.tx.payload {
+            let registry = default_qa_registry();
+            match check_contract_deploy(
+                bytecode,
+                None,
+                None,
+                registry.max_bytecode_size(),
+            ) {
+                QaResult::Reject(reject) => return Err(MempoolError::QaRejected(reject)),
+                QaResult::Unsure => return Err(MempoolError::QaPendingPool),
+                QaResult::Allow => {}
+            }
+        }
         let tx_id = signed.tx.id();
         let mut inner = self.inner.lock().unwrap();
         if inner.by_id.contains_key(&tx_id) {
@@ -42,9 +62,9 @@ impl Mempool {
         Ok(())
     }
 
-    /// Remove and return transactions up to `max` for block inclusion.
-    /// Returns txs in nonce order (per sender).
-    pub fn drain_for_block(&self, max: usize) -> Vec<Transaction> {
+    /// Remove and return signed transactions up to `max` for block inclusion.
+    /// Returns txs in nonce order (per sender). Callers can re-insert on failure (e.g. consensus).
+    pub fn drain_for_block(&self, max: usize) -> Vec<SignedTransaction> {
         let mut inner = self.inner.lock().unwrap();
         let mut candidates: Vec<(AccountId, u64)> = Vec::new();
         for (sender, by_nonce) in inner.by_sender.iter() {
@@ -59,11 +79,19 @@ impl Mempool {
                 if let Some(signed) = by_nonce.remove(&nonce) {
                     inner.by_id.remove(&signed.tx.id());
                     inner.len = inner.len.saturating_sub(1);
-                    out.push(signed.tx);
+                    out.push(signed);
                 }
             }
         }
         out
+    }
+
+    /// Re-insert signed transactions (e.g. after block production or consensus failure).
+    /// Duplicates are skipped; invalid signatures are skipped. Used to restore txs when a block is not committed.
+    pub fn reinsert(&self, signed_txs: Vec<SignedTransaction>) {
+        for signed in signed_txs {
+            let _ = self.insert(signed);
+        }
     }
 
     /// Number of pending transactions.
@@ -82,4 +110,10 @@ pub enum MempoolError {
     Duplicate,
     #[error("Invalid signature")]
     InvalidSignature,
+    /// Protocol QA rejected this deployment; rule_id and message give user feedback.
+    #[error("QA rejected: {0}")]
+    QaRejected(QaReject),
+    /// Deployment referred to community QA pool (Unsure); not accepted until pool decides.
+    #[error("Deployment referred to community QA pool")]
+    QaPendingPool,
 }
