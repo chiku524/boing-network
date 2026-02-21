@@ -9,15 +9,10 @@ import Layout from '../layouts/Layout.astro';
 >
   <!-- Hero -->
   <section class="hero" id="hero">
-    <!-- Robot hero: extracted layers, each with independent 3D motion -->
+    <!-- Robot hero: extracted Boing robot (from hero image) with 3D motion over environment background -->
     <div class="hero-robot-wrap" aria-hidden="true">
-      <div class="hero-robot-composite">
-        <img src="/hero_layer_0.png" alt="" class="hero-layer hero-layer-0" width="480" height="480" />
-        <img src="/hero_layer_1.png" alt="" class="hero-layer hero-layer-1" width="480" height="480" />
-        <img src="/hero_layer_2.png" alt="" class="hero-layer hero-layer-2" width="480" height="480" />
-        <img src="/hero_layer_3.png" alt="" class="hero-layer hero-layer-3" width="480" height="480" />
-        <img src="/hero_layer_4.png" alt="" class="hero-layer hero-layer-4" width="480" height="480" />
-        <img src="/hero_layer_5.png" alt="" class="hero-layer hero-layer-5" width="480" height="480" />
+      <div class="hero-robot-3d">
+        <img src="/boing_robot_only.png" alt="" class="hero-robot-img" width="480" height="480" />
       </div>
     </div>
     <div class="hero-bg" aria-hidden="true">
@@ -234,56 +229,36 @@ import Layout from '../layouts/Layout.astro';
   @media (min-width: 900px) {
     .hero-robot-wrap { position: absolute; right: 0; bottom: 0; top: 0; left: 45%; }
   }
-  .hero-robot-composite {
+  .hero-robot-3d {
+    transform-style: preserve-3d;
+    animation: hero-robot-float 7s ease-in-out infinite;
+    filter: drop-shadow(0 0 40px rgba(0, 229, 204, 0.2)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+  }
+  .hero-robot-wrap .hero-robot-3d {
     position: relative;
     width: min(55vw, 420px);
     height: min(55vw, 420px);
     max-width: 480px;
     max-height: 75vh;
-    transform-style: preserve-3d;
-    filter: drop-shadow(0 0 40px rgba(0, 229, 204, 0.15)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.25));
   }
   @media (min-width: 900px) {
-    .hero-robot-composite { width: min(42vw, 480px); height: min(42vw, 480px); }
+    .hero-robot-wrap .hero-robot-3d { width: min(42vw, 480px); height: min(42vw, 480px); }
   }
-  .hero-layer {
-    position: absolute;
-    inset: 0;
+  .hero-robot-img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: center bottom;
+    animation: hero-robot-glow 4s ease-in-out infinite;
   }
-  /* Each extracted layer: different translateZ (depth) and motion */
-  .hero-layer-0 { transform: translateZ(-40px); animation: layer-float-0 8s ease-in-out infinite; }
-  .hero-layer-1 { transform: translateZ(-24px); animation: layer-float-1 7s ease-in-out infinite 0.2s; }
-  .hero-layer-2 { transform: translateZ(-8px); animation: layer-float-2 6.5s ease-in-out infinite 0.4s; }
-  .hero-layer-3 { transform: translateZ(8px); animation: layer-float-3 6s ease-in-out infinite 0.6s; }
-  .hero-layer-4 { transform: translateZ(24px); animation: layer-float-4 7.5s ease-in-out infinite 0.3s; }
-  .hero-layer-5 { transform: translateZ(40px); animation: layer-float-5 5.5s ease-in-out infinite 0.5s; }
-  @keyframes layer-float-0 {
-    0%, 100% { transform: translateZ(-40px) translateY(0) rotateY(-4deg) rotateX(2deg); }
-    50% { transform: translateZ(-40px) translateY(-10px) rotateY(2deg) rotateX(-1deg); }
+  @keyframes hero-robot-float {
+    0%, 100% { transform: translateY(0) rotateY(-6deg) rotateX(3deg); }
+    50% { transform: translateY(-14px) rotateY(4deg) rotateX(-2deg); }
   }
-  @keyframes layer-float-1 {
-    0%, 100% { transform: translateZ(-24px) translateY(0) rotateY(3deg) rotateX(-2deg); }
-    50% { transform: translateZ(-24px) translateY(-8px) rotateY(-2deg) rotateX(1deg); }
-  }
-  @keyframes layer-float-2 {
-    0%, 100% { transform: translateZ(-8px) translateY(0) rotateY(-2deg) rotateX(1deg); }
-    50% { transform: translateZ(-8px) translateY(-12px) rotateY(4deg) rotateX(-2deg); }
-  }
-  @keyframes layer-float-3 {
-    0%, 100% { transform: translateZ(8px) translateY(0) rotateY(2deg) rotateX(-1deg); }
-    50% { transform: translateZ(8px) translateY(-6px) rotateY(-3deg) rotateX(2deg); }
-  }
-  @keyframes layer-float-4 {
-    0%, 100% { transform: translateZ(24px) translateY(0) rotateY(-3deg) rotateX(2deg); }
-    50% { transform: translateZ(24px) translateY(-9px) rotateY(1deg) rotateX(-1deg); }
-  }
-  @keyframes layer-float-5 {
-    0%, 100% { transform: translateZ(40px) translateY(0) rotateY(1deg) rotateX(-2deg); }
-    50% { transform: translateZ(40px) translateY(-7px) rotateY(-2deg) rotateX(1deg); }
+  @keyframes hero-robot-glow {
+    0%, 100% { filter: drop-shadow(0 0 40px rgba(0, 229, 204, 0.2)); opacity: 1; }
+    50% { filter: drop-shadow(0 0 56px rgba(0, 229, 204, 0.35)); opacity: 0.98; }
   }
   .hero-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
   .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.4; animation: float 20s ease-in-out infinite; }
@@ -428,13 +403,8 @@ import Layout from '../layouts/Layout.astro';
     .hero-orb, .shooting-star, .float-particle { animation: none; }
     .hero-orb { opacity: 0.25; }
     .shooting-star, .float-particle { display: none; }
-    .hero-layer-0, .hero-layer-1, .hero-layer-2, .hero-layer-3, .hero-layer-4, .hero-layer-5 { animation: none; }
-    .hero-layer-0 { transform: translateZ(-40px); }
-    .hero-layer-1 { transform: translateZ(-24px); }
-    .hero-layer-2 { transform: translateZ(-8px); }
-    .hero-layer-3 { transform: translateZ(8px); }
-    .hero-layer-4 { transform: translateZ(24px); }
-    .hero-layer-5 { transform: translateZ(40px); }
+    .hero-robot-3d { animation: none; transform: translateY(0) rotateY(-4deg) rotateX(2deg); }
+    .hero-robot-img { animation: none; }
     .card:hover, .app-card:hover, .stat-card:hover, .t-item:hover { transform: none; }
   }
 </style>

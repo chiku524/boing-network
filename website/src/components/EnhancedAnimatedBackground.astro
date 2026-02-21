@@ -3,8 +3,8 @@
     Motifs: hexagonal grid, circuit lines, bioluminescent orbs, bubbles, shooting stars. */
 ---
 <div class="animated-bg" aria-hidden="true">
-  <!-- Base: boing_background_dark.png with unique overlays (tint + vignette) -->
-  <div class="bg-image-layer" aria-hidden="true"></div>
+  <!-- Base: oceanic environment from boing_robot_hero (coral, jellyfish, 3D animals) — theme for all pages -->
+  <div class="bg-image-layer bg-environment" aria-hidden="true"></div>
   <div class="bg-image-overlay" aria-hidden="true"></div>
   <!-- Hexagonal grid layer (circuit/network motif from brand assets) -->
   <div class="hex-grid-layer" aria-hidden="true">
@@ -79,17 +79,19 @@
     background: var(--bg-primary, #0A0E1A);
   }
 
-  /* Boing background image — unique treatment with overlays */
+  /* Oceanic environment from hero image (coral, jellyfish, 3D animals) — site-wide theme */
   .bg-image-layer {
     position: absolute;
     inset: 0;
     z-index: 0;
-    background-image: url('/boing_background_dark.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    opacity: 0.85;
     animation: bg-image-drift 45s ease-in-out infinite;
+  }
+  .bg-environment {
+    background-image: url('/boing_environment.png');
+    opacity: 0.9;
   }
   .bg-image-overlay {
     position: absolute;
