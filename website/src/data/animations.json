@@ -1,0 +1,26 @@
+{
+  "mascot": {
+    "float_duration": "9s",
+    "float_offset_y": "6px",
+    "glow_duration": "5s",
+    "easing": "ease-in-out",
+    "scale": "0.22",
+    "opacity": "0.85"
+  },
+  "cards": {
+    "perspective": "1200px",
+    "tilt_max_deg": "4",
+    "tilt_hover_deg_x": "2",
+    "tilt_hover_deg_y": "-3",
+    "transition_duration": "0.35s",
+    "easing": "ease-out"
+  },
+  "sections": {
+    "stagger_step": "0.08s",
+    "fade_in_duration": "0.6s"
+  },
+  "links": {
+    "tilt_max_deg": "2",
+    "transition_duration": "0.25s"
+  }
+}

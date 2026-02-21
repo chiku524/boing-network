@@ -1,0 +1,53 @@
+---
+/** Boing robot mascot — fixed on page with subtle animation (config from motion-config.css). */
+---
+<div class="mascot-wrap" aria-hidden="true">
+  <div class="mascot-3d">
+    <img src="/boing_robot_hero.png" alt="" class="mascot-img" width="200" height="200" />
+  </div>
+</div>
+
+<style>
+  .mascot-wrap {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 20;
+    pointer-events: none;
+    width: clamp(80px, 22vw, 140px);
+    height: clamp(80px, 22vw, 140px);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    perspective: 800px;
+  }
+  @media (max-width: 640px) {
+    .mascot-wrap { bottom: 0.75rem; right: 0.75rem; width: 64px; height: 64px; }
+  }
+  .mascot-3d {
+    transform-style: preserve-3d;
+    animation: mascot-float var(--motion-mascot-float_duration) var(--motion-mascot-easing) infinite;
+    opacity: var(--motion-mascot-opacity);
+    filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.15));
+  }
+  .mascot-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom right;
+    animation: mascot-glow var(--motion-mascot-glow_duration) ease-in-out infinite;
+  }
+  @keyframes mascot-float {
+    0%, 100% { transform: translateY(0) rotateY(-5deg) rotateX(2deg); }
+    50% { transform: translateY(calc(-1 * var(--motion-mascot-float_offset_y))) rotateY(3deg) rotateX(-1deg); }
+  }
+  @keyframes mascot-glow {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 229, 204, 0.15)); opacity: 1; }
+    50% { filter: drop-shadow(0 0 28px rgba(0, 229, 204, 0.25)); opacity: 0.95; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .mascot-3d { animation: none; transform: rotateY(-5deg) rotateX(2deg); }
+    .mascot-img { animation: none; }
+  }
+</style>

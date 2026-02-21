@@ -196,14 +196,14 @@ import Layout from '../layouts/Layout.astro';
   <section class="section section-alt links-section fade-in-up">
     <h2>Resources</h2>
     <div class="link-grid">
-      <a href="/network/testnet" class="link-highlight">Join Testnet</a>
-      <a href="/network/faucet" class="link-highlight">Faucet</a>
-      <a href="/docs/getting-started">Getting Started</a>
-      <a href="/docs/rpc-api">RPC API</a>
-      <a href="/developers/quickstart">Developer Quickstart</a>
-      <a href="/network/status">Network Status</a>
-      <a href="/about">About</a>
-      <a href="/community">Community</a>
+      <a href="/network/testnet" class="link-highlight link-3d">Join Testnet</a>
+      <a href="/network/faucet" class="link-highlight link-3d">Faucet</a>
+      <a href="/docs/getting-started" class="link-3d">Getting Started</a>
+      <a href="/docs/rpc-api" class="link-3d">RPC API</a>
+      <a href="/developers/quickstart" class="link-3d">Developer Quickstart</a>
+      <a href="/network/status" class="link-3d">Network Status</a>
+      <a href="/about" class="link-3d">About</a>
+      <a href="/community" class="link-3d">Community</a>
     </div>
   </section>
 </Layout>
@@ -355,7 +355,7 @@ import Layout from '../layouts/Layout.astro';
   /* Tokenomics */
   .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
   .stat-card { background: rgba(18,24,41,0.35); border: 1px solid rgba(0,229,204,0.2); border-radius: 1rem; padding: 1.25rem; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s, border-color 0.3s; backdrop-filter: blur(12px); }
-  .stat-card:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 8px 24px rgba(0,229,204,0.25); border-color: rgba(0,229,204,0.4); }
+  .stat-card:hover { box-shadow: 0 8px 24px rgba(0,229,204,0.25); border-color: rgba(0,229,204,0.4); }
   .stat-value { display: block; font-size: 1.5rem; font-weight: 700; color: var(--accent-neon); }
   .stat-label { font-size: 0.85rem; color: var(--text-secondary); }
   .chart-fullwidth { margin-bottom: 1.5rem; }
@@ -383,7 +383,7 @@ import Layout from '../layouts/Layout.astro';
   /* Ecosystem */
   .apps-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1rem; }
   .app-card { background: rgba(18,24,41,0.35); border: 1px solid rgba(0,229,204,0.2); border-radius: 1rem; padding: 1.25rem; text-decoration: none; color: inherit; transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s; backdrop-filter: blur(12px); }
-  .app-card:hover { transform: translateY(-4px) scale(1.02); border-color: rgba(0,229,204,0.5); box-shadow: 0 12px 32px rgba(0,229,204,0.25); }
+  .app-card:hover { border-color: rgba(0,229,204,0.5); box-shadow: 0 12px 32px rgba(0,229,204,0.25); }
   .app-card.featured { border-color: rgba(0,180,255,0.5); }
   .app-card h3 { font-size: 1rem; margin: 0 0 0.5rem; color: var(--text-primary); }
   .app-card p { font-size: 0.875rem; color: var(--text-secondary); margin: 0 0 0.75rem; line-height: 1.4; }
@@ -394,7 +394,7 @@ import Layout from '../layouts/Layout.astro';
   /* Innovations grid */
   .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
   .card { padding: 1.25rem; background: rgba(18,24,41,0.35); border: 1px solid rgba(0,229,204,0.2); border-radius: 1rem; transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.3s; backdrop-filter: blur(12px); }
-  .card:hover { transform: translateY(-3px) scale(1.02); border-color: rgba(0,229,204,0.4); box-shadow: 0 10px 28px rgba(0,229,204,0.2); }
+  .card:hover { border-color: rgba(0,229,204,0.4); box-shadow: 0 10px 28px rgba(0,229,204,0.2); }
   .card h3 { font-size: 0.95rem; margin: 0 0 0.5rem; color: var(--text-primary); }
   .card p { margin: 0; font-size: 0.85rem; color: var(--text-secondary); }
 

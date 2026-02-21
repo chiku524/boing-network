@@ -2,6 +2,7 @@
    Primary #00E5CC, Secondary #00B4FF, Dark #0A0E1A, Comfortaa. Motifs: hexagonal grid, circuit lines, neon glow, jellyfish/coral. */
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import './motion-config.css';
 
 /* Dark theme (default for Boing Network) — Deep Navy, bioluminescent feel */
 :root {
@@ -129,6 +130,43 @@ html { scroll-behavior: smooth; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Site-wide 3D motion (cards, links) — uses motion-config.css vars */
+.card-3d,
+.stat-card,
+.chart-card,
+.app-card,
+.card {
+  transform-style: preserve-3d;
+  transition: transform var(--motion-cards-transition_duration) var(--motion-cards-easing),
+    box-shadow var(--motion-cards-transition_duration) var(--motion-cards-easing),
+    border-color var(--motion-cards-transition_duration);
+}
+.card-3d,
+.stat-card,
+.chart-card,
+.app-card,
+.card {
+  transform: perspective(var(--motion-cards-perspective)) rotateX(0) rotateY(0);
+}
+.card-3d:hover,
+.stat-card:hover,
+.chart-card:hover,
+.app-card:hover,
+.card:hover {
+  transform: perspective(var(--motion-cards-perspective)) rotateX(var(--motion-cards-tilt_hover_deg_x)) rotateY(var(--motion-cards-tilt_hover_deg_y)) translateY(-2px);
+}
+.link-3d {
+  display: inline-block;
+  transition: transform var(--motion-links-transition_duration) ease-out;
+}
+.link-3d:hover {
+  transform: rotateX(var(--motion-links-tilt_max_deg)) rotateY(var(--motion-links-tilt_max_deg));
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-3d:hover, .stat-card:hover, .chart-card:hover, .app-card:hover, .card:hover,
+  .link-3d:hover { transform: none; }
 }
 
 /* Reduced motion */

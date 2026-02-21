@@ -1,6 +1,7 @@
 ---
 import '../styles/boing-theme.css';
 import EnhancedAnimatedBackground from '../components/EnhancedAnimatedBackground.astro';
+import BoingMascot from '../components/BoingMascot.astro';
 
 interface Props {
   title?: string;
@@ -59,6 +60,7 @@ const ogImage = `${siteUrl}/og.png`;
   </head>
   <body>
     <EnhancedAnimatedBackground />
+    <BoingMascot />
     <header class="site-header">
       <a href="/" class="logo">
       <img src="/logo.svg" alt="Boing" width="36" height="36" class="logo-icon" />
