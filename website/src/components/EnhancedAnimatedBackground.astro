@@ -3,6 +3,9 @@
     Motifs: hexagonal grid, circuit lines, bioluminescent orbs, bubbles, shooting stars. */
 ---
 <div class="animated-bg" aria-hidden="true">
+  <!-- Base: boing_background_dark.png with unique overlays (tint + vignette) -->
+  <div class="bg-image-layer" aria-hidden="true"></div>
+  <div class="bg-image-overlay" aria-hidden="true"></div>
   <!-- Hexagonal grid layer (circuit/network motif from brand assets) -->
   <div class="hex-grid-layer" aria-hidden="true">
     <svg class="hex-grid-svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
@@ -73,10 +76,32 @@
     inset: 0;
     z-index: 0;
     overflow: hidden;
-    /* Base: deep ocean/space (matches launch video) */
-    background: radial-gradient(ellipse 120% 80% at 50% 20%, rgba(0, 20, 35, 0.5) 0%, transparent 50%),
-                radial-gradient(ellipse 100% 100% at 80% 80%, rgba(0, 180, 255, 0.04) 0%, transparent 40%),
-                var(--bg-primary, #0A0E1A);
+    background: var(--bg-primary, #0A0E1A);
+  }
+
+  /* Boing background image — unique treatment with overlays */
+  .bg-image-layer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: url('/boing_background_dark.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.85;
+    animation: bg-image-drift 45s ease-in-out infinite;
+  }
+  .bg-image-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: radial-gradient(ellipse 100% 100% at 50% 50%, transparent 30%, rgba(10, 14, 26, 0.4) 70%, rgba(10, 14, 26, 0.75) 100%),
+                linear-gradient(180deg, rgba(0, 229, 204, 0.03) 0%, transparent 40%, transparent 60%, rgba(0, 180, 255, 0.02) 100%);
+    pointer-events: none;
+  }
+  @keyframes bg-image-drift {
+    0%, 100% { transform: scale(1) translate(0, 0); }
+    50% { transform: scale(1.04) translate(-1%, -0.5%); }
   }
   .animated-bg svg {
     position: absolute;
@@ -87,12 +112,12 @@
     min-height: 100%;
   }
 
-  /* Hexagonal grid — outerspace-oceanic / circuit motif */
+  /* Hexagonal grid — outerspace-oceanic / circuit motif (above bg overlay) */
   .hex-grid-layer {
     position: absolute;
     inset: 0;
-    z-index: 0;
-    opacity: 0.12;
+    z-index: 2;
+    opacity: 0.14;
     color: #00E5CC;
   }
   .hex-grid-svg {
@@ -134,5 +159,6 @@
     .animated-bg { opacity: 0.5; }
     .animated-bg svg * { animation: none !important; }
     .bg-shooting-stars { display: none; }
+    .bg-image-layer { animation: none; }
   }
 </style>
