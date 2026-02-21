@@ -157,6 +157,8 @@ wrangler pages project create boing-network --production-branch main
 wrangler pages deploy dist --project-name=boing-network
 ```
 
+`wrangler.toml` is kept minimal (no D1/R2/KV) for static Pages deploy. For Workers/API with bindings use `wrangler.worker.toml`.
+
 ---
 
 ## Step 6: Custom Domain

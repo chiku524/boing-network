@@ -1,17 +1,6 @@
+# Used by: wrangler pages deploy dist (Pages does not support --config)
+# Static site only — no Functions, so no bindings here. Avoids "Failed to publish your Function".
+# For Workers/API with D1, R2, KV use: wrangler deploy --config wrangler.worker.toml
 name = "boing-network"
 compatibility_date = "2024-01-01"
 pages_build_output_dir = "dist"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "boing-network-db"
-database_id = "8cafc32c-5d92-42f3-8c4e-5277b20006c5"
-
-[[r2_buckets]]
-binding = "R2_BUCKET"
-bucket_name = "boing-network-assets"
-
-[[kv_namespaces]]
-binding = "CACHE"
-id = "924fb843a67547d4949908240d6ed74a"
-preview_id = "dbe16d33d8204d518dc6c62affe14bc7"
