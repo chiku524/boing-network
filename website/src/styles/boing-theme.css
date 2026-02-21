@@ -1,43 +1,48 @@
-/* Boing brand theme — aligned with boing.finance */
+/* Boing brand theme — Outerspace-Oceanic (Marketing Asset Package + launch video)
+   Primary #00E5CC, Secondary #00B4FF, Dark #0A0E1A, Comfortaa. Motifs: hexagonal grid, circuit lines, neon glow, jellyfish/coral. */
 
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* Dark theme (default for Boing Network) */
+/* Dark theme (default for Boing Network) — Deep Navy, bioluminescent feel */
 :root {
   --font-sans: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  --primary-color: #3b82f6;
-  --secondary-color: #8b5cf6;
-  --accent-color: #06b6d4;
-  --accent-neon: #00e0ff;
-  --accent-purple: #7b61ff;
+  /* PDF: Primary Accent Teal/Cyan #00E5CC, Secondary Electric Blue #00B4FF */
+  --primary-color: #00E5CC;
+  --secondary-color: #00B4FF;
+  --accent-color: #00E5CC;
+  --accent-neon: #00E5CC;
+  --accent-electric: #00B4FF;
   --success-color: #10b981;
   --warning-color: #f59e0b;
   --error-color: #ef4444;
 
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --bg-card: #1e293b;
+  /* PDF: Dark Background #0A0E1A (Deep Navy), Light Background #F0FFFE (Soft White-Teal) */
+  --bg-primary: #0A0E1A;
+  --bg-secondary: #121829;
+  --bg-tertiary: #1a2235;
+  --bg-card: #121829;
 
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-tertiary: #94a3b8;
+  --text-primary: #f0fffe;
+  --text-secondary: #b8e6e3;
+  --text-tertiary: #7eb8b5;
 
-  --border-color: #334155;
-  --border-hover: #475569;
+  --border-color: #1a2235;
+  --border-hover: #243044;
 
-  --shadow: rgba(0, 0, 0, 0.3);
-  --shadow-hover: rgba(0, 0, 0, 0.4);
-  --glow-cyan: rgba(0, 224, 255, 0.35);
-  --glow-cyan-subtle: rgba(6, 182, 212, 0.4);
+  --shadow: rgba(0, 0, 0, 0.35);
+  --shadow-hover: rgba(0, 0, 0, 0.45);
+  --glow-cyan: rgba(0, 229, 204, 0.4);
+  --glow-cyan-subtle: rgba(0, 229, 204, 0.35);
+  --glow-blue: rgba(0, 180, 255, 0.35);
   --accent-gold: #facc15;
   --accent-gold-dim: #eab308;
   --glow-gold: rgba(250, 204, 21, 0.35);
   --glow-gold-subtle: rgba(234, 179, 8, 0.25);
 
-  /* Aliases */
+  /* Aliases (accent-purple kept for compatibility, maps to electric blue) */
+  --accent-purple: #00B4FF;
   --text-muted: var(--text-tertiary);
   --surface: var(--bg-tertiary);
   --border: var(--border-color);
@@ -110,16 +115,16 @@ html { scroll-behavior: smooth; }
   animation: pulseGlow 3s ease-in-out infinite;
 }
 
-/* Gradient utilities */
+/* Gradient utilities — PDF Primary #00E5CC, Secondary #00B4FF */
 .gradient-text {
-  background: linear-gradient(135deg, #22d3ee, #06b6d4, #3b82f6);
+  background: linear-gradient(135deg, #00E5CC, #00B4FF);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-text-hero {
-  background: linear-gradient(135deg, #22d3ee, #06b6d4, #3b82f6);
+  background: linear-gradient(135deg, #00E5CC, #00B4FF);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

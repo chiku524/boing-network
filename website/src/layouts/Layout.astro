@@ -8,10 +8,10 @@ interface Props {
   canonical?: string;
 }
 
-const { title = 'Boing Network', description = 'Boing Network — The DeFi that always bounces back. Authentic L1 blockchain built from first principles.', canonical } = Astro.props;
+const { title = 'Boing Network', description = 'Boing Network — Authentic. Decentralized. Optimal. Quality-Assured. Authentic L1 blockchain built from first principles.', canonical } = Astro.props;
 
 const siteUrl = 'https://boing.network';
-const fullTitle = title === 'Boing Network' ? 'Boing Network | The DeFi that always bounces back' : `${title} | Boing Network`;
+const fullTitle = title === 'Boing Network' ? 'Boing Network | Authentic. Decentralized. Optimal. Quality-Assured.' : `${title} | Boing Network`;
 const path = (Astro.url.pathname || '/').replace(/\/$/, '') || '';
 const canonicalUrl = canonical ? `${siteUrl}${canonical.startsWith('/') ? canonical : '/' + canonical}` : `${siteUrl}${path || '/'}`;
 const ogImage = `${siteUrl}/og.png`;
@@ -45,7 +45,7 @@ const ogImage = `${siteUrl}/og.png`;
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Additional SEO -->
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#0A0E1A" />
     <meta name="keywords" content="Boing, Boing Network, blockchain, DeFi, L1, cryptocurrency, boing.finance, decentralized finance" />
 
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -53,8 +53,8 @@ const ogImage = `${siteUrl}/og.png`;
       "@type": "Organization",
       "name": "Boing Network",
       "url": siteUrl,
-      "description": "The DeFi that always bounces back. Authentic L1 blockchain built from first principles.",
-      "slogan": "The DeFi that always bounces back"
+      "description": "Authentic. Decentralized. Optimal. Quality-Assured. Authentic L1 blockchain built from first principles.",
+      "slogan": "Authentic. Decentralized. Optimal. Quality-Assured."
     })} />
   </head>
   <body>
@@ -77,7 +77,7 @@ const ogImage = `${siteUrl}/og.png`;
       <slot />
     </main>
     <footer class="site-footer">
-      <p>Boing Network — The DeFi that always bounces back. Authentic. Decentralized. Optimal. Sustainable.</p>
+      <p>Boing Network — Authentic. Decentralized. Optimal. Quality-Assured.</p>
       <div class="footer-links">
         <a href="/network/testnet">Join Testnet</a>
         <a href="/network/faucet">Faucet</a>
@@ -136,10 +136,10 @@ const ogImage = `${siteUrl}/og.png`;
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem 2rem;
-    border-bottom: 1px solid rgba(6, 182, 212, 0.3);
+    border-bottom: 1px solid rgba(0, 229, 204, 0.3);
     background: var(--bg-primary);
     backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(6, 182, 212, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 229, 204, 0.1);
   }
 
   .logo {
