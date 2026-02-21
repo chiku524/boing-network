@@ -38,8 +38,7 @@ All project documentation lives in **[docs/](docs/)**:
 | [DECENTRALIZATION-AND-NETWORKING.md](docs/DECENTRALIZATION-AND-NETWORKING.md) | Advanced P2P, peer discovery, WebRTC signaling, light clients |
 | [DEVELOPMENT-AND-ENHANCEMENTS.md](docs/DEVELOPMENT-AND-ENHANCEMENTS.md) | SDK, automation, dApp incentives, enhancement vision |
 | [SECURITY-STANDARDS.md](docs/SECURITY-STANDARDS.md) | Protocol, network, application, and operational security |
-| [QUALITY-ASSURANCE-NETWORK.md](docs/QUALITY-ASSURANCE-NETWORK.md) | Protocol-enforced QA: only quality assets allowed on-chain; automation + community pool |
-| [DEVELOPMENT-AND-ENHANCEMENTS.md](docs/DEVELOPMENT-AND-ENHANCEMENTS.md) | SDK, automation, dApp incentives; network-wide enhancements (implemented and planned) |
+| [QUALITY-ASSURANCE-NETWORK.md](docs/QUALITY-ASSURANCE-NETWORK.md) | Protocol-enforced QA: only quality assets allowed on-chain; automation + community pool; §16 enhancements |
 | [BUILD-ROADMAP.md](docs/BUILD-ROADMAP.md) | Implementation tasks and phases |
 | [AUTOMATION-VERIFICATION.md](docs/AUTOMATION-VERIFICATION.md) | Cryptographic verification for decentralized automation |
 | [NETWORK-COST-ESTIMATE.md](docs/NETWORK-COST-ESTIMATE.md) | Cost overview and economic parameters |
@@ -52,4 +51,4 @@ The [boing.network](https://boing.network) website lives in `website/`. It's bui
 
 ## Priorities
 
-Security → Scalability → Decentralization → Authenticity → **True quality assurance** (protocol-enforced QA: only quality assets on-chain; automation + community pool for edge cases). See [QUALITY-ASSURANCE-NETWORK.md](docs/QUALITY-ASSURANCE-NETWORK.md).
+Security → Scalability → Decentralization → Authenticity → Transparency → **True quality assurance** (protocol-enforced QA: only quality assets on-chain; automation + community pool for edge cases; leniency for meme culture; no malice). See [BOING-NETWORK-ESSENTIALS.md](docs/BOING-NETWORK-ESSENTIALS.md) and [QUALITY-ASSURANCE-NETWORK.md](docs/QUALITY-ASSURANCE-NETWORK.md).

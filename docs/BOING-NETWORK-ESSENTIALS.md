@@ -82,7 +82,7 @@ When trade-offs arise, the network applies this order:
 | Document | Use it for |
 |----------|------------|
 | [BOING-BLOCKCHAIN-DESIGN-PLAN.md](BOING-BLOCKCHAIN-DESIGN-PLAN.md) | Full architecture, innovations, tokenomics, design decisions |
-| [QUALITY-ASSURANCE-NETWORK.md](QUALITY-ASSURANCE-NETWORK.md) | Sixth pillar: QA rules, automation, community pool, meme leniency, no malice |
+| [QUALITY-ASSURANCE-NETWORK.md](QUALITY-ASSURANCE-NETWORK.md) | Sixth pillar: QA rules, automation, community pool, meme leniency, no malice; §16 additional enhancements & optimizations |
 | [BUILD-ROADMAP.md](BUILD-ROADMAP.md) | Implementation phases and task checklist |
 | [RUNBOOK.md](RUNBOOK.md) | Running nodes, RPC, CLI, monitoring, incidents |
 | [RPC-API-SPEC.md](RPC-API-SPEC.md) | JSON-RPC methods and error codes |

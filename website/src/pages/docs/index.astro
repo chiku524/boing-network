@@ -37,8 +37,10 @@ const paramsObjectWrong = '{}';
       <section id="overview" class="doc-section active">
         <h2>Overview</h2>
         <p>Boing Network is an authentic L1 blockchain built from first principles. It is independent of other chains and designed for sustainable value, uncapped supply with floor-triggered rebalancing, and 100% transparent governance and tokenomics.</p>
-        <h3>Priority pillars</h3>
-        <p>In order: <strong>Security</strong> (safety over speed) → <strong>Scalability</strong> (throughput, efficiency) → <strong>Decentralization</strong> (permissionless at every layer) → <strong>Authenticity</strong> (unique architecture) → <strong>Transparency</strong> (100% openness; trust through verification).</p>
+        <h3>The six pillars</h3>
+        <p>In order: <strong>Security</strong> (safety over speed) → <strong>Scalability</strong> (throughput, efficiency) → <strong>Decentralization</strong> (permissionless at every layer) → <strong>Authenticity</strong> (unique architecture) → <strong>Transparency</strong> (100% openness; trust through verification) → <strong>True quality assurance</strong> (protocol-enforced QA: only assets that meet rules and security bar; automation + community pool for edge cases; leniency for meme culture; no malice). See the repository <strong>BOING-NETWORK-ESSENTIALS.md</strong> and <strong>QUALITY-ASSURANCE-NETWORK.md</strong> for full detail.</p>
+        <h3>Recent enhancements &amp; optimizations</h3>
+        <p>Network-wide improvements include: re-insert of failed txs into mempool, RPC methods <code>boing_qaCheck</code> and QA error codes, <code>boing_getBalance</code> / <code>boing_getAccount</code>, six-pillars and essentials documentation, Protocol QA phase in the roadmap. QA pillar enhancements (pre-flight checks, structured errors, public metrics, versioned rule sets, appeal path) are documented in QUALITY-ASSURANCE-NETWORK.md. For the full list of implemented and planned enhancements, see <strong>DEVELOPMENT-AND-ENHANCEMENTS.md</strong> in the repository.</p>
         <h3>What this documentation covers</h3>
         <p><strong>Getting Started</strong> — Prerequisites, build, run a node (full or validator), first transaction. <strong>Network Overview</strong> — Block time, consensus, key facts. <strong>Tokenomics</strong> — Supply model, fees, staking, waves. <strong>Architecture & Features</strong> — Native AA, adaptive gas, cross-chain, slashing, governance. <strong>RPC API</strong> — All JSON-RPC methods, params, and error codes. <strong>Operations</strong> — CLI, monitoring, troubleshooting, incident response. <strong>Roadmap</strong> — Phased build status. <strong>Testnet</strong> — How to join testnet when available. <strong>Security</strong> — Protocol, network, and operational security. <strong>Governance & Transparency</strong> — How decisions and parameters are visible and verifiable. <strong>Resources</strong> — Links to repo, landing page, and other pages.</p>
       </section>
@@ -293,9 +295,12 @@ cargo build --release</code></pre>
         <h3>Repository (boing-network)</h3>
         <p>Source code and full specs: <a href="https://github.com/chiku524/boing-network" target="_blank" rel="noopener">github.com/chiku524/boing-network</a>. Key documents include:</p>
         <ul>
+          <li><strong>BOING-NETWORK-ESSENTIALS.md</strong> — Six pillars, design philosophy, priorities, tech stack, key docs — start here.</li>
+          <li><strong>QUALITY-ASSURANCE-NETWORK.md</strong> — Sixth pillar: protocol QA rules, automation, community pool, meme leniency, no malice, additional enhancements.</li>
+          <li><strong>DEVELOPMENT-AND-ENHANCEMENTS.md</strong> — SDK, automation, dApp incentives; network-wide enhancements (implemented and planned).</li>
           <li><strong>BOING-BLOCKCHAIN-DESIGN-PLAN.md</strong> — Design philosophy, tokenomics, decentralization, innovations.</li>
           <li><strong>RUNBOOK.md</strong> — Operations: node setup, RPC, CLI, monitoring, incident response, troubleshooting.</li>
-          <li><strong>docs/RPC-API-SPEC.md</strong> — Full JSON-RPC method and error specification.</li>
+          <li><strong>docs/RPC-API-SPEC.md</strong> — Full JSON-RPC method and error specification (including boing_qaCheck, boing_getBalance, boing_getAccount).</li>
           <li><strong>SECURITY-STANDARDS.md</strong> — Protocol, network, and operational security; audit and bug bounty.</li>
           <li><strong>BUILD-ROADMAP.md</strong> — Build and release roadmap.</li>
         </ul>
