@@ -5,7 +5,6 @@ import Layout from '../../layouts/Layout.astro';
 <Layout
   title="Join Testnet"
   description="Boing Network testnet: run a node, get testnet BOING from the faucet, and join as a validator."
-  pageClass="page-app"
 >
   <article class="page testnet-page">
     <h1>Join the Testnet</h1>
@@ -65,15 +64,15 @@ import Layout from '../../layouts/Layout.astro';
 
     <section class="section">
       <h2>One-click mining (VibeMiner)</h2>
-      <p>Prefer a desktop UI? <strong>VibeMiner</strong> offers one-click mining/validating for Boing. See <a href="https://github.com/chiku524/boing-network/blob/main/VIBEMINER-INTEGRATION.md" target="_blank" rel="noopener">VIBEMINER-INTEGRATION.md</a>.</p>
+      <p>Prefer a desktop UI? <strong>VibeMiner</strong> offers one-click mining/validating for Boing. See <a href="https://github.com/chiku524/boing-network/blob/main/docs/VIBEMINER-INTEGRATION.md" target="_blank" rel="noopener">VIBEMINER-INTEGRATION.md</a>.</p>
     </section>
 
     <section class="section">
       <h2>Docs</h2>
       <ul>
         <li><a href="/docs/getting-started">Getting started</a></li>
-        <li><a href="https://github.com/chiku524/boing-network/blob/main/TESTNET.md" target="_blank" rel="noopener">TESTNET.md</a> — Full testnet guide</li>
-        <li><a href="https://github.com/chiku524/boing-network/blob/main/RUNBOOK.md" target="_blank" rel="noopener">RUNBOOK.md</a> — Node setup and RPC</li>
+        <li><a href="https://github.com/chiku524/boing-network/blob/main/docs/TESTNET.md" target="_blank" rel="noopener">TESTNET.md</a> — Full testnet guide</li>
+        <li><a href="https://github.com/chiku524/boing-network/blob/main/docs/RUNBOOK.md" target="_blank" rel="noopener">RUNBOOK.md</a> — Node setup and RPC</li>
       </ul>
     </section>
   </article>
@@ -86,7 +85,9 @@ import Layout from '../../layouts/Layout.astro';
   .dedicated-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; }
   .dedicated-card {
     display: block;
+    position: relative;
     padding: 1.25rem;
+    padding-bottom: 2.25rem;
     background: rgba(30,41,59,0.35);
     border: 1px solid rgba(34,211,238,0.2);
     border-radius: 1rem;
@@ -98,7 +99,14 @@ import Layout from '../../layouts/Layout.astro';
   .dedicated-card.featured { border-color: rgba(34,211,238,0.4); background: rgba(6,182,212,0.06); }
   .dedicated-card h2 { font-size: 1.1rem; margin: 0 0 0.5rem; color: var(--text-primary); }
   .dedicated-card p { font-size: 0.9rem; color: var(--text-secondary); margin: 0 0 0.75rem; line-height: 1.4; }
-  .card-arrow { font-size: 0.85rem; color: var(--accent-teal); font-weight: 600; }
+  .card-arrow {
+    position: absolute;
+    bottom: 1rem;
+    right: 1.25rem;
+    font-size: 0.8rem;
+    color: var(--accent-teal);
+    font-weight: 500;
+  }
   .section { margin-top: 2rem; }
   .section h2 { font-size: 1.25rem; color: var(--text-primary); margin-bottom: 0.5rem; }
   .section p, .section li { color: var(--text-secondary); }
