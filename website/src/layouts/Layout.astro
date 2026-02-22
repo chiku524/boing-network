@@ -1,6 +1,7 @@
 ---
 import '../styles/boing-theme.css';
-import EnhancedAnimatedBackground from '../components/EnhancedAnimatedBackground.astro';
+import '../styles/design-tokens-cosmic.css';
+import BoingCanvasBackground from '../components/BoingCanvasBackground.astro';
 import BoingMascot from '../components/BoingMascot.astro';
 
 interface Props {
@@ -48,7 +49,7 @@ const ogImage = `${siteUrl}/og.png`;
     <meta name="twitter:image" content={ogImage} />
 
     <!-- Additional SEO -->
-    <meta name="theme-color" content="#0A0E1A" />
+    <meta name="theme-color" content="#020408" />
     <meta name="keywords" content="Boing, Boing Network, blockchain, DeFi, L1, cryptocurrency, boing.finance, decentralized finance" />
 
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -61,7 +62,7 @@ const ogImage = `${siteUrl}/og.png`;
     })} />
   </head>
   <body class:list={[pageClass]}>
-    {!pageClass && <EnhancedAnimatedBackground />}
+    {!pageClass && <BoingCanvasBackground path={path} />}
     <BoingMascot />
     <header class="site-header">
       <a href="/" class="logo">
@@ -188,36 +189,42 @@ const ogImage = `${siteUrl}/og.png`;
     color: var(--accent-teal);
   }
 
+  /* Cosmic Foundation: primary CTA = violet → cyan gradient */
   .site-header nav a.nav-cta {
     padding: 0.35rem 0.75rem;
-    border-radius: 8px;
+    border-radius: var(--radius-pill, 999px);
     font-weight: 600;
-    color: var(--accent-gold);
-    background: rgba(250, 204, 21, 0.08);
-    border: 1px solid var(--glow-gold);
+    color: white;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan));
+    border: none;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
     transition: all var(--motion-transition);
   }
 
   .site-header nav a.nav-cta:hover {
-    color: var(--accent-gold);
-    background: rgba(250, 204, 21, 0.14);
-    border-color: var(--glow-gold);
-    box-shadow: 0 0 12px var(--glow-gold);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 0 28px rgba(124, 58, 237, 0.5);
   }
 
-  /* Shared Join Testnet CTA style (hero, banners) — matches nav-cta */
+  /* Shared Join Testnet / primary CTA (hero, banners) — Cosmic gradient */
   .btn-testnet {
-    color: var(--accent-gold) !important;
-    background: rgba(250, 204, 21, 0.08) !important;
-    border: 1px solid var(--glow-gold) !important;
+    color: white !important;
+    background: linear-gradient(135deg, var(--accent-teal), var(--accent-cyan)) !important;
+    border: none !important;
     font-weight: 600;
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
     transition: all var(--motion-transition);
   }
   .btn-testnet:hover {
-    color: var(--accent-gold) !important;
-    background: rgba(250, 204, 21, 0.14) !important;
-    border-color: var(--glow-gold) !important;
-    box-shadow: 0 0 12px var(--glow-gold);
+    color: white !important;
+    transform: translateY(-1px);
+    box-shadow: 0 0 28px rgba(124, 58, 237, 0.5);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site-header nav a.nav-cta:hover,
+    .btn-testnet:hover { transform: none; }
   }
 
   .site-footer {

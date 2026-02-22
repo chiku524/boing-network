@@ -1,0 +1,72 @@
+/* ============================================================
+   BOING NETWORK — COSMIC FOUNDATION DESIGN TOKENS
+   Variant: boing.network — Authoritative · Technical · Epic
+   Source: docs/BOING-DESIGN-SYSTEM.md
+   Import after boing-theme.css to apply Cosmic Foundation palette.
+   ============================================================ */
+
+:root {
+  /* ── Core brand (shared) ─────────────────────────────────── */
+  --boing-black:    #020408;
+  --boing-void:     #050810;
+  --boing-deep:     #080d1a;
+  --boing-navy:     #0c1428;
+
+  /* ── Network accent palette ─────────────────────────────── */
+  --network-primary:         #7c3aed;
+  --network-primary-light:    #a78bfa;
+  --network-primary-glow:     rgba(124, 58, 237, 0.3);
+  --network-cyan:            #06b6d4;
+  --network-cyan-light:       #22d3ee;
+  --network-cyan-glow:        rgba(6, 182, 212, 0.2);
+  --network-aurora:           #0ea5e9;
+  --network-nebula:           #c026d3;
+  --network-nebula-glow:      rgba(192, 38, 211, 0.15);
+  --network-gold:             #fbbf24;
+
+  /* Status */
+  --status-live:             #22c55e;
+  --status-building:         #f59e0b;
+  --status-planned:          #64748b;
+
+  /* ── Override base theme tokens for Cosmic look ──────────── */
+  --bg-primary:              var(--boing-black);
+  --bg-secondary:             #0a1628;
+  --bg-tertiary:              #0d1f3c;
+  --bg-card:                  rgba(8, 13, 26, 0.75);
+
+  --text-primary:            #f8fafc;
+  --text-secondary:           #94a3b8;
+  --text-tertiary:            #475569;
+  --text-muted:               var(--text-tertiary);
+
+  /* Primary accent = violet; secondary = cosmic cyan */
+  --accent-teal:              var(--network-primary);
+  --accent-cyan:              var(--network-cyan);
+  --accent-purple:            var(--network-primary-light);
+  --accent-gold:              var(--network-gold);
+  --accent-gold-dim:           #eab308;
+
+  --border-color:             rgba(124, 58, 237, 0.18);
+  --border-hover:             rgba(124, 58, 237, 0.45);
+
+  --glow-cyan:                rgba(124, 58, 237, 0.4);
+  --glow-blue:                rgba(6, 182, 212, 0.35);
+  --glow-cyan-subtle:         rgba(124, 58, 237, 0.25);
+  --glow-gold-subtle:         rgba(251, 191, 36, 0.25);
+
+  /* Aliases (used by components) */
+  --primary-color:           var(--network-primary);
+  --secondary-color:         var(--network-cyan);
+  --accent-color:             var(--network-primary);
+  --accent-neon:              var(--network-primary-light);
+  --accent-electric:          var(--network-cyan);
+  --success-color:            var(--status-live);
+  --warning-color:            var(--status-building);
+  --error-color:              #ef4444;
+  --surface:                  var(--bg-tertiary);
+  --border:                   var(--border-color);
+
+  /* Cosmic Foundation uses Inter for body (design system) */
+  --font-sans:                'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
